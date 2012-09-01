@@ -1,5 +1,3 @@
 {
-	"cmd": ["build.bat"],
-	"working_dir": "${project_path:${folder:${file_path}}}",
-	"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)"
+	"cmd": ["PATH_TO_USER_FOLDER\\Documents\\GitHub\\tower-defense-13\\build.bat"]
 }

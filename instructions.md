@@ -1,6 +1,6 @@
 Setting up build system
 ===============
-Create a new build system (name is not important), replace the generated contents with the contents of tower-defense.sublime-build, save, go to tools->build system-> select your build system. <code>ctrl+b</code> to build.
+Create a new build system (name is not important), replace the generated contents with the contents of tower-defense.sublime-build, replace PATH_TO_USER_FOLDER with the path to your user folder (e.g. C:\\Users\\username), save, go to tools->build system-> select your build system. <code>ctrl+b</code> to build.
 
 Adding a new file
 =================

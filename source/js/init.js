@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	var data = makeMap(width, height);
 	map = data[0];
 	obstacles = data[1];
-	hideLoading();
 	animate();
+	hideLoading();
 	// spriteTest();
 }, true);
