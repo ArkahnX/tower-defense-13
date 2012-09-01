@@ -1,3 +1,5 @@
+create a new build system (name is not important), replace the generated contents with the contents of tower-defense.sublime-build, save, go to tools->build system-> select your build system. ctrl+b to build.
+
 To add a function to the rendering loop:
 append it to the end of the animate() function.
 

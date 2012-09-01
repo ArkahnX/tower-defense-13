@@ -1,0 +1,929 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prio",
+				"print  (function)"
+			],
+			[
+				"inter",
+				"internalFound  (variable)"
+			],
+			[
+				"sani",
+				"sanitaryOptions  (variable)"
+			],
+			[
+				"option",
+				"optionType  (variable)"
+			],
+			[
+				"defa",
+				"defaultSetup  (variable)"
+			],
+			[
+				"parse",
+				"parse  (variable)"
+			],
+			[
+				"er",
+				"errorHandler"
+			],
+			[
+				"newa",
+				"newArray  (variable)"
+			],
+			[
+				"re",
+				"responseText  (variable)"
+			],
+			[
+				"file",
+				"fileName  (variable)"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"form",
+				"formatted"
+			],
+			[
+				"forma",
+				"formattedOptions"
+			],
+			[
+				"code",
+				"codeList"
+			],
+			[
+				"cod",
+				"codeList"
+			],
+			[
+				"doc",
+				"documentFragment"
+			],
+			[
+				"bas",
+				"base64_decode"
+			],
+			[
+				"for",
+				"formattedOptions"
+			],
+			[
+				"offset",
+				"offsetFunctions"
+			],
+			[
+				"off",
+				"offsetFunctions"
+			],
+			[
+				"lang",
+				"language"
+			],
+			[
+				"font",
+				"font	font-style: normal/italic/oblique"
+			],
+			[
+				"new",
+				"newline"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"rege",
+				"regexList"
+			],
+			[
+				"this",
+				"thisString"
+			],
+			[
+				"sear",
+				"searchRegex"
+			],
+			[
+				"is",
+				"isString"
+			],
+			[
+				"u",
+				"unformatted"
+			],
+			[
+				"li",
+				"lines"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"inde",
+				"indexOf"
+			],
+			[
+				"pa",
+				"partinfo"
+			],
+			[
+				"part",
+				"partID"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/index.html",
+			"settings":
+			{
+				"buffer_size": 567,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/app.build.js",
+			"settings":
+			{
+				"buffer_size": 456,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/init.js",
+			"settings":
+			{
+				"buffer_size": 1730,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/var.js",
+			"settings":
+			{
+				"buffer_size": 503,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/mouse.js",
+			"settings":
+			{
+				"buffer_size": 789,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/build.bat",
+			"settings":
+			{
+				"buffer_size": 100,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/tower-defense.sublime-build",
+			"settings":
+			{
+				"buffer_size": 126,
+				"line_ending": "Windows",
+				"name": "untitled.sublime-build"
+			}
+		},
+		{
+			"file": "/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/User/tower-defense.sublime-build",
+			"settings":
+			{
+				"buffer_size": 126,
+				"line_ending": "Windows",
+				"name": "untitled.sublime-build"
+			}
+		},
+		{
+			"file": "tower-defense-13.sublime-project",
+			"settings":
+			{
+				"buffer_size": 288,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/tower-defense.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pret",
+				"HTMLPrettify: Prettify"
+			],
+			[
+				"syntax less",
+				"Set Syntax: LESS"
+			],
+			[
+				"syntax ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"html",
+				"HTMLPrettify: Prettify"
+			],
+			[
+				"packages",
+				"Preferences: Browse Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"snippe",
+				"Snippet: html"
+			],
+			[
+				"tidy",
+				"Tidy HTML"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: list",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 314.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/User/tower-defense.sublime-build",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/tile.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/map.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/draw.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/map.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/style.css",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/init.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/var.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/mouse.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/building.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/tile.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/app.build.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/stats.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/index.html",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/draw.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/start.frag",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/functions.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/instructions.md",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/README.md",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/build.html",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/end.frag",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/build.bat",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/r.js",
+		"/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/maze.js",
+		"/C/Users/ArkahnX/Downloads/pyjs-pyjs-07f54ad/INSTALL.txt",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/tileData.html",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/js/settings.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/css/form.css",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/disabledTileData.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/comparisons.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/test.js",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/css/pages/tiles.css",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/css/req/combine.color.css",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/css/main.css",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/CSS/CSS.tmLanguage",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/api/oldTile",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/js/pages/tile.js",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/js/pages/settings.js",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/js/pages/tiles.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/templates.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/tile.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/css/form.less",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/css/req/button.css",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/css/req/borders.css",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/css/compare.less",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/css/main.less",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/setup.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/grid.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/modules/gaq.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/ui/grid.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/app.build.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/3rd/zepto.min.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/buildApp.bat",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/modules/buildTemplate.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/options.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/index.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/background.html",
+		"/C/Users/ArkahnX/web/ext/blackTheme/1.0/manifest.json",
+		"/C/Users/ArkahnX/Downloads/theme_service.cc",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/row.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/column.html",
+		"/C/Users/ArkahnX/web/ext/rts/chromeExtension/source/js/parserstart.js",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/index.html",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/main.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/background.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/options.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/templates/module.html",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/User/mntp.sublime-build",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/Sublime-HTMLPrettify/scripts/beautify-html.js",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/Sublime-HTMLPrettify/HTMLPrettify.py",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/hello.tpl",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/manifest.json",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/manifest.json",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/_locales/en/messages.json",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/modules/gaq",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/setup.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/api/storage.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/modules/upgradeCheck.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/build/js/setup.js",
+		"/C/Users/ArkahnX/web/ext/mntp/app.build.js",
+		"/C/Users/ArkahnX/web/ext/mntp/source/manifest.json",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/tools/makeapi.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/buildDocs.bat",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/js/tools/makeapi",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/old/highlightJavascript.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/README.md",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/background.js",
+		"/C/Users/ArkahnX/Documents/GitHub/MyNewTabPage/source/html/background",
+		"/C/Users/ArkahnX/AppData/Local/Google/Chrome/User Data/Default/Extensions/chcnifjbmpcbjclkmpblgapodnmmbfcm/1.2.8.2_0/background.html",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Projects/nmntp.sublime-project",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/ZenCoding/zen-coding.sublime-settings",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/ZenCoding/Default.sublime-keymap",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/manifest.json",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/3rd/meny/index.html",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/html/test.html",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/css/scroll.css",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/data/experiments.json",
+		"/C/Users/ArkahnX/Documents/GitHub/rtsgui-api/tests/dropdown/index.html",
+		"/C/Users/ArkahnX/Documents/GitHub/rtsgui-api/tests/dropdown/main.js",
+		"/C/Users/ArkahnX/Documents/GitHub/rtsgui-api/tests/dropdown/main.css",
+		"/C/Users/ArkahnX/web/ext/rts/API/source/css/rtskrypt.less",
+		"/C/Users/ArkahnX/web/ext/rts/API/source/css/rtskrypt.css",
+		"/C/Users/ArkahnX/Desktop/googl.txt",
+		"/C/Users/ArkahnX/web/ext/rts/API/source/js/terminal/create.js",
+		"/C/Users/ArkahnX/web/ext/rts/chromeExtension/source/css/terminal.less",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/Sublime-HTMLPrettify/HTMLPrettify.sublime-commands",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/User/HtmlTidy.sublime-settings",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/HtmlTidy/HtmlTidy.sublime-settings",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/HtmlTidy/tidy.php",
+		"/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/HtmlTidy/html_tidy.py",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/3rd/meny/css/meny.css",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/js/background.js",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/html/index.html",
+		"/C/Users/ArkahnX/web/ext/rts/chromeExtension/source/manifest.json",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/source/_locales/en/messages.json",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/app.build.js",
+		"/C/Users/ArkahnX/Documents/GitHub/chrome-dev-app/manifest.json",
+		"/C/Users/ArkahnX/web/ext/rts/knowledge/source/knowledge/infantry.json",
+		"/C/Users/ArkahnX/web/ext/rts/knowledge/source/knowledge/system.json",
+		"/C/Users/ArkahnX/Documents/GitHub/gitolite-admin/conf/gitolite.conf",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/setup.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/language/javascript.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/functions.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/error.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/helper.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/source/worker.js",
+		"/C/Users/ArkahnX/Documents/GitHub/highlightJavascript/app.build.js",
+		"/C/Users/ArkahnX/web/ext/rts/knowledge/source/knowledge/infantry"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"<current>",
+			"this",
+			"terminal.less",
+			"highlight.js",
+			"resources/highlight.js",
+			"resources/css/shTheme.css",
+			"css/shTheme.css",
+			"shTheme.css",
+			"C:\\Users\\ArkahnX\\web\\ext\\jsdoc-toolkit\\templates\\codeview",
+			"structure.js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"type",
+			"location",
+			"RecursiveBacktracker",
+			"();\n",
+			"function",
+			"2px",
+			"}\n",
+			"some",
+			"label",
+			"body",
+			"grid",
+			"white",
+			"152",
+			"previousTarget",
+			"5",
+			"4",
+			"5",
+			"4",
+			"3",
+			"2",
+			"1",
+			"path",
+			"BackgroundTab",
+			"kDefaultTintBackgroundTab",
+			"ThisTextIsNotALie",
+			"style",
+			"print_newline",
+			"new",
+			"setup",
+			"chrome.storage.StorageArea",
+			"...",
+			"\\",
+			"if (http_check.readyState == 4) {\n		// 	if (http_check.status == 200) {\n		// 		keepgoing();\n		// 	} else if (http_check.status == 404) {\n		// 		callanotherfunction();\n		// 	}\n		// }",
+			"getSelectMenu",
+			"getContainer",
+			"height",
+			"});",
+			"...",
+			"selec",
+			"valueOf",
+			"((?<=,)[a-z0-9_$]+|[a-z0-9_$]+(?=,))",
+			"b.",
+			"((?<=,)[a-z0-9_$]+|[a-z0-9_$]+(?=,))",
+			"((?<=,)[a-z_$0-9]+|[a-z_$0-9]+(?=,))",
+			"window.",
+			"((?<=,)[a-z_$0-9]+|[a-z_$0-9]+(?=,))",
+			"document.",
+			"((?<=,)[a-z_$0-9]+|[a-z_$0-9]+(?=,))",
+			"d.",
+			"((?<=,)[a-z_$0-9]+|[a-z_$0-9]+(?=,))",
+			"((?<=,)[a-z_$]+|[a-z_$]+(?=,))",
+			"((?<=,)[a-z_]+|[a-z_]+(?=,))",
+			"(?<=,)([a-z_]+)|([a-z_]+)(?=,)",
+			"(?<=,)[_a-z]+|[a-z_]+(?=,)",
+			"(?<=,)[_a-z]+|[_a-z]+(?=,)",
+			"(?<=,)[_a-z]+||[_a-z]+(?=,)",
+			"(?:(?<=,))([_a-z]+)||([_a-z]+)(?:(?=,))",
+			"(?<=,)([_a-z]+)||([_a-z]+)(?=,)",
+			",([_a-z]+),?",
+			",([_a-z]+)",
+			",([a-z]+)",
+			",?([a-z]+)",
+			"lookbehind",
+			"error",
+			"options",
+			"element",
+			"p",
+			"dirD",
+			"dir",
+			"theme",
+			".dn",
+			".expandingArea",
+			"expandingArea",
+			"border-color:",
+			"border:",
+			"border",
+			"border-bo",
+			"shared",
+			"console",
+			"id",
+			"18",
+			".expandingArea",
+			"cleanArray",
+			"error",
+			"fillZip",
+			"addFile",
+			"git",
+			"console.log",
+			"changedFiles",
+			"rebuildResources",
+			"decode",
+			"btoa",
+			"utf8encode",
+			"fullPath",
+			"createResources",
+			"console",
+			"rebuildResources",
+			"currentVersion",
+			"write",
+			"mtime",
+			";\n",
+			"console",
+			">",
+			"console",
+			"&a",
+			"console",
+			"text",
+			"\\n",
+			"offsetF",
+			"));",
+			"exec",
+			"sh_load",
+			"sh_highlightElement",
+			"sh_highlightString",
+			"if (!compileModes.called) {\n    //   compileModes();\n    //   compileModes.called = true;\n    // }",
+			"utf8_decode",
+			"SyntaxHighlighter",
+			"syntaxHighlighter",
+			"highlightJavascript",
+			"i+",
+			"i +",
+			"offset",
+			"];",
+			"reg",
+			"func",
+			"[class=js]",
+			".syntaxhighlighter",
+			"<pre"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"position",
+			"4",
+			"3",
+			"2",
+			"1",
+			"0",
+			"chrome.storage[type]",
+			"",
+			"/",
+			"",
+			"\"$1\"",
+			"",
+			"\"$1\"",
+			"",
+			"\"$1\"",
+			"",
+			"\"$1\"",
+			"",
+			"\"$1\"",
+			"2",
+			"\"$1\"",
+			",\"$1\",?",
+			",\"$1\"",
+			",?\"$1\"",
+			"&",
+			"highlight",
+			"",
+			"pre code[class=js]",
+			"<pre><code class=\"js\">"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 7,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/index.html",
+					"settings":
+					{
+						"buffer_size": 567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								499,
+								499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/app.build.js",
+					"settings":
+					{
+						"buffer_size": 456,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								41,
+								37
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/init.js",
+					"settings":
+					{
+						"buffer_size": 1730,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1575,
+								1519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 600.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/var.js",
+					"settings":
+					{
+						"buffer_size": 503,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/source/js/mouse.js",
+					"settings":
+					{
+						"buffer_size": 789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								306,
+								306
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/build.bat",
+					"settings":
+					{
+						"buffer_size": 100,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								61,
+								61
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/ArkahnX/Documents/GitHub/tower-defense-13/tower-defense.sublime-build",
+					"settings":
+					{
+						"buffer_size": 126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AAAPackageDev/Support/Sublime Text Build System.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/Users/ArkahnX/Desktop/Sublime Text/Data/Packages/User/tower-defense.sublime-build",
+					"settings":
+					{
+						"buffer_size": 126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								126,
+								126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AAAPackageDev/Support/Sublime Text Build System.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "tower-defense-13.sublime-project",
+					"settings":
+					{
+						"buffer_size": 288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								225,
+								225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 271.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 183.0,
+	"status_bar_visible": true
+}
