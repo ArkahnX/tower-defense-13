@@ -1,7 +1,7 @@
 ({
 	baseUrl: "./",
 	name: "functions",
-	include: ["map","tile","draw"],
+	include: ["mouse", "building", "map","tile","draw"],
 	out: "build.js",
 	keepBuildDir: false,
 	locale: "en-us",
@@ -9,6 +9,10 @@
 	uglify: {
 		quote_keys: true,
 		except: []
+	},
+	wrap: {
+		startFile: "start.frag",
+		endFile: "end.frag"
 	},
 	findNestedDependencies: true,
 	optimizeCss: "standard",

@@ -5,7 +5,9 @@ function makeMap(width, height) {
 		map[y] = map[y] || [];
 		obstacles[y] = obstacles[y] || [];
 		for (var x = 0; x < width; x++) {
-			map[y][x] = random(0, tiles.length - 1);
+			var num = getWeightedRandom();
+			var thisTile = tiles[num];
+			map[y][x] = new setTile(tiles[num], "imageList");
 			obstacles[y][x] = 0;
 		}
 	}
@@ -15,7 +17,8 @@ function makeMap(width, height) {
 function drawMap() {
 	for (var y = 0; y < map.length; y++) {
 		for (var x = 0; x < map[y].length; x++) {
-			context.drawImage(tiles[map[y][x]], x * 32, y * 32);
+			context.drawImage(map[y][x].image, x * 32, y * 32);
 		}
 	}
 }
+

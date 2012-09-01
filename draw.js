@@ -33,6 +33,12 @@ var canvas, context;
 var tiles = [];
 var map;
 var obstacles;
+var id = 0;
+var mouse = {
+	x:0,
+	y:0
+};
+var strokeColor = "black";
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -41,6 +47,11 @@ function animate() {
 
 function draw() {
 	drawMap();
+	drawCursor();
+}
+
+function hideLoading() {
+	document.getElementById("loading").classList.add("hidden")
 }
 
 
@@ -50,6 +61,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	var data = makeMap(width, height);
 	map = data[0];
 	obstacles = data[1];
+	hideLoading();
 	animate();
 	// spriteTest();
 }, true);

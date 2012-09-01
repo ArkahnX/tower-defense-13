@@ -8,3 +8,10 @@ For now main variables are located in draw.js
 
 
 using requirejs for build system. Prerequisites: npm install requirejs
+
+to keep things small, string interpretations
+e.g. <code>(someVariable === "someString")</code>
+which minifies like <code>(a === "someString")</code>,
+should defined as a global constant <code>(const CONSTANT\_NAME)</code>
+e.g. <code>(someVariable === SOME_STRING)</code>
+which minifies like: <code>(a === b)</code>
