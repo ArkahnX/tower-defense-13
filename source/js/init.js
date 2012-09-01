@@ -1,8 +1,3 @@
-/**
- * draw.js
- * Main draw loop.
- */
-
 (function() {
 	var lastTime = 0;
 	var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -26,34 +21,39 @@
 	};
 }());
 
-var width = 20;
-var height = 20;
-var tileSize = 32;
-var canvas, context;
-var tiles = [];
-var map;
-var obstacles;
-var id = 0;
-var mouse = {
-	x:0,
-	y:0
+
+
+function random(from, to) {
+	return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+
+function init() {
+	canvas = document.getElementById("canvas");
+	canvas.width = width * tileSize;
+	canvas.height = height * tileSize;
+	context = canvas.getContext("2d");
+}
+
+function getWeightedRandom() {
+	var sum_of_weight = 0;
+	for (var i = 0; i < tiles.length; i++) {
+		sum_of_weight += tiles[i].priority;
+	}
+	var num = random(0, sum_of_weight-1);
+	for (var i = 0; i < tiles.length; i++) {
+		if (num < tiles[i].priority) {
+			return i;
+		}
+		num -= tiles[i].priority;
+	}
+	// shouldnt arrive here
+	return false;
+}
+
+function modulus(num, size) {
+	var mod = num % size;
+	return (num - mod) / size;
 };
-var strokeColor = "black";
-
-function animate() {
-	requestAnimationFrame(animate);
-	draw();
-}
-
-function draw() {
-	drawMap();
-	drawCursor();
-}
-
-function hideLoading() {
-	document.getElementById("loading").classList.add("hidden")
-}
-
 
 window.addEventListener("DOMContentLoaded", function() {
 	init();

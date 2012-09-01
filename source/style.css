@@ -11,3 +11,12 @@
 .hidden {
 	display:none;
 }
+#stats {
+	float:right;
+}
+#stats ul {
+	list-style:none;
+}
+#stats ul li pre {
+	display:inline-block;
+}

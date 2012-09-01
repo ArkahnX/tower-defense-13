@@ -1,24 +1,3 @@
-var buildList = {
-	"images/drain.png": {
-		"type": "trap",
-		"name": "drain",
-		"src": "images/drain.png",
-		"stats": {
-			"health": "",
-			"cost": "10"
-		}
-	},
-	"images/scorpion.png": {
-		"type": "structure",
-		"name": "scorpion",
-		"src": "images/scorpion.png",
-		"stats": {
-			"health": "100",
-			"cost": "100"
-		}
-	}
-};
-
 function isBuilding() {
 	return building() ? true : false;
 }
@@ -37,7 +16,7 @@ function building() {
 	return getAll("name", "scorpion")[0];
 }
 
-var canBuild = function() {
+function canBuild() {
 	var currentTile = map[mouse.y][mouse.x];
 	if (obstacles[mouse.y][mouse.x] !== 0) {
 		return null;
