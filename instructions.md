@@ -6,3 +6,5 @@ place before the animate function is called in the event listener in draw.js
 
 For now main variables are located in draw.js
 
+
+using requirejs for build system. Prerequisites: npm install requirejs
