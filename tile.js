@@ -23,25 +23,27 @@ function makeTile(dataArray, tileSize) {
 }
 
 function makeSprites() {
-	tiles.push(makeTile([
-		[32 * 32, [175, 225],
-			[1.5, 1, 2]
-		],
-		[100, [200, 245],
-			[1, 1.3, 1.5]
-		],
-		[100, [125, 175],
-			[2, 1, 2]
-		]
-	], 32));
-	tiles.push(makeTile([
-		[32 * 32, [0, 0],
-			[1, 1, 1]
-		],
-		[600, [0, 50],
-			[1, 1, 1]
-		]
-	], 32));
+	for (var i = 0; i < 5; i++) {
+		tiles.push(makeTile([
+			[32 * 32, [175, 230],
+				[1.3, 1, 2]
+			],
+			[50, [200, 245],
+				[1, 1.3, 1.5]
+			],
+			[100, [125, 175],
+				[2, 1, 2]
+			]
+		], 32));
+		tiles.push(makeTile([
+			[32 * 32, [0, 0],
+				[1, 1, 1]
+			],
+			[600, [0, 50],
+				[1, 1, 1]
+			]
+		], 32));
+	}
 }
 
 function spriteTest() {
@@ -56,8 +58,6 @@ function spriteTest() {
 		x++;
 	}
 }
-
-
 
 
 function oldBuildTiles() {
