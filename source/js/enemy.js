@@ -1,13 +1,13 @@
-function makeenemy() {
+function makeEnemy() {
 	enemyData.push(makefoes("Scoot","normal", "FF0000", 12, 13, 125));
-	enemyData.push(makefoes("Solly","normal", "0FF000", 12, 13, 125));
+	enemyData.push(makefoes("Solly","normal", "0FF000", 18, 8, 200));
 	enemyData.push(makefoes("Pyro","normal", "00FF00", 16, 10, 175));
-	enemyData.push(makefoes("Demo","normal", "00FF00", 12, 13, 125));
+	enemyData.push(makefoes("Demo","normal", "000FF0", 16, 9, 125));
 	enemyData.push(makefoes("Hoovey","normal", "0000FF", 20, 7, 300));
-	enemyData.push(makefoes("Engie","normal", "00FF00", 12, 13, 125));
-	enemyData.push(makefoes("Medic","normal", "00FF00", 12, 13, 125));
-	enemyData.push(makefoes("Sniper","normal", "00FF00", 12, 13, 125));
-	enemyData.push(makefoes("Spah","normal", "00FF00", 12, 13, 125));
+	enemyData.push(makefoes("Engie","normal", "FFFF00", 16, 10, 125));
+	enemyData.push(makefoes("Medic","normal", "0FFFF0", 14, 11, 150));
+	enemyData.push(makefoes("Sniper","normal", "00FFFF", 12, 10, 125));
+	enemyData.push(makefoes("Spah","normal", "FFFFFF", 10, 10, 125));
 }
 function makefoes(name, type, color, size, speed, health) {
 	var side = Math.ceil(4*Math.random());
