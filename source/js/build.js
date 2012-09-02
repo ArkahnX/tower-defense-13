@@ -2,16 +2,6 @@ function isBuilding() {
 	return building() ? true : false;
 }
 
-function getAll(array, property, value) {
-	var list = [];
-	for (var attr in array) {
-		if (array[attr][property] === value) {
-			list.push(array[attr]);
-		}
-	}
-	return list;
-}
-
 function building() {
 	return getAll(buildList, "name", "scorpion")[0];
 }
@@ -20,6 +10,12 @@ function canBuild() {
 	var currentTile = map[mouse.y][mouse.x];
 	if (obstacles[mouse.y][mouse.x] !== 0) {
 		return null;
+	}
+	var enemy = getAll(enemyData, "y", mouse.y)
+	if (enemy.length) {
+		if (getAll(enemy, "x", mouse.x).length) {
+			return false;
+		}
 	}
 	if (!isBuilding()) {
 		return true;
@@ -49,11 +45,12 @@ function setConstructibles() {
 		var item = towers[i];
 		var name = "<span>" + item.name + "</span>";
 		var cost = "<span class='cost'>$" + item.cost + "</span>";
-		var image = "<img src='" + item.image.src + "' title='" + item.type + ": " + item.name + " ($" + item.cost + ")" + "'>";
-		var container = "<div class='container'>" + image + name + cost + "</div>";
+		var image = "<img src='" + item.image.src + "'>";
+		var container = "<div class='container' title='" + item.is + ": " + item.name + " ($" + item.cost + ")" + "'>" + image + name + cost + "</div>";
 		structures.push("" + container + "")
 	}
 	document.getElementById("towers").innerHTML = structures.join("");
+	bindBuyClicks();
 }
 
 function fillBuildMenu() {

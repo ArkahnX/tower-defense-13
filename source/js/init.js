@@ -22,6 +22,16 @@
 }());
 
 
+function getAll(array, property, value) {
+	var list = [];
+	for (var attr in array) {
+		if (array[attr][property] === value) {
+			list.push(array[attr]);
+		}
+	}
+	return list;
+}
+
 
 function random(from, to) {
 	return Math.floor(Math.random() * (to - from + 1)) + from;
@@ -64,6 +74,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	map = data[0];
 	obstacles = data[1];
 	makeEnemy();
+	addMoney(500);
 	animate();
 	hideLoading();
 	// spriteTest();

@@ -1,7 +1,7 @@
 ({
 	baseUrl: "./source/",
 	name: "js/init",
-	include: ["js/var", "js/mouse", "js/stats", "js/build", "js/map", "js/tile", "js/draw", "js/structure", "js/enemy"],
+	include: ["js/var", "js/mouse", "js/stats", "js/build", "js/map", "js/tile", "js/draw", "js/structure", "js/enemy", "js/astar", "js/money"],
 	out: "build/build.js",
 	keepBuildDir: false,
 	locale: "en-us",

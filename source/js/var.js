@@ -17,6 +17,7 @@ var GraphNodeType = {
 	OPEN: 1,
 	WALL: 0
 };
+var money = 0;
 var buildList = {
 	"images/drain.png": {
 		"type": "trap",

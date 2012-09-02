@@ -1,23 +1,56 @@
 window.addEventListener("DOMContentLoaded", function() {
-	canvas.addEventListener("mousemove", function(event) {
-		mouse.x = event.pageX - canvas.offsetLeft;
-		mouse.y = event.pageY - canvas.offsetTop;
-		mouse.x = modulus(mouse.x, tileSize);
-		mouse.y = modulus(mouse.y, tileSize);
-		strokeColor = "black";
-		if (canBuild() && isBuilding()) {
-			strokeColor = "green";
-		} else if (canBuild() === null) {
-			strokeColor = "blue";
-		} else if (!canBuild()) {
-			strokeColor = "red";
-		}
-
-	}, true);
-	canvas.addEventListener("click", function(event) {
-		// if(isBuilding())
-	},true);
+	addEvent(canvas, "mousemove", moveHandler);
+	addEvent(canvas, "click", clickHandler);
 }, true);
+
+function bindBuyClicks() {
+	var containers = document.querySelectorAll(".container");
+	for (var i = 0; i < containers.length; i++) {
+		addEvent(containers[i], "click", buyHandler);
+	}
+}
+
+function buyHandler(event) {
+	var container = this;
+	if (!container.hasClass("expensive")) {
+		tile.css({
+			left: event.pageX - 16,
+			top: event.pageY - 40
+		}).removeClass("hidden").addClass("drain");
+		whatToBuild = container.find("img").attr("src");
+		console.log("remove")
+		removeMoney(buildList[whatToBuild].stats.cost);
+	}
+}
+
+function clickHandler(event) {
+
+}
+
+function moveHandler(event) {
+	mouse.x = event.pageX - canvas.offsetLeft;
+	mouse.y = event.pageY - canvas.offsetTop;
+	mouse.x = modulus(mouse.x, tileSize);
+	mouse.y = modulus(mouse.y, tileSize);
+	strokeColor = "black";
+	if (canBuild() && isBuilding()) {
+		strokeColor = "green";
+	} else if (canBuild() === null) {
+		strokeColor = "blue";
+	} else if (!canBuild()) {
+		strokeColor = "red";
+	}
+}
+
+function addEvent(target, handler, callback) {
+	removeEvent(target, handler, callback);
+	target.addEventListener(handler, callback, true);
+}
+
+function removeEvent(target, handler, callback) {
+	target.removeEventListener(handler, callback);
+}
+
 
 function drawCursor() {
 	var x = mouse.x * 32;
