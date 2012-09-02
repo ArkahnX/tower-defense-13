@@ -7,9 +7,11 @@ var map;
 var obstacles;
 var id = 0;
 var mouse = {
-	x:0,
-	y:0
+	x: 0,
+	y: 0
 };
+var enemyData = [];
+var towers = [];
 var strokeColor = "black";
 var buildList = {
 	"images/drain.png": {

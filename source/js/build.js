@@ -2,11 +2,11 @@ function isBuilding() {
 	return building() ? true : false;
 }
 
-function getAll(property, value) {
+function getAll(array, property, value) {
 	var list = [];
-	for (var attr in buildList) {
-		if (buildList[attr][property] === value) {
-			list.push(buildList[attr]);
+	for (var attr in array) {
+		if (array[attr][property] === value) {
+			list.push(array[attr]);
 		}
 	}
 	return list;
@@ -35,3 +35,7 @@ function canBuild() {
 	}
 	return false;
 };
+
+function makeMonster() {
+
+}
