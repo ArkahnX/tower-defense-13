@@ -37,11 +37,11 @@ function canBuild() {
 };
 
 function emptyBuildMenu() {
-	document.getElementById("towers").innerHTML = "<ul></ul>";
+	document.getElementById("towers").innerHTML = "";
 }
 
 function setConstructibles() {
-	if (document.getElementById("towers").children[0].children.length > 0) {
+	if (document.getElementById("towers").children.length > 0) {
 		emptyBuildMenu()
 	}
 	var structures = [];
@@ -51,9 +51,9 @@ function setConstructibles() {
 		var cost = "<span class='cost'>$" + item.cost + "</span>";
 		var image = "<img src='" + item.image.src + "' title='" + item.type + ": " + item.name + " ($" + item.cost + ")" + "'>";
 		var container = "<div class='container'>" + image + name + cost + "</div>";
-		structures.push("<li>" + container + "</li>")
+		structures.push("" + container + "")
 	}
-	document.getElementById("towers").children[0].innerHTML = structures.join("");
+	document.getElementById("towers").innerHTML = structures.join("");
 }
 
 function fillBuildMenu() {
