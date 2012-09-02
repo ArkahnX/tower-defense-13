@@ -13,7 +13,7 @@ function makeTilePart(ammount, tileSize, colorStart, colorEnd, Red, Green, Blue)
 	}
 }
 
-function makeTile(name, type, priority, dataArray, tileSize) {
+function makeTile(name, type, priority, speed, dataArray, tileSize) {
 	var images = [];
 	for (var i = 0; i < 3; i++) {
 		num = random(dataArray[0][1], dataArray[0][2]);
@@ -35,7 +35,8 @@ function makeTile(name, type, priority, dataArray, tileSize) {
 		imageList: images,
 		images:images.length,
 		priority: priority,
-		id: thisId
+		id: thisId,
+		speed:speed
 	};
 }
 
@@ -51,21 +52,21 @@ function setTile(tile, watch) {
 }
 
 function makeSprites() {
-	tiles.push(makeTile("grass", "path", 0, [
+	tiles.push(makeTile("grass", "path", 7, 2, [
 		[32 * 32, 175, 230, 1.3, 1, 2],
 		[50, 200, 245, 1, 1.3, 1.5],
 		[100, 125, 175, 2, 1, 2]
 	], 32));
-	tiles.push(makeTile("darkGrass", "path", 7, [
+	tiles.push(makeTile("darkGrass", "path", 7, 2, [
 		[32 * 32, 150, 205, 1.3, 1, 2],
 		[50, 175, 220, 1, 1.3, 1.5],
 		[100, 100, 150, 2, 1, 2]
 	], 32));
-	tiles.push(makeTile("road", "speed", 4, [
+	tiles.push(makeTile("road", "speed", 4, 1, [
 		[32 * 32, 0, 0, 1, 1, 1],
 		[600, 0, 50, 1, 1, 1]
 	], 32));
-	tiles.push(makeTile("water", "slow", 3, [
+	tiles.push(makeTile("water", "slow", 3, 3, [
 		[32 * 32, 100, 200, 1.5, 1.5, 1],
 		[600, 100, 200, 1.5, 1.5, 1]
 	], 32));
