@@ -1,6 +1,7 @@
 function makeStructures() {
 	var types = [
-		["turret", "basic", 255, 0, 0]
+		["base", "special", 255, 0, 0],
+		["turret", "basic", 225, 0, 0]
 	];
 	for (var i = 0; i < types.length; i++) {
 		towers.push(defineTower(types[i][0], types[i][1], types[i][2], types[i][3], types[i][4]));

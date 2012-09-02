@@ -51,6 +51,14 @@ function setTile(tile, watch) {
 	return this;
 }
 
+setTile.prototype.toString = function() {
+    return "[" + this.x + " " + this.y + "]";
+};
+
+setTile.prototype.isWall = function() {
+    return this.type == GraphNodeType.WALL;
+};
+
 function makeSprites() {
 	tiles.push(makeTile("grass", "path", 7, 2, [
 		[32 * 32, 175, 230, 1.3, 1, 2],

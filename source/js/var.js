@@ -13,6 +13,10 @@ var mouse = {
 var enemyData = [];
 var towers = [];
 var strokeColor = "black";
+var GraphNodeType = {
+	OPEN: 1,
+	WALL: 0
+};
 var buildList = {
 	"images/drain.png": {
 		"type": "trap",

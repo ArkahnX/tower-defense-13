@@ -13,7 +13,7 @@ function getAll(array, property, value) {
 }
 
 function building() {
-	return getAll("name", "scorpion")[0];
+	return getAll(buildList, "name", "scorpion")[0];
 }
 
 function canBuild() {
