@@ -10,6 +10,7 @@ function animate() {
 
 function draw() {
 	drawMap();
+	enemies();
 	drawCursor();
 	setStats();
 }
