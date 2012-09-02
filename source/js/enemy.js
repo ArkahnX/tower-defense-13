@@ -8,7 +8,6 @@ function makeEnemy() {
 	enemyData.push(makefoes("Medic", "normal", "0FFFF0", 14, 11, 150));
 	enemyData.push(makefoes("Sniper", "normal", "00FFFF", 12, 10, 125));
 	enemyData.push(makefoes("Spah", "normal", "FFFFFF", 10, 10, 125));
-	getpath();
 }
 
 function makefoes(name, type, color, size, speed, health) {
@@ -41,8 +40,8 @@ function makefoes(name, type, color, size, speed, health) {
 }
 function getpath(x, y) {
 	// FIRST, gets the tile of the enemy in question
-	tilex = Math.round(x/32)
-	tiley = Math.round(y/32)
+	tilex = Math.round(x/32);
+	tiley = Math.round(y/32);
 	// SECOND, gets the path it must take
 	move = astar.search(map,map[tilex][tiley],map[10][10]);
 	return move

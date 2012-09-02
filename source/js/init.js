@@ -58,12 +58,12 @@ function modulus(num, size) {
 window.addEventListener("DOMContentLoaded", function() {
 	init();
 	makeSprites();
-	makeEnemy();
 	makeStructures();
 	setConstructibles();
 	var data = makeMap(canvasWidth, canvasHeight);
 	map = data[0];
 	obstacles = data[1];
+	makeEnemy();
 	animate();
 	hideLoading();
 	// spriteTest();
