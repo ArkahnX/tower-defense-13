@@ -14,6 +14,7 @@ function draw() {
 	drawStructures();
 	enemies();
 	setStats();
+	moveThings();
 }
 
 function hideLoading() {
