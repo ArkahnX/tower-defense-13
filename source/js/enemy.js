@@ -1,14 +1,14 @@
 function makeEnemy() {
 	var used = [];
-	enemyData.push(makefoes("Scoot", "normal", "FF0000", 12, 13, 125, used));
-	enemyData.push(makefoes("Solly", "normal", "0FF000", 18, 8, 200, used));
-	enemyData.push(makefoes("Pyro", "normal", "00FF00", 16, 10, 175, used));
-	enemyData.push(makefoes("Demo", "normal", "000FF0", 16, 9, 125, used));
-	enemyData.push(makefoes("Hoovey", "normal", "0000FF", 20, 7, 300, used));
-	enemyData.push(makefoes("Engie", "normal", "FFFF00", 16, 10, 125, used));
-	enemyData.push(makefoes("Medic", "normal", "0FFFF0", 14, 11, 150, used));
-	enemyData.push(makefoes("Sniper", "normal", "00FFFF", 12, 10, 125, used));
-	enemyData.push(makefoes("Spah", "normal", "FFFFFF", 10, 10, 125, used));
+	enemyData.push(makefoes("Scoot", "normal", "FF0000", 12, .013, 125, used));
+	enemyData.push(makefoes("Solly", "normal", "0FF000", 18, .008, 200, used));
+	enemyData.push(makefoes("Pyro", "normal", "00FF00", 16, .010, 175, used));
+	enemyData.push(makefoes("Demo", "normal", "000FF0", 16, .009, 125, used));
+	enemyData.push(makefoes("Hoovey", "normal", "0000FF", 20, .007, 300, used));
+	enemyData.push(makefoes("Engie", "normal", "FFFF00", 16, .010, 125, used));
+	enemyData.push(makefoes("Medic", "normal", "0FFFF0", 14, .011, 150, used));
+	enemyData.push(makefoes("Sniper", "normal", "00FFFF", 12, .010, 125, used));
+	enemyData.push(makefoes("Spah", "normal", "FFFFFF", 10, .010, 125, used));
 }
 
 function uniqueSpawn(x, y, used) {
@@ -48,14 +48,14 @@ function makefoes(name, type, color, size, speed, health, used) {
 		health: health,
 		x: x,
 		y: y,
-		path: getpath(x, y)
+		path: getpath(x, y),
+		next: 0
 	}
 }
 
-function getpath(x, y, xEnd, yEnd) {
-	// FIRST, gets the tile of the enemy in question
-	// SECOND, gets the path it must take
-	return astar.search(map, map[y][x], map[10][10]);
+function getpath(x, y) {
+	base = getBase();
+	return astar.search(map, map[y][x], map[base.x][base.y]);
 }
 
 function enemies() {
@@ -65,16 +65,34 @@ function enemies() {
 		context.fillStyle = mook.color;
 		context.fillRect(mook.x * tileSize + (tileSize / 2) - (mook.size / 2), mook.y * tileSize + (tileSize / 2) - (mook.size / 2), mook.size, mook.size);
 		context.fill();
+		/*function draw() {
+			for (x in enemies) {
+				canvas.draw(img, enemyData[x].x, enemyData[x].y, enemyData[x].size, enemyData[x].size)
+			}
+		}*/
 	}
-	// Movement function for these guys
-/*for (i = 0; i < enemyData.length; i++) {
-		// FIRST, gets the tile of the enemy in question
-		mook - enemyData[i];
-		tilex = Math.round(mook.x/32)
-		tiley = Math.round(mook.y/32)
-		// SECOND, gets the path it must take
-		move = astar.search(map,map[tilex][tiley],map[10][10]);
-		// THIRD, moves it along the given path
+}
 
-	}*/
+function moveThings() {
+	for (x in enemyData) {
+		if (enemyData[x].x < enemyData[x].path[enemyData[x].next].x) {
+			enemyData[x].x += enemyData[x].speed;
+		}
+		else if (enemyData[x].y < enemyData[x].path[enemyData[x].next].y) {
+			enemyData[x].y += enemyData[x].speed;
+		}
+		else if (enemyData[x].x > enemyData[x].path[enemyData[x].next].x) {
+			enemyData[x].x -= enemyData[x].speed;
+		}
+		else if (enemyData[x].y > enemyData[x].path[enemyData[x].next].y) {
+			enemyData[x].y -= enemyData[x].speed;
+		}
+		if (Math.round(enemyData[x].x) === Math.round(enemyData[x].path[enemyData[x].next].x) && enemyData[x].y === Math.round(enemyData[x].path[enemyData[x].next].y)) {
+			enemyData[x].next++;
+		}
+
+		if (enemyData[x].next > enemyData[x].path.length) {
+			enemyData[x].next = enemyData[x].path.length;
+		}
+	}
 }
