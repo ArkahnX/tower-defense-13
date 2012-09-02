@@ -1,5 +1,5 @@
-var width = 20;
-var height = 20;
+var canvasWidth = 20;
+var canvasHeight = 20;
 var tileSize = 32;
 var canvas, context;
 var tiles = [];

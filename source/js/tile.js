@@ -15,6 +15,8 @@ function makeTilePart(ammount, tileSize, colorStart, colorEnd, Red, Green, Blue)
 
 function makeTile(name, type, priority, speed, dataArray, tileSize) {
 	var images = [];
+	canvas.width = 32;
+	canvas.height = 32;
 	for (var i = 0; i < 3; i++) {
 		num = random(dataArray[0][1], dataArray[0][2]);
 		context.fillStyle = "rgb(" + Math.floor(num / dataArray[0][3]) + "," + Math.floor(num / dataArray[0][4]) + "," + Math.floor(num / dataArray[0][5]) + ")";
@@ -29,20 +31,22 @@ function makeTile(name, type, priority, speed, dataArray, tileSize) {
 	}
 	var thisId = id;
 	id++;
+	canvas.width = canvasWidth * tileSize;
+	canvas.height = canvasHeight * tileSize;
 	return {
 		name: name,
 		is: type,
 		imageList: images,
-		images:images.length,
+		images: images.length,
 		priority: priority,
 		id: thisId,
-		speed:speed
+		speed: speed
 	};
 }
 
 function setTile(tile, watch) {
-	for(var attr in tile) {
-		if(attr === watch) {
+	for (var attr in tile) {
+		if (attr === watch) {
 			this.image = tile[watch][random(0, tile.images - 1)];
 		} else {
 			this[attr] = tile[attr];
@@ -52,11 +56,11 @@ function setTile(tile, watch) {
 }
 
 setTile.prototype.toString = function() {
-    return "[" + this.x + " " + this.y + "]";
+	return "[" + this.x + " " + this.y + "]";
 };
 
 setTile.prototype.isWall = function() {
-    return this.type == GraphNodeType.WALL;
+	return this.type == GraphNodeType.WALL;
 };
 
 function makeSprites() {

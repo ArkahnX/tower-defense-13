@@ -36,6 +36,48 @@ function canBuild() {
 	return false;
 };
 
-function makeMonster() {
+function emptyBuildMenu() {
+	document.getElementById("towers").innerHTML = "<ul></ul>";
+}
 
+function setConstructibles() {
+	if (document.getElementById("towers").children[0].children.length > 0) {
+		emptyBuildMenu()
+	}
+	var structures = [];
+	for (var i = 0; i < towers.length; i++) {
+		var item = towers[i];
+		var name = "<span>" + item.name + "</span>";
+		var cost = "<span class='cost'>$" + item.cost + "</span>";
+		var image = "<img src='" + item.image.src + "' title='" + item.type + ": " + item.name + " ($" + item.cost + ")" + "'>";
+		var container = "<div class='container'>" + image + name + cost + "</div>";
+		structures.push("<li>" + container + "</li>")
+	}
+	document.getElementById("towers").children[0].innerHTML = structures.join("");
+}
+
+function fillBuildMenu() {
+	if (menu.children().length > 0) {
+		emptyBuildMenu()
+	}
+	for (var attr in buildList) {
+		var item = buildList[attr];
+		var container = $("<div class='container'></div>");
+		var name = $("<span>" + item.name + "</span>");
+		var cost = $("<span class='cost'>$" + item.stats.cost + "</span>");
+		var image = new Image();
+		container.append(image);
+		container.append(name);
+		container.append(cost);
+		image.src = item.src;
+		image.title = item.type + ": " + item.name + " ($" + item.stats.cost + ")";
+		menu.append(container);
+		applyClicks();
+	}
+	var leftOffset = $('#canvas').position().left;
+	var topOffset = $('#canvas').position().top;
+	target.css({
+		left: leftOffset - 3,
+		top: topOffset - 3
+	});
 }
