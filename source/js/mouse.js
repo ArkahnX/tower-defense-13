@@ -14,6 +14,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 
 	}, true);
+	canvas.addEventListener("click", function(event) {
+		// if(isBuilding())
+	},true);
 }, true);
 
 function drawCursor() {

@@ -51,7 +51,7 @@ function setTile(tile, watch) {
 }
 
 function makeSprites() {
-	tiles.push(makeTile("grass", "path", 7, [
+	tiles.push(makeTile("grass", "path", 0, [
 		[32 * 32, 175, 230, 1.3, 1, 2],
 		[50, 200, 245, 1, 1.3, 1.5],
 		[100, 125, 175, 2, 1, 2]

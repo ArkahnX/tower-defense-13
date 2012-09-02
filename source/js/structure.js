@@ -3,13 +3,13 @@ function makeStructures() {
 		["turret", "basic", 255, 0, 0]
 	];
 	for (var i = 0; i < types.length; i++) {
-		defineTower(types[i][0], types[i][1], types[i][2], types[i][3], types[i][4]);
+		towers.push(defineTower(types[i][0], types[i][1], types[i][2], types[i][3], types[i][4]));
 	}
 }
 
 function defineTower(name, type, red, blue, green) {
 	var width = random(10, 20);
-	var height = random(10, 20) + width / 1.5;
+	var height = random(10, 20) + Math.floor(width / 1.5);
 	var depth = random(7, 15);
 	// main tower
 	// makeSquare(x, y, w, h, red, green, blue);

@@ -7,6 +7,12 @@ function makeMap(width, height) {
 		for (var x = 0; x < width; x++) {
 			var num = getWeightedRandom();
 			var thisTile = tiles[num];
+			thisTile.x = x;
+			thisTile.y = y;
+			thisTile.pos = {
+				x: x,
+				y: y
+			};
 			map[y][x] = new setTile(tiles[num], "imageList");
 			obstacles[y][x] = 0;
 		}
