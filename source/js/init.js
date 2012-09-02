@@ -59,6 +59,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	init();
 	makeSprites();
 	makeEnemy();
+	makeStructures();
 	var data = makeMap(width, height);
 	map = data[0];
 	obstacles = data[1];

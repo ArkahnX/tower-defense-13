@@ -10,7 +10,7 @@ function makeStructures() {
 function defineTower(name, type, red, blue, green) {
 	var width = random(10, 20);
 	var height = random(10, 20) + Math.floor(width / 1.5);
-	var depth = random(7, 15);
+	var depth = random(7, 12);
 	// main tower
 	// makeSquare(x, y, w, h, red, green, blue);
 	// tower roof
@@ -19,7 +19,7 @@ function defineTower(name, type, red, blue, green) {
 	return {
 		name: name,
 		is: type,
-		color: [red, blue, green],
+		color: [red, green, blue],
 		width: width,
 		height: height,
 		depth: depth
@@ -28,7 +28,7 @@ function defineTower(name, type, red, blue, green) {
 
 function drawTower(name, x, y) {
 	var tower = getAll(towers, "name", name)[0];
-	makeStructure(tileSize * x + ((tileSize / 2) - (tower.width / 2)), tileSize * y - height + ((tileSize / 2)), tower.width, tower.height, tower.color[0], tower.color[1], tower.color[2])
+	makeStructure(tileSize * x + ((tileSize / 2) - (tower.width / 2)), tileSize * y - height + ((tileSize / 2)), tower.width, tower.height, tower.depth, tower.color[0], tower.color[1], tower.color[2])
 }
 
 function darken(color) {
@@ -38,18 +38,18 @@ function darken(color) {
 	return color - 50;
 }
 
-function makeSquare(x, y, w, h, red, green, blue) {
+function makeSquare(x, y, width, height, red, green, blue) {
 	context.beginPath();
-	context.rect(x, y, w, h);
+	context.rect(x, y, width, height);
 	context.fillStyle = "rgb(" + red + "," + green + "," + blue + ")";
 	context.fill();
 }
 
 function makeStructure(x, y, width, height, depth, red, blue, green) {
 	// main tower
-	makeSquare(x, y, w, h + (depth / 2), red, green, blue);
+	makeSquare(x, y + (depth / 2), width, height, red, green, blue);
 	// tower roof
-	makeSquare(x, y, w, h, darken(red), darken(green), darken(blue))
+	makeSquare(x, y, width, depth, darken(red), darken(green), darken(blue));
 	// context.beginPath();
 	// context.rect(32 * 2 + ((32 / 2) - (w / 2)), 32 * 2 - h + ((32 / 2) + (d / 2)), w, h);
 	// context.fillStyle = '#550000';
