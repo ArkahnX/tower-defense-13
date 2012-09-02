@@ -15,13 +15,13 @@ function makefoes(name, type, color, size, speed, health) {
 	var x = 0;
 	var y = 0;
 	if (side === 1 || side === 3) {
-		x = Math.random() * 32 * 19.5;
+		x = Math.floor(Math.random() * 32 * 19.5);
 		if (side === 3) {
 			y = 640 - size;
 		}
 	}
 	if (side === 2 || side === 4) {
-		y = Math.random() * 32 * 19.5;
+		y = Math.floor(Math.random() * 32 * 19.5);
 		if (side === 2) {
 			x = 640 - size;
 		}
@@ -34,10 +34,18 @@ function makefoes(name, type, color, size, speed, health) {
 		speed: speed,
 		health: health,
 		x: x,
-		y: y
+		y: y,
+		path: getpath(x, y)
 	}
 }
-
+function getpath(x, y) {
+	// FIRST, gets the tile of the enemy in question
+	tilex = Math.round(x/32);
+	tiley = Math.round(y/32);
+	// SECOND, gets the path it must take
+	move = astar.search(map,map[tilex][tiley],map[10][10]);
+	return move
+}
 function enemies() {
 	for (i = 0; i < enemyData.length; i++) {
 		mook = enemyData[i];
@@ -46,4 +54,15 @@ function enemies() {
 		context.fillRect(mook.x, mook.y, mook.size, mook.size);
 		context.fill();
 	}
+	// Movement function for these guys
+	/*for (i = 0; i < enemyData.length; i++) {
+		// FIRST, gets the tile of the enemy in question
+		mook - enemyData[i];
+		tilex = Math.round(mook.x/32)
+		tiley = Math.round(mook.y/32)
+		// SECOND, gets the path it must take
+		move = astar.search(map,map[tilex][tiley],map[10][10]);
+		// THIRD, moves it along the given path
+
+	}*/
 }
