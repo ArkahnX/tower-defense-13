@@ -29,8 +29,8 @@ function random(from, to) {
 
 function init() {
 	canvas = document.getElementById("canvas");
-	canvas.width = width * tileSize;
-	canvas.height = height * tileSize;
+	canvas.width = canvasWidth * tileSize;
+	canvas.height = canvasHeight * tileSize;
 	context = canvas.getContext("2d");
 }
 
@@ -60,7 +60,8 @@ window.addEventListener("DOMContentLoaded", function() {
 	makeSprites();
 	makeEnemy();
 	makeStructures();
-	var data = makeMap(width, height);
+	setConstructibles();
+	var data = makeMap(canvasWidth, canvasHeight);
 	map = data[0];
 	obstacles = data[1];
 	animate();
