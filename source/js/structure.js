@@ -11,7 +11,7 @@ function makeStructures() {
 function defineTower(name, type, cost, health, from, to, red, blue, green) {
 	var width = random(from, to);
 	var height = random(from, to) + Math.floor(width / 1.5);
-	var depth = random(from-3, to-3);
+	var depth = random(from - 3, to - 3);
 	// main tower
 	// makeSquare(x, y, w, h, red, green, blue);
 	// tower roof
@@ -76,4 +76,18 @@ function makeStructure(x, y, width, height, depth, red, blue, green) {
 	// context.rect(32 * 2 + ((32 / 2) - (w / 2)), 32 * 2 - h + ((32 / 2)), w, d);
 	// context.fillStyle = '#FF0000';
 	// context.fill();
+}
+
+function getBase() {
+	for (var y = 0; y < obstacles.length; y++) {
+		for (var x = 0; x < obstacles[y].length; x++) {
+			if (obstacles[y][x] === 1) {
+				return {
+					x: x,
+					y: y
+				};
+			}
+		}
+	}
+	return false;
 }
