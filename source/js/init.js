@@ -58,6 +58,7 @@ function modulus(num, size) {
 window.addEventListener("DOMContentLoaded", function() {
 	init();
 	makeSprites();
+	makeenemy();
 	var data = makeMap(width, height);
 	map = data[0];
 	obstacles = data[1];
