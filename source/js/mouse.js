@@ -1,25 +1,21 @@
-window.addEventListener("DOMContentLoaded", function() {
+WINDOW.addEventListener("DOMContentLoaded", function() {
 	addEvent(canvas, "mousemove", moveHandler);
 	addEvent(canvas, "click", clickHandler);
 }, true);
 
 function bindBuyClicks() {
-	var containers = document.querySelectorAll(".container");
-	for (var i = 0; i < containers.length; i++) {
+	var containers = document[QUERY_SELECTOR_ALL](".container");
+	for (var i = 0; i < containers[LENGTH]; i++) {
 		addEvent(containers[i], "click", buyHandler);
 	}
 }
 
 function buyHandler(event) {
 	var container = this;
-	if (!container.hasClass("expensive")) {
-		tile.css({
-			left: event.pageX - 16,
-			top: event.pageY - 40
-		}).removeClass("hidden").addClass("drain");
+	if (!container[CLASS_LIST].contains("expensive")) {
 		whatToBuild = container.find("img").attr("src");
 		console.log("remove")
-		removeMoney(buildList[whatToBuild].stats.cost);
+		removeMoney(buildList[whatToBuild].stats[COST]);
 	}
 }
 
@@ -35,7 +31,7 @@ function moveHandler(event) {
 	strokeColor = "black";
 	if (canBuild() && isBuilding()) {
 		strokeColor = "green";
-	} else if (canBuild() === null) {
+	} else if (canBuild() === NULL) {
 		strokeColor = "blue";
 	} else if (!canBuild()) {
 		strokeColor = "red";

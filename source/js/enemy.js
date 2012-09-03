@@ -1,18 +1,18 @@
-function makeEnemy() {
+function makeEnemies() {
 	var used = [];
-	enemyData.push(makefoes("Scoot", "normal", "FF0000", 12, .013, 125, used));
-	enemyData.push(makefoes("Solly", "normal", "0FF000", 18, .008, 200, used));
-	enemyData.push(makefoes("Pyro", "normal", "00FF00", 16, .010, 175, used));
-	enemyData.push(makefoes("Demo", "normal", "000FF0", 16, .009, 125, used));
-	enemyData.push(makefoes("Hoovey", "normal", "0000FF", 20, .007, 300, used));
-	enemyData.push(makefoes("Engie", "normal", "FFFF00", 16, .010, 125, used));
-	enemyData.push(makefoes("Medic", "normal", "0FFFF0", 14, .011, 150, used));
-	enemyData.push(makefoes("Sniper", "normal", "00FFFF", 12, .010, 125, used));
-	enemyData.push(makefoes("Spah", "normal", "FFFFFF", 10, .010, 125, used));
+	enemies[PUSH](makefoes("Scoot", "normal", "FF0000", 12, 3, 125, used));
+	// enemies[PUSH](makefoes("Solly", "normal", "0FF000", 18, 1, 200, used));
+	// enemies[PUSH](makefoes("Pyro", "normal", "00FF00", 16, 1, 175, used));
+	// enemies[PUSH](makefoes("Demo", "normal", "000FF0", 16, 1, 125, used));
+	// enemies[PUSH](makefoes("Hoovey", "normal", "0000FF", 20, 1, 300, used));
+	// enemies[PUSH](makefoes("Engie", "normal", "FFFF00", 16, 1, 125, used));
+	// enemies[PUSH](makefoes("Medic", "normal", "0FFFF0", 14, 1, 150, used));
+	// enemies[PUSH](makefoes("Sniper", "normal", "00FFFF", 12, 1, 125, used));
+	// enemies[PUSH](makefoes("Spah", "normal", "FFFFFF", 10, 1, 125, used));
 }
 
 function uniqueSpawn(x, y, used) {
-	for (var i = 0; i < used.length; i++) {
+	for (var i = 0; i < used[LENGTH]; i++) {
 		if (used[i][0] === x && used[i][1] === y) {
 			return false
 		}
@@ -20,7 +20,12 @@ function uniqueSpawn(x, y, used) {
 	return true;
 }
 
-function makefoes(name, type, color, size, speed, health, used) {
+
+function makeEnemy() {
+
+}
+
+function makefoes(name, type, color, size, speedModifier, health, used) {
 	var side = random(0, 3)
 	// 0-3 top-left clockwise
 	var x = 0;
@@ -38,7 +43,9 @@ function makefoes(name, type, color, size, speed, health, used) {
 			}
 		}
 	} while (!uniqueSpawn(x, y, used));
-	used.push([x, y]);
+	used[PUSH]([x, y]);
+	var speed = (tileSize / 60) * speedModifier;
+	var path = astar.search(map, map[y][x], map[getBase().y][getBase().x]);
 	return {
 		name: name,
 		type: type,
@@ -46,53 +53,60 @@ function makefoes(name, type, color, size, speed, health, used) {
 		size: size,
 		speed: speed,
 		health: health,
+		targetX: path[0].x,
+		targetY: path[0].y,
+		path: path,
 		x: x,
 		y: y,
-		path: getpath(x, y),
-		next: 0
+		pixelX: center(x, size),
+		pixelY: center(y, size),
+		pathIndex: 0
 	}
 }
 
-function getpath(x, y) {
-	base = getBase();
-	return astar.search(map, map[y][x], map[base.x][base.y]);
-}
-
-function enemies() {
-	for (i = 0; i < enemyData.length; i++) {
-		var mook = enemyData[i];
+function drawEnemies() {
+	for (i = 0; i < enemies[LENGTH]; i++) {
+		var thisEnemy = enemies[i];
 		context.beginPath();
-		context.fillStyle = mook.color;
-		context.fillRect(mook.x * tileSize + (tileSize / 2) - (mook.size / 2), mook.y * tileSize + (tileSize / 2) - (mook.size / 2), mook.size, mook.size);
+		context.fillStyle = thisEnemy[COLOR];
+		context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
 		context.fill();
-		/*function draw() {
-			for (x in enemies) {
-				canvas.draw(img, enemyData[x].x, enemyData[x].y, enemyData[x].size, enemyData[x].size)
-			}
-		}*/
 	}
 }
 
-function moveThings() {
-	for (x in enemyData) {
-		if (enemyData[x].x < enemyData[x].path[enemyData[x].next].x) {
-			enemyData[x].x += enemyData[x].speed;
-		}
-		else if (enemyData[x].y < enemyData[x].path[enemyData[x].next].y) {
-			enemyData[x].y += enemyData[x].speed;
-		}
-		else if (enemyData[x].x > enemyData[x].path[enemyData[x].next].x) {
-			enemyData[x].x -= enemyData[x].speed;
-		}
-		else if (enemyData[x].y > enemyData[x].path[enemyData[x].next].y) {
-			enemyData[x].y -= enemyData[x].speed;
-		}
-		if (Math.round(enemyData[x].x) === Math.round(enemyData[x].path[enemyData[x].next].x) && enemyData[x].y === Math.round(enemyData[x].path[enemyData[x].next].y)) {
-			enemyData[x].next++;
-		}
+function round(number) {
+	return WINDOW[MATH].round(number);
+}
+function floor(number) {
+	return WINDOW[MATH][FLOOR](number);
+}
 
-		if (enemyData[x].next > enemyData[x].path.length) {
-			enemyData[x].next = enemyData[x].path.length;
+function center(position, size) {
+	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
+}
+
+function moveEnemies() {
+	for (var i = 0; i < enemies.length; i++) {
+		var thisEnemy = enemies[i];
+		if (thisEnemy.pathIndex < thisEnemy[PATH][LENGTH]) {
+			var target = thisEnemy[PATH][thisEnemy.pathIndex];
+			thisEnemy.x = modulus(thisEnemy.pixelX + (thisEnemy.size / 2), tileSize);
+			thisEnemy.y = modulus(thisEnemy.pixelY + (thisEnemy.size / 2), tileSize);
+			thisEnemy.targetX = target.x;
+			thisEnemy.targetY = target.y;
+			// console.log(thisEnemy.pixelX < thisEnemy[PATH][thisEnemy.pathIndex].x)
+			if (round(thisEnemy.pixelX) < center(thisEnemy.targetX, thisEnemy.size)) {
+				thisEnemy.pixelX += thisEnemy[SPEED];
+			} else if (round(thisEnemy.pixelY) < center(thisEnemy.targetY, thisEnemy.size)) {
+				thisEnemy.pixelY += thisEnemy[SPEED];
+			} else if (round(thisEnemy.pixelX) > center(thisEnemy.targetX, thisEnemy.size)) {
+				thisEnemy.pixelX -= thisEnemy[SPEED];
+			} else if (round(thisEnemy.pixelY) > center(thisEnemy.targetY, thisEnemy.size)) {
+				thisEnemy.pixelY -= thisEnemy[SPEED];
+			}
+			if (round(thisEnemy.pixelX) === center(thisEnemy.targetX, thisEnemy.size) && round(thisEnemy.pixelY) === center(thisEnemy.targetY, thisEnemy.size)) {
+				thisEnemy.pathIndex++;
+			}
 		}
 	}
 }

@@ -12,12 +12,11 @@ function draw() {
 	drawMap();
 	drawCursor();
 	drawStructures();
-	enemies();
-	setStats();
+	drawEnemies();
 	setScore();
-	moveThings();
+	moveEnemies();
 }
 
 function hideLoading() {
-	document.getElementById("loading").classList.add("hidden")
+	document[GET_ELEMENT_BY_ID]("loading")[CLASS_LIST].add("hidden")
 }

@@ -3,17 +3,21 @@ function isBuilding() {
 }
 
 function building() {
-	return getAll(buildList, "name", "scorpion")[0];
+	if(bought === NULL) {
+		return false;
+	} else {
+		return getAll(structures, NAME, bought)
+	}
 }
 
 function canBuild() {
 	var currentTile = map[mouse.y][mouse.x];
 	if (obstacles[mouse.y][mouse.x] !== 0) {
-		return null;
+		return NULL;
 	}
-	var enemy = getAll(enemyData, "y", mouse.y)
-	if (enemy.length) {
-		if (getAll(enemy, "x", mouse.x).length) {
+	var enemy = getAll(enemies, "y", mouse.y);
+	if (enemy[LENGTH]) {
+		if (getAll(enemy, "x", mouse.x)[LENGTH]) {
 			return false;
 		}
 	}
@@ -23,7 +27,7 @@ function canBuild() {
 	if (building().is === "terrain") {
 		return true;
 	}
-	if (currentTile.is === "path") {
+	if (currentTile.is === PATH) {
 		return true;
 	}
 	if (building().is === "trap" && currentTile.is === "fast") {
@@ -33,41 +37,41 @@ function canBuild() {
 };
 
 function emptyBuildMenu() {
-	document.getElementById("towers").innerHTML = "";
+	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = "";
 }
 
 function setConstructibles() {
-	if (document.getElementById("towers").children.length > 0) {
+	if (document[GET_ELEMENT_BY_ID](TOWERS).children[LENGTH] > 0) {
 		emptyBuildMenu()
 	}
 	var structures = [];
-	for (var i = 0; i < towers.length; i++) {
+	for (var i = 0; i < towers[LENGTH]; i++) {
 		var item = towers[i];
-		var name = "<span>" + item.name + "</span>";
-		var cost = "<span class='cost'>$" + item.cost + "</span>";
-		var image = "<img src='" + item.image.src + "'>";
-		var container = "<div class='container' title='" + item.is + ": " + item.name + " ($" + item.cost + ")" + "'>" + image + name + cost + "</div>";
-		structures.push("" + container + "")
+		var name = START_SPAN+">" + item[NAME] + CLOSE_SPAN;
+		var cost = START_SPAN+" class='cost'>$" + item[COST] + CLOSE_SPAN;
+		var image = "<img src='" + item.image[SRC] + "'>";
+		var container = START_DIV+" class='container' title='" + item.is + ": " + item[NAME] + " ($" + item[COST] + ")" + "'>" + image + name + cost + CLOSE_DIV;
+		structures[PUSH]("" + container + "")
 	}
-	document.getElementById("towers").innerHTML = structures.join("");
+	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = structures.join("");
 	bindBuyClicks();
 }
 
 function fillBuildMenu() {
-	if (menu.children().length > 0) {
+	if (menu.children()[LENGTH] > 0) {
 		emptyBuildMenu()
 	}
 	for (var attr in buildList) {
 		var item = buildList[attr];
-		var container = $("<div class='container'></div>");
-		var name = $("<span>" + item.name + "</span>");
-		var cost = $("<span class='cost'>$" + item.stats.cost + "</span>");
+		var container = $(START_DIV+" class='container'>"+CLOSE_DIV);
+		var name = $(START_SPAN+">" + item[NAME] + CLOSE_SPAN);
+		var cost = $(START_SPAN+" class='cost'>$" + item.stats[COST] + CLOSE_SPAN);
 		var image = new Image();
 		container.append(image);
 		container.append(name);
 		container.append(cost);
-		image.src = item.src;
-		image.title = item.type + ": " + item.name + " ($" + item.stats.cost + ")";
+		image[SRC] = item[SRC];
+		image.title = item.type + ": " + item[NAME] + " ($" + item.stats[COST] + ")";
 		menu.append(container);
 		applyClicks();
 	}
