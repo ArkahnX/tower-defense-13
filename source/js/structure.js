@@ -38,8 +38,9 @@ function defineTower(name, type, cost, health, from, to, red, blue, green) {
 	};
 }
 
-function drawTower(name, x, y) {
-	var tower = getAll(towers, NAME, name)[0];
+function drawTower(tower, x, y) {
+	tower.x = x;
+	tower.y = y;
 	makeStructure(tileSize * x + ((HALF_TILE_SIZE) - (tower[WIDTH] / 2)), tileSize * y - tower[HEIGHT] + ((HALF_TILE_SIZE)), tower[WIDTH], tower[HEIGHT], tower.depth, tower[COLOR][0], tower[COLOR][1], tower[COLOR][2])
 }
 
@@ -78,16 +79,25 @@ function makeStructure(x, y, width, height, depth, red, blue, green) {
 	// context.fill();
 }
 
-function getBase() {
+function getBaseCoords() {
 	for (var y = 0; y < obstacles[LENGTH]; y++) {
 		for (var x = 0; x < obstacles[y][LENGTH]; x++) {
-			if (obstacles[y][x] === 1) {
+			if (obstacles[y][x][NAME] === "base") {
 				return {
 					x: x,
 					y: y
 				};
 			}
+
 		}
 	}
 	return false;
+}
+
+function setStructure(tower, watch) {
+	var object = Object.create(null);
+	for (var attr in tower) {
+		object[attr] = tower[attr];
+	}
+	return object;
 }

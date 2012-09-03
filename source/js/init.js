@@ -21,15 +21,30 @@
 	};
 }());
 
+function clone(object) {
+	var newObj = (object instanceof Array) ? [] : {};
+	for (i in object) {
+		if (i === 'clone') {
+			continue;
+		}
+		if (object[i] && typeof object[i] === "object" && !Array.isArray(object[i]) && !object[i].nodeType) {
+			newObj[i] = clone(object[i]);
+		} else {
+			newObj[i] = object[i];
+		}
+	}
+	return newObj;
+};
 
-function getAll(array, property, value) {
+
+function getAll(array, property, value, cloneResult) {
 	var list = [];
 	for (var attr in array) {
 		if (array[attr][property] === value) {
-			list[PUSH](array[attr]);
+			cloneResult ? list[PUSH](clone(array[attr])) : list[PUSH](array[attr]);
 		}
 	}
-	return list;
+	return list.length ? list : false;
 }
 
 
@@ -49,7 +64,7 @@ function getWeightedRandom() {
 	for (var i = 0; i < tiles[LENGTH]; i++) {
 		sum_of_weight += tiles[i].priority;
 	}
-	var num = random(0, sum_of_weight-1);
+	var num = random(0, sum_of_weight - 1);
 	for (var i = 0; i < tiles[LENGTH]; i++) {
 		if (num < tiles[i].priority) {
 			return i;
@@ -58,6 +73,10 @@ function getWeightedRandom() {
 	}
 	// shouldnt arrive here
 	return false;
+}
+
+function damage(target, ammount) {
+	target.health -= ammount;
 }
 
 function modulus(num, size) {
@@ -73,8 +92,8 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 	var data = makeMap(canvasWidth, canvasHeight);
 	map = data[0];
 	obstacles = data[1];
-	makeEnemies();
 	addMoney(500);
+	makeEnemies();
 	animate();
 	hideLoading();
 	// spriteTest();

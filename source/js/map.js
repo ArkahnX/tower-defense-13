@@ -4,19 +4,21 @@ function makeMap(width, height) {
 		obstacles[y] = obstacles[y] || [];
 		for (var x = 0; x < width; x++) {
 			var num = getWeightedRandom();
-			var thisTile = tiles[num];
+			var thisTile = new setTile(tiles[num], "imageList");
 			thisTile.x = x;
 			thisTile.y = y;
 			thisTile.pos = {
 				x: x,
 				y: y
 			};
-			map[y][x] = new setTile(tiles[num], "imageList");
+			map[y][x] = thisTile;
 			obstacles[y][x] = 0;
 		}
 	}
-	var base = random((width / 2) - 1, (height / 2) + 1);
-	obstacles[base][base] = 1;
+	var baseLocation = random((width / 2) - 1, (height / 2) + 1);
+	var base = new setStructure(towers[0]);
+	base.x = base.y = baseLocation;
+	obstacles[baseLocation][baseLocation] = base;
 	return [map, obstacles];
 }
 
@@ -31,8 +33,8 @@ function drawMap() {
 function drawStructures() {
 	for (var y = 0; y < map[LENGTH]; y++) {
 		for (var x = 0; x < map[y][LENGTH]; x++) {
-			if (obstacles[y][x] > 0) {
-				drawTower(towers[obstacles[y][x] - 1][NAME], x, y);
+			if (typeof obstacles[y][x] === "object") {
+				drawTower(obstacles[y][x], x, y);
 			}
 		}
 	}

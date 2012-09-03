@@ -45,7 +45,8 @@ function makefoes(name, type, color, size, speedModifier, health, used) {
 	} while (!uniqueSpawn(x, y, used));
 	used[PUSH]([x, y]);
 	var speed = (tileSize / 60) * speedModifier;
-	var path = astar.search(map, map[y][x], map[getBase().y][getBase().x]);
+	var base = getBaseCoords();
+	var path = astar.search(map, map[y][x], map[base.y][base.x]);
 	return {
 		name: name,
 		type: type,
