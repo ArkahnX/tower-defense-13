@@ -1,95 +1,104 @@
 #loading {
-	z-index:3;
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	background:white;
-	transition:all .2s linear;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    transition: all .2s linear;
 }
+
 .hidden {
-	display:none;
+    display: none;
 }
+
 #stats {
-	float:right;
+    float: right;
 }
+
 #stats ul {
-	list-style:none;
+    list-style: none;
 }
+
 #stats ul li pre {
-	display:inline-block;
+    display: inline-block;
 }
 
-#main
-{
-	width: 224px;
-	height: 256px;
-	background-color: #FFFFFF;
-	position: absolute;
-	margin-left: 32px;
-	margin-top: 32px;
+#main {
+    width: 224px;
+    height: 256px;
+    background-color: #FFFFFF;
+    margin-right: 10px;
+    float: left;
 }
 
-#data
-{
-	width: 224px;
-	height: 96px;
-	background-color: #111111;
-	color:gray;
-}
-#data:hover
-{
-	color:white;
+#data {
+    width: 224px;
+    height: 96px;
+    background-color: #111111;
+    color: gray;
 }
 
-#data ul
-{
-	list-style:none;
-	margin:0;
+#data:hover {
+    color: white;
 }
 
-#towers
-{
-	width: 224px;
-	height: 160px;
-	background-color: #111111;
+#data ul {
+    list-style: none;
+    margin: 0;
 }
 
-.container
-{
-	padding: 7px;
-	display: inline-block;
-	height: 48px;
-	color:gray;
-	font-weight:bold;
-	cursor:default;
-	user-select:none;
+#towers {
+    width: 224px;
+    height: 160px;
+    background-color: #111111;
 }
 
-.container:not(.expensive):hover
-{
-	background-color:rgba(255,255,255,0.25);
-	color: white;
-	cursor:pointer;
+.container {
+    padding: 7px;
+    display: inline-block;
+    height: 48px;
+    color: gray;
+    font-weight: bold;
+    cursor: default;
+    user-select: none;
 }
 
-.container:hover span
-{
+.container:not(.expensive):not(.building):hover {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+    cursor: pointer;
 }
 
-.container span
-{
-	display: block;
-	text-shadow:1px 1px 1px black;
-}
-.container .cost
-{
-	margin-top: -47px;
+.container:hover span {
 }
 
-.container img
-{
-	margin: 0;
-	float: left;
+.container span {
+    display: block;
+    text-shadow: 1px 1px 1px black;
+}
+
+.container .cost {
+    margin-top: -47px;
+}
+
+.container img {
+    margin: 0;
+    float: left;
+}
+
+.container.expensive {
+    color: red;
+    text-decoration: line-through;
+}
+
+#effects {
+    background:transparent;
+    position:absolute;
+}
+
+.container.expensive.building, .container.building {
+    color: white;
+    text-decoration: line-through;
 }
