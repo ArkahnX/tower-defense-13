@@ -1,9 +1,3 @@
-WINDOW.addEventListener("DOMContentLoaded", function() {
-	addEvent(canvas, "mousemove", moveHandler);
-	addEvent(canvas, "mousedown", clickHandler);
-	addEvent(canvas, "contextmenu", doNothing);
-}, true);
-
 function bindBuyClicks() {
 	var containers = document[QUERY_SELECTOR_ALL](".container");
 	for (var i = 0; i < containers[LENGTH]; i++) {

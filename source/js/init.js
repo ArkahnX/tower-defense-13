@@ -57,6 +57,9 @@ function init() {
 	canvas[WIDTH] = canvasWidth * tileSize;
 	canvas[HEIGHT] = canvasHeight * tileSize;
 	context = canvas.getContext("2d");
+	addEvent(canvas, "mousemove", moveHandler);
+	addEvent(canvas, "mousedown", clickHandler);
+	addEvent(canvas, "contextmenu", doNothing);
 }
 
 function getWeightedRandom() {
