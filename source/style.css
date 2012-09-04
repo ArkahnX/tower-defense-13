@@ -1,104 +1,131 @@
-#loading {
-    z-index: 3;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: white;
-    transition: all .2s linear;
+* {
+	margin: 0;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
-.hidden {
-    display: none;
-}
-
-#stats {
-    float: right;
-}
-
-#stats ul {
-    list-style: none;
-}
-
-#stats ul li pre {
-    display: inline-block;
+body {
+	overflow: scroll;
 }
 
 #main {
-    width: 224px;
-    height: 256px;
-    background-color: #FFFFFF;
-    margin-right: 10px;
-    float: left;
+	z-index: 2;
+	position: fixed;
+	bottom: 0;
+	top: 0;
+	width: 250px;
+	background-color: #111111;
+
+	-webkit-box-shadow: 3px 0 3px #111;
+	box-shadow: 3px 0 3px #111;
+}
+
+canvas {
+	position: absolute;
+	left: 250px;
+	z-index: 1;
+}
+
+#loading {
+	z-index: 3;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	color: rgba(0,183,229,0.9);
+	background: black;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 15px;
+
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+#loading.hidden {
+	top: 50%;
+	bottom: 50%;
+	height: 0;
+	color: white;
+	overflow: hidden;
+	padding: 0;
 }
 
 #data {
-    width: 224px;
-    height: 96px;
-    background-color: #111111;
-    color: gray;
+	color: gray;
+	padding: 10px;
 }
 
 #data:hover {
-    color: white;
+	color: white;
 }
 
 #data ul {
-    list-style: none;
-    margin: 0;
-}
-
-#towers {
-    width: 224px;
-    height: 160px;
-    background-color: #111111;
+	list-style: none;
+	margin: 0;
 }
 
 .container {
-    padding: 7px;
-    display: inline-block;
-    height: 48px;
-    color: gray;
-    font-weight: bold;
-    cursor: default;
-    user-select: none;
+	padding: 7px;
+	display: inline-block;
+	height: 61px;
+	color: gray;
+	font-weight: bold;
+	cursor: default;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	-webkit-transition-duration: .1s;
+	-moz-transition-duration: .1s;
+	-o-transition-duration: .1s;
+	-ms-transition-duration: .1s;
+	transition-duration: .1s;
 }
 
 .container:not(.expensive):not(.building):hover {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-    cursor: pointer;
-}
-
-.container:hover span {
+	background-color: rgba(255,255,255,0.25);
+	color: white;
+	cursor: pointer;
 }
 
 .container span {
-    display: block;
-    text-shadow: 1px 1px 1px black;
+	display: block;
+	text-shadow: 1px 1px 1px black;
 }
 
 .container .cost {
-    margin-top: -47px;
+	margin-top: -47px;
 }
 
 .container img {
-    margin: 0;
-    float: left;
+	margin: 0;
+	float: left;
 }
 
 .container.expensive {
-    color: red;
-    text-decoration: line-through;
+	color: red;
+	text-decoration: line-through;
 }
 
-#effects {
-    background:transparent;
-    position:absolute;
-}
-
-.container.expensive.building, .container.building {
-    color: white;
-    text-decoration: line-through;
+.container.expensive.building,.container.building {
+	color: white;
+	text-decoration: line-through;
 }
