@@ -1,10 +1,12 @@
 function setScore() {
+	var baseHealth = getBase().health;
 	var statsList = ["money"];
 	var start = "<li>";
 	var end = "</li>";
 	var preStart = "<code>";
 	var preEnd = "</code>"
 	var stats = [];
+	stats[PUSH]("Base Health: " + preStart + JSON.stringify(baseHealth) + preEnd)
 	for (var i = 0; i < statsList[LENGTH]; i++) {
 		if (typeof this[statsList[i]] === "function") {
 			stats[PUSH](statsList[i] + ": " + preStart + JSON.stringify(this[statsList[i]]()) + preEnd);

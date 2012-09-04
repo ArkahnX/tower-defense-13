@@ -10,11 +10,12 @@ function animate() {
 
 function draw() {
 	drawMap();
+	cursorColor();
 	drawCursor();
-	drawStructures();
 	drawEnemies();
-	setScore();
 	moveEnemies();
+	drawStructures();
+	setScore();
 }
 
 function hideLoading() {

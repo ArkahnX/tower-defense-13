@@ -79,6 +79,18 @@ function makeStructure(x, y, width, height, depth, red, blue, green) {
 	// context.fill();
 }
 
+function getBase() {
+	for (var y = 0; y < obstacles[LENGTH]; y++) {
+		for (var x = 0; x < obstacles[y][LENGTH]; x++) {
+			if (obstacles[y][x][NAME] === "base") {
+				return obstacles[y][x];
+			}
+
+		}
+	}
+	return false;
+}
+
 function getBaseCoords() {
 	for (var y = 0; y < obstacles[LENGTH]; y++) {
 		for (var x = 0; x < obstacles[y][LENGTH]; x++) {
@@ -101,3 +113,8 @@ function setStructure(tower, watch) {
 	}
 	return object;
 }
+
+function reachBase(enemy) {
+	damage(getBase(), enemy.health)
+}
+

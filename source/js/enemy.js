@@ -1,6 +1,6 @@
 function makeEnemies() {
 	var used = [];
-	enemies[PUSH](makefoes("Scoot", "normal", "FF0000", 12, 3, 125, used));
+	enemies[PUSH](makeEnemy("Scoot", "normal", "FFF000", 12, 1, 125, used));
 	// enemies[PUSH](makefoes("Solly", "normal", "0FF000", 18, 1, 200, used));
 	// enemies[PUSH](makefoes("Pyro", "normal", "00FF00", 16, 1, 175, used));
 	// enemies[PUSH](makefoes("Demo", "normal", "000FF0", 16, 1, 125, used));
@@ -20,12 +20,7 @@ function uniqueSpawn(x, y, used) {
 	return true;
 }
 
-
-function makeEnemy() {
-
-}
-
-function makefoes(name, type, color, size, speedModifier, health, used) {
+function makeEnemy(name, type, color, size, speedModifier, health, used) {
 	var side = random(0, 3)
 	// 0-3 top-left clockwise
 	var x = 0;
@@ -66,18 +61,21 @@ function makefoes(name, type, color, size, speedModifier, health, used) {
 }
 
 function drawEnemies() {
-	for (i = 0; i < enemies[LENGTH]; i++) {
-		var thisEnemy = enemies[i];
-		context.beginPath();
-		context.fillStyle = thisEnemy[COLOR];
-		context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
-		context.fill();
+	if (enemies[LENGTH]) {
+		for (i = 0; i < enemies[LENGTH]; i++) {
+			var thisEnemy = enemies[i];
+			context.beginPath();
+			context.fillStyle = thisEnemy[COLOR];
+			context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
+			context.fill();
+		}
 	}
 }
 
 function round(number) {
 	return WINDOW[MATH].round(number);
 }
+
 function floor(number) {
 	return WINDOW[MATH][FLOOR](number);
 }
@@ -95,19 +93,42 @@ function moveEnemies() {
 			thisEnemy.y = modulus(thisEnemy.pixelY + (thisEnemy.size / 2), tileSize);
 			thisEnemy.targetX = target.x;
 			thisEnemy.targetY = target.y;
+			var tile = map[thisEnemy.y][thisEnemy.x];
+			var speed = thisEnemy[SPEED] / tile[SPEED];
+			var x = center(thisEnemy.targetX, thisEnemy.size);
+			var y = center(thisEnemy.targetY, thisEnemy.size);
 			// console.log(thisEnemy.pixelX < thisEnemy[PATH][thisEnemy.pathIndex].x)
-			if (round(thisEnemy.pixelX) < center(thisEnemy.targetX, thisEnemy.size)) {
-				thisEnemy.pixelX += thisEnemy[SPEED];
-			} else if (round(thisEnemy.pixelY) < center(thisEnemy.targetY, thisEnemy.size)) {
-				thisEnemy.pixelY += thisEnemy[SPEED];
-			} else if (round(thisEnemy.pixelX) > center(thisEnemy.targetX, thisEnemy.size)) {
-				thisEnemy.pixelX -= thisEnemy[SPEED];
-			} else if (round(thisEnemy.pixelY) > center(thisEnemy.targetY, thisEnemy.size)) {
-				thisEnemy.pixelY -= thisEnemy[SPEED];
+			if (round(thisEnemy.pixelX) < x) {
+				if (thisEnemy.pixelX + speed > x) {
+					thisEnemy.pixelX = x
+				} else {
+					thisEnemy.pixelX += speed;
+				}
+			} else if (round(thisEnemy.pixelY) < y) {
+				if (thisEnemy.pixelY + speed > y) {
+					thisEnemy.pixelY = y
+				} else {
+					thisEnemy.pixelY += speed;
+				}
+			} else if (round(thisEnemy.pixelX) > x) {
+				if (thisEnemy.pixelX - speed < x) {
+					thisEnemy.pixelX = x
+				} else {
+					thisEnemy.pixelX -= speed;
+				}
+			} else if (round(thisEnemy.pixelY) > y) {
+				if (thisEnemy.pixelY - speed < y) {
+					thisEnemy.pixelY = y
+				} else {
+					thisEnemy.pixelY -= speed;
+				}
 			}
 			if (round(thisEnemy.pixelX) === center(thisEnemy.targetX, thisEnemy.size) && round(thisEnemy.pixelY) === center(thisEnemy.targetY, thisEnemy.size)) {
 				thisEnemy.pathIndex++;
 			}
+		} else {
+			reachBase(thisEnemy);
+			destroyUnit(thisEnemy[NAME])
 		}
 	}
 }

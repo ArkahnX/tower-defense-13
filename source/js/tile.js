@@ -64,21 +64,21 @@ setTile.prototype.isWall = function() {
 };
 
 function makeSprites() {
-	tiles[PUSH](makeTile("grass", PATH, 7, 2, [
+	tiles[PUSH](makeTile("grass", PATH, 7, 1, [
 		[32 * 32, 175, 230, 1.3, 1, 2],
 		[50, 200, 245, 1, 1.3, 1.5],
 		[100, 125, 175, 2, 1, 2]
 	], 32));
-	tiles[PUSH](makeTile("darkGrass", PATH, 7, 2, [
+	tiles[PUSH](makeTile("darkGrass", PATH, 7, 1, [
 		[32 * 32, 150, 205, 1.3, 1, 2],
 		[50, 175, 220, 1, 1.3, 1.5],
 		[100, 100, 150, 2, 1, 2]
 	], 32));
-	tiles[PUSH](makeTile("road", "speed", 4, 1, [
+	tiles[PUSH](makeTile("road", "speed", 4, 0.5, [
 		[32 * 32, 0, 0, 1, 1, 1],
 		[600, 0, 50, 1, 1, 1]
 	], 32));
-	tiles[PUSH](makeTile("water", "slow", 3, 3, [
+	tiles[PUSH](makeTile("water", "slow", 3, 1.5, [
 		[32 * 32, 100, 200, 1.5, 1.5, 1],
 		[600, 100, 200, 1.5, 1.5, 1]
 	], 32));

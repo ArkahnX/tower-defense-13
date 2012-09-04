@@ -98,3 +98,11 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 	hideLoading();
 	// spriteTest();
 });
+
+function destroyUnit(name) {
+	for(var i=0;i<enemies.length;i++) {
+		if(enemies[i][NAME] === name) {
+			enemies.splice(i, 1);
+		}
+	}
+}

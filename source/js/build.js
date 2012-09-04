@@ -56,29 +56,3 @@ function setConstructibles() {
 	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = structures.join("");
 	bindBuyClicks();
 }
-
-function fillBuildMenu() {
-	if (menu.children()[LENGTH] > 0) {
-		emptyBuildMenu()
-	}
-	for (var attr in buildList) {
-		var item = buildList[attr];
-		var container = $(START_DIV+" class='container'>"+CLOSE_DIV);
-		var name = $(START_SPAN+">" + item[NAME] + CLOSE_SPAN);
-		var cost = $(START_SPAN+" class='cost'>$" + item.stats[COST] + CLOSE_SPAN);
-		var image = new Image();
-		container.append(image);
-		container.append(name);
-		container.append(cost);
-		image[SRC] = item[SRC];
-		image.title = item.type + ": " + item[NAME] + " ($" + item.stats[COST] + ")";
-		menu.append(container);
-		applyClicks();
-	}
-	var leftOffset = $('#canvas').position().left;
-	var topOffset = $('#canvas').position().top;
-	target.css({
-		left: leftOffset - 3,
-		top: topOffset - 3
-	});
-}

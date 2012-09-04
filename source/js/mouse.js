@@ -13,9 +13,8 @@ function bindBuyClicks() {
 function buyHandler(event) {
 	var container = this;
 	if (!container[CLASS_LIST].contains("expensive")) {
-		whatToBuild = container.find("img").attr("src");
-		console.log("remove")
-		removeMoney(buildList[whatToBuild].stats[COST]);
+		bought = container[QUERY_SELECTOR]("span").innerText;
+		removeMoney(getAll(towers, NAME, bought)[0].cost);
 	}
 }
 
@@ -28,6 +27,9 @@ function moveHandler(event) {
 	mouse.y = event.pageY - canvas.offsetTop;
 	mouse.x = modulus(mouse.x, tileSize);
 	mouse.y = modulus(mouse.y, tileSize);
+}
+
+function cursorColor() {
 	strokeColor = "black";
 	if (canBuild() && isBuilding()) {
 		strokeColor = "green";
