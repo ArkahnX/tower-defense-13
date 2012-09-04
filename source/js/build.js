@@ -15,6 +15,9 @@ function canBuild() {
 	if (obstacles[mouse.y][mouse.x] !== 0) {
 		return NULL;
 	}
+	if (!isBuilding()) {
+		return true;
+	}
 	var enemy = getAll(enemies, "y", mouse.y);
 	if (enemy[LENGTH]) {
 		if (getAll(enemy, "x", mouse.x)[LENGTH]) {
@@ -26,9 +29,6 @@ function canBuild() {
 		if (getAll(enemy, "targetX", mouse.x)[LENGTH]) {
 			return false;
 		}
-	}
-	if (!isBuilding()) {
-		return true;
 	}
 	var testMap = compile(mouse.x, mouse.y);
 	if(!getPaths(testMap)) {
