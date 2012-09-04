@@ -97,7 +97,6 @@ function moveEnemies() {
 			var speed = thisEnemy[SPEED] / tile[SPEED];
 			var x = center(thisEnemy.targetX, thisEnemy.size);
 			var y = center(thisEnemy.targetY, thisEnemy.size);
-			// console.log(thisEnemy.pixelX < thisEnemy[PATH][thisEnemy.pathIndex].x)
 			if (round(thisEnemy.pixelX) < x) {
 				if (thisEnemy.pixelX + speed > x) {
 					thisEnemy.pixelX = x

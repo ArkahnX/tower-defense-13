@@ -1,6 +1,6 @@
 function makeStructures() {
 	var types = [
-		["base", "special", 1000, 100, 15, 25, 255, 0, 0],
+		["base", "special", 10000, 1000, 15, 25, 255, 0, 0],
 		["turret", "basic", 100, 10, 10, 20, 200, 0, 0]
 	];
 	for (var i = 0; i < types[LENGTH]; i++) {
