@@ -55,14 +55,6 @@ function setTile(tile, watch) {
 	return this;
 }
 
-setTile.prototype.toString = function() {
-	return "[" + this.x + " " + this.y + "]";
-};
-
-setTile.prototype.isWall = function() {
-	return this.type === 0;
-};
-
 function makeSprites() {
 	tiles[PUSH](makeTile("grass", PATH, 7, 1, [
 		[32 * 32, 175, 230, 1.3, 1, 2],

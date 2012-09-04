@@ -65,7 +65,7 @@
     user-select: none;
 }
 
-.container:not(.expensive):hover {
+.container:not(.expensive):not(.building):hover {
     background-color: rgba(255,255,255,0.25);
     color: white;
     cursor: pointer;
@@ -90,5 +90,15 @@
 
 .container.expensive {
     color: red;
+    text-decoration: line-through;
 }
 
+#effects {
+    background:transparent;
+    position:absolute;
+}
+
+.container.expensive.building, .container.building {
+    color: white;
+    text-decoration: line-through;
+}

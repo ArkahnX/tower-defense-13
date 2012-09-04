@@ -9,6 +9,7 @@ function makeEnemies() {
 	// enemies[PUSH](makefoes("Medic", "normal", "0FFFF0", 14, 1, 150, used));
 	// enemies[PUSH](makefoes("Sniper", "normal", "00FFFF", 12, 1, 125, used));
 	// enemies[PUSH](makefoes("Spah", "normal", "FFFFFF", 10, 1, 125, used));
+	getPaths();
 }
 
 function uniqueSpawn(x, y, used) {
@@ -40,8 +41,6 @@ function makeEnemy(name, type, color, size, speedModifier, health, used) {
 	} while (!uniqueSpawn(x, y, used));
 	used[PUSH]([x, y]);
 	var speed = (tileSize / 60) * speedModifier;
-	var base = getBaseCoords();
-	var path = astar.search(map, map[y][x], map[base.y][base.x]);
 	return {
 		name: name,
 		type: type,
@@ -49,9 +48,9 @@ function makeEnemy(name, type, color, size, speedModifier, health, used) {
 		size: size,
 		speed: speed,
 		health: health,
-		targetX: path[0].x,
-		targetY: path[0].y,
-		path: path,
+		targetX: null,
+		targetY: null,
+		path: null,
 		x: x,
 		y: y,
 		pixelX: center(x, size),
@@ -125,9 +124,38 @@ function moveEnemies() {
 			if (round(thisEnemy.pixelX) === center(thisEnemy.targetX, thisEnemy.size) && round(thisEnemy.pixelY) === center(thisEnemy.targetY, thisEnemy.size)) {
 				thisEnemy.pathIndex++;
 			}
-		} else {
+		}
+		var base = getBaseCoords()
+		if (thisEnemy.x === base.x && thisEnemy.y === base.y) {
 			reachBase(thisEnemy);
 			destroyUnit(thisEnemy[NAME])
 		}
 	}
+}
+
+function getPaths(testMap) {
+	var list = [];
+	for (var i = 0; i < enemies.length; i++) {
+		var compiledMap = testMap || compile();
+		var thisEnemy = enemies[i];
+		var base = getBaseCoords();
+		var path = astar.search(compiledMap, compiledMap[thisEnemy.y][thisEnemy.x], compiledMap[base.y][base.x]);
+		if (testMap) {
+			list[PUSH](!!path.length);
+		} else {
+			thisEnemy.path = path;
+			thisEnemy.targetX = path[0].x;
+			thisEnemy.targetY = path[0].y;
+		}
+	}
+	if (testMap) {
+		if(list.indexOf(false)>-1) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function stop() {
+	cancelAnimationFrame(animationLoop)
 }

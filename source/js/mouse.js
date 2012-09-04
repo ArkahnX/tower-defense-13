@@ -1,6 +1,7 @@
 WINDOW.addEventListener("DOMContentLoaded", function() {
 	addEvent(canvas, "mousemove", moveHandler);
-	addEvent(canvas, "click", clickHandler);
+	addEvent(canvas, "mousedown", clickHandler);
+	addEvent(canvas, "contextmenu", doNothing);
 }, true);
 
 function bindBuyClicks() {
@@ -10,16 +11,40 @@ function bindBuyClicks() {
 	}
 }
 
+function doNothing(event) {
+	event.preventDefault();
+}
+
 function buyHandler(event) {
+	doNothing(event);
 	var container = this;
-	if (!container[CLASS_LIST].contains("expensive")) {
+	if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
 		bought = container[QUERY_SELECTOR]("span").innerText;
 		removeMoney(getAll(towers, NAME, bought)[0].cost);
 	}
 }
 
 function clickHandler(event) {
-
+	doNothing(event);
+	if (isBuilding() && canBuild()) {
+		if (event.which === 2) {
+			returnStructure();
+		} else {
+			var base = new setStructure(building());
+			obstacles[mouse.y][mouse.x] = base;
+			bought = "";
+			checkAffordable();
+			getPaths();
+		}
+	}
+	if (canBuild() === null) {
+		//middle click sell
+		if (event.which === 2) {
+			if (getBaseCoords().x !== mouse.x && getBaseCoords().y !== mouse.y) {
+				sellStructure(mouse.x, mouse.y);
+			}
+		}
+	}
 }
 
 function moveHandler(event) {
@@ -53,8 +78,6 @@ function removeEvent(target, handler, callback) {
 function drawCursor() {
 	var x = mouse.x * 32;
 	var y = mouse.y * 32;
-	var xEnd = x + 32;
-	var yEnd = y + 32;
 	context.strokeStyle = strokeColor;
 	context.lineWidth = 2;
 	context.strokeRect(x, y, 32, 32);

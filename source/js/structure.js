@@ -118,3 +118,16 @@ function reachBase(enemy) {
 	damage(getBase(), enemy.health)
 }
 
+function destroyStructure(x, y) {
+	obstacles[y][x] = 0;
+}
+function sellStructure(x, y) {
+	addMoney(obstacles[y][x].cost/2);
+	destroyStructure(x, y);
+}
+
+function returnStructure() {
+	var ammount = building().cost;
+	bought = "";
+	addMoney(ammount);
+}

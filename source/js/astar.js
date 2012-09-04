@@ -55,7 +55,7 @@ var astar = {
 			for (var i = 0, il = neighbors[LENGTH]; i < il; i++) {
 				var neighbor = neighbors[i];
 
-				if (neighbor.closed || neighbor.isWall()) {
+				if (neighbor.closed || neighbor[SPEED] === 0) {
 					// Not a valid node to process, skip to next neighbor.
 					continue;
 				}

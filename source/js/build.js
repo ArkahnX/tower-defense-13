@@ -6,7 +6,7 @@ function building() {
 	if(bought === NULL) {
 		return false;
 	} else {
-		return getAll(structures, NAME, bought)
+		return getAll(towers, NAME, bought)[0];
 	}
 }
 
@@ -21,8 +21,18 @@ function canBuild() {
 			return false;
 		}
 	}
+	var enemy = getAll(enemies, "targetY", mouse.y);
+	if (enemy[LENGTH]) {
+		if (getAll(enemy, "targetX", mouse.x)[LENGTH]) {
+			return false;
+		}
+	}
 	if (!isBuilding()) {
 		return true;
+	}
+	var testMap = compile(mouse.x, mouse.y);
+	if(!getPaths(testMap)) {
+		return false;
 	}
 	if (building().is === "terrain") {
 		return true;
