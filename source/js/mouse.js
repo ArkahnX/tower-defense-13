@@ -40,7 +40,7 @@ function clickHandler(event) {
 	if (canBuild() === null) {
 		//middle click sell
 		if (event.which === 2) {
-			if (getBaseCoords().x !== mouse.x && getBaseCoords().y !== mouse.y) {
+			if (getBaseCoords().x !== mouse.x || getBaseCoords().y !== mouse.y) {
 				sellStructure(mouse.x, mouse.y);
 			}
 		}

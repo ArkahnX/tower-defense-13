@@ -30,6 +30,7 @@ function defineTower(name, type, cost, health, from, to, red, blue, green) {
 		is: type,
 		cost: cost,
 		health: health,
+		fullHealth: health,
 		color: [red, green, blue],
 		image: image,
 		width: width,
@@ -122,7 +123,8 @@ function destroyStructure(x, y) {
 	obstacles[y][x] = 0;
 }
 function sellStructure(x, y) {
-	addMoney(obstacles[y][x].cost/2);
+	var thisTower = obstacles[y][x];
+	addMoney(thisTower.cost*(thisTower.health/thisTower.fullHealth)/2);
 	destroyStructure(x, y);
 }
 

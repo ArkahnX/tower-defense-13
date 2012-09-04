@@ -146,6 +146,7 @@ function getPaths(testMap) {
 			thisEnemy.path = path;
 			thisEnemy.targetX = path[0].x;
 			thisEnemy.targetY = path[0].y;
+			thisEnemy.pathIndex = 0;
 		}
 	}
 	if (testMap) {

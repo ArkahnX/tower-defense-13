@@ -32,7 +32,7 @@ function drawPath() {
 		for (e = 0; e < thisEnemy.path.length; e++) {
 			var thisPath = thisEnemy.path[e];
 			context.beginPath();
-			context.fillStyle = "#0000FF";
+			context.fillStyle = "rgba(100,100,100,0.5)";
 			context.fillRect(thisPath.x * tileSize, thisPath.y * tileSize, tileSize, tileSize);
 			context.fill();
 		}
