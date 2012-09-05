@@ -1,14 +1,14 @@
 function makeEnemies() {
 	var used = [];
 	enemies[PUSH](makeEnemy("Scoot", "normal", "FFF000", 12, 1, 125, used));
-	// enemies[PUSH](makefoes("Solly", "normal", "0FF000", 18, 1, 200, used));
-	// enemies[PUSH](makefoes("Pyro", "normal", "00FF00", 16, 1, 175, used));
-	// enemies[PUSH](makefoes("Demo", "normal", "000FF0", 16, 1, 125, used));
-	// enemies[PUSH](makefoes("Hoovey", "normal", "0000FF", 20, 1, 300, used));
-	// enemies[PUSH](makefoes("Engie", "normal", "FFFF00", 16, 1, 125, used));
-	// enemies[PUSH](makefoes("Medic", "normal", "0FFFF0", 14, 1, 150, used));
-	// enemies[PUSH](makefoes("Sniper", "normal", "00FFFF", 12, 1, 125, used));
-	// enemies[PUSH](makefoes("Spah", "normal", "FFFFFF", 10, 1, 125, used));
+	 enemies[PUSH](makeEnemy("Solly", "normal", "0FF000", 18, 1, 200, used));
+	 enemies[PUSH](makeEnemy("Pyro", "normal", "00FF00", 16, 1, 175, used));
+	 enemies[PUSH](makeEnemy("Demo", "normal", "000FF0", 16, 1, 125, used));
+	 enemies[PUSH](makeEnemy("Hoovey", "normal", "0000FF", 20, 1, 300, used));
+	 enemies[PUSH](makeEnemy("Engie", "normal", "FFFF00", 16, 1, 125, used));
+	 enemies[PUSH](makeEnemy("Medic", "normal", "0FFFF0", 14, 1, 150, used));
+	 enemies[PUSH](makeEnemy("Sniper", "normal", "00FFFF", 12, 1, 125, used));
+	 enemies[PUSH](makeEnemy("Spah", "normal", "FFFFFF", 10, 1, 125, used));
 }
 
 function uniqueSpawn(x, y, used) {
