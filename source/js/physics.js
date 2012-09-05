@@ -1,7 +1,7 @@
 function createParticle(x, y, speed, red, green, blue) {
 	return {
-		x: center(x, tileSize),
-		y: center(y, tileSize),
+		x: center(x, 1),
+		y: center(y, 1),
 		w: random(2, 7),
 		h: random(2, 7),
 		dx: randomFloat(-2, 2),

@@ -80,7 +80,6 @@ function floor(number) {
 }
 
 function center(position, size) {
-	console.log(position * tileSize + (HALF_TILE_SIZE) - (size / 2))
 	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
 }
 
