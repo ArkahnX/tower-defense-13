@@ -1,6 +1,6 @@
 function makeEnemies() {
 	var used = [];
-	enemies[PUSH](makeEnemy("Scoot", "normal", "FFF000", 12, 1, 125, used));
+	enemies[PUSH](makeEnemy("Scoot", "normal", [255,127,0], 12, 1, 125, used));
 	// enemies[PUSH](makefoes("Solly", "normal", "0FF000", 18, 1, 200, used));
 	// enemies[PUSH](makefoes("Pyro", "normal", "00FF00", 16, 1, 175, used));
 	// enemies[PUSH](makefoes("Demo", "normal", "000FF0", 16, 1, 125, used));
@@ -21,7 +21,7 @@ function uniqueSpawn(x, y, used) {
 	return true;
 }
 
-function makeEnemy(name, type, color, size, speedModifier, health, used) {
+function makeEnemy(name, type, colors, size, speedModifier, health, used) {
 	var side = random(0, 3)
 	// 0-3 top-left clockwise
 	var x = 0;
@@ -44,7 +44,7 @@ function makeEnemy(name, type, color, size, speedModifier, health, used) {
 	return {
 		name: name,
 		type: type,
-		color: color,
+		colors: colors,
 		size: size,
 		speed: speed,
 		health: health,
@@ -64,7 +64,7 @@ function drawEnemies() {
 		for (i = 0; i < enemies[LENGTH]; i++) {
 			var thisEnemy = enemies[i];
 			context.beginPath();
-			context.fillStyle = thisEnemy[COLOR];
+			context.fillStyle = "rgb("+thisEnemy.colors[0]+","+thisEnemy.colors[1]+","+thisEnemy.colors[2]+")";
 			context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
 			context.fill();
 		}
@@ -80,6 +80,7 @@ function floor(number) {
 }
 
 function center(position, size) {
+	console.log(position * tileSize + (HALF_TILE_SIZE) - (size / 2))
 	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
 }
 

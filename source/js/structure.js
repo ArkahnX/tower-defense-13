@@ -120,6 +120,8 @@ function reachBase(enemy) {
 }
 
 function destroyStructure(x, y) {
+	var thisTower = obstacles[y][x];
+	makeParticles(x, y, 60, thisTower.color[0], thisTower.color[1], thisTower.color[2]);
 	obstacles[y][x] = 0;
 }
 function sellStructure(x, y) {

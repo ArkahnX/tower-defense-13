@@ -20,6 +20,7 @@ function draw() {
 	moveEnemies();
 	drawStructures();
 	setScore();
+	explode()
 }
 
 function hideLoading() {

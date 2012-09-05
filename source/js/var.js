@@ -18,3 +18,4 @@ var obstacles = [];
 var tiles = [];
 var enemies = [];
 var towers = [];
+var particles = [];

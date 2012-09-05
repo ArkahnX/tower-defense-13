@@ -178,6 +178,10 @@ function random(from, to) {
 	return floor(WINDOW[MATH].random() * (to - from + 1)) + from;
 }
 
+function randomFloat(from, to) {
+	return (WINDOW[MATH].random() * (to - from + 1)) + from;
+}
+
 function init() {
 	canvas = document[GET_ELEMENT_BY_ID]("canvas");
 	canvas[WIDTH] = canvasWidth * tileSize;
@@ -231,6 +235,8 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 function destroyUnit(name) {
 	for (var i = 0; i < enemies.length; i++) {
 		if (enemies[i][NAME] === name) {
+			var thisEnemy = enemies[i];
+			makeParticles(thisEnemy.x, thisEnemy.y, 60, thisEnemy.colors[0], thisEnemy.colors[1], thisEnemy.colors[2]);
 			enemies.splice(i, 1);
 		}
 	}
