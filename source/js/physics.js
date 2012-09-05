@@ -19,7 +19,7 @@ function explode() {
 	for (var i = 0; i < particles.length; i++) {
 		var thisParticle = particles[i];
 		context.beginPath();
-		context.fillStyle = "rgba(0,0,255," + (thisParticle.life / thisParticle.lifespan) + ")";
+		context.fillStyle = "rgba("+thisParticle.red+","+thisParticle.green+","+thisParticle.blue+"," + (thisParticle.life / thisParticle.lifespan) + ")";
 		context.fillRect(thisParticle.x, thisParticle.y, thisParticle.w, thisParticle.h);
 		context.fill();
 		thisParticle.life = thisParticle.life - 1;
