@@ -24,7 +24,7 @@ function clickHandler(event) {
 		if (event.which === 2) {
 			returnStructure();
 		} else {
-			var base = new setStructure(building());
+			var base = cloneData(building());
 			obstacles[mouse.y][mouse.x] = base;
 			bought = "";
 			checkAffordable();

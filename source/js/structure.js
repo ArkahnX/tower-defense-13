@@ -1,10 +1,10 @@
 function makeStructures() {
-	towers[PUSH](defineTower("base", "special", 10000, 1000, 15, 25, 255, 0, 0));
-	towers[PUSH](defineTower("turret", "basic", 100, 10, 10, 20, 200, 0, 0));
-	towers[PUSH](defineTower("ShotGun", "spread", 100, 10, 15, 15, 125, 0, 0));
+	towers[PUSH](defineTower("base", "special", 0, 10000, 1000, 15, 25, 255, 0, 0));
+	towers[PUSH](defineTower("turret", "basic", 5, 100, 10, 10, 20, 200, 0, 0));
+	towers[PUSH](defineTower("ShotGun", "spread", 2, 100, 10, 15, 15, 125, 0, 0));
 }
 
-function defineTower(name, type, cost, health, from, to, red, blue, green) {
+function defineTower(name, type, range, cost, health, from, to, red, blue, green) {
 	var width = random(from, to);
 	var height = random(from, to) + round(width / 1.5);
 	var depth = random(from - 3, to - 3);
@@ -35,7 +35,8 @@ function defineTower(name, type, cost, health, from, to, red, blue, green) {
 		image: image,
 		width: width,
 		height: height,
-		depth: depth
+		depth: depth,
+		range:range
 	};
 }
 
