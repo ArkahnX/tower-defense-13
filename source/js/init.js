@@ -236,7 +236,10 @@ function destroyUnit(name) {
 	for (var i = 0; i < enemies.length; i++) {
 		if (enemies[i][NAME] === name) {
 			var thisEnemy = enemies[i];
-			makeParticles(thisEnemy.x, thisEnemy.y, 60, thisEnemy.colors[0], thisEnemy.colors[1], thisEnemy.colors[2]);
+			var x = thisEnemy.pixelX;
+			var y = thisEnemy.pixelY;
+			var modifier = thisEnemy.size / 2;
+			makeParticles(20, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [thisEnemy.colors[0], thisEnemy.colors[1], thisEnemy.colors[2]], true);
 			enemies.splice(i, 1);
 		}
 	}

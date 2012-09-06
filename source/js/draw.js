@@ -20,7 +20,8 @@ function draw() {
 	moveEnemies();
 	drawStructures();
 	setScore();
-	explode()
+	explode();
+	drawBullets();
 }
 
 function hideLoading() {

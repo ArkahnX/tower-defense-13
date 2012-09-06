@@ -118,6 +118,7 @@ canvas {
 .container img {
 	margin: 0;
 	float: left;
+	padding:5px;
 }
 
 .container.expensive {

@@ -1,6 +1,6 @@
 function makeEnemies() {
 	var used = [];
-	enemies[PUSH](makeEnemy("Scoot", "normal", [255,127,0], 12, 1, 125, used));
+	enemies[PUSH](makeEnemy("Scoot", "normal", [255, 127, 0], 12, 1, 125, used));
 	// enemies[PUSH](makefoes("Solly", "normal", "0FF000", 18, 1, 200, used));
 	// enemies[PUSH](makefoes("Pyro", "normal", "00FF00", 16, 1, 175, used));
 	// enemies[PUSH](makefoes("Demo", "normal", "000FF0", 16, 1, 125, used));
@@ -63,10 +63,14 @@ function drawEnemies() {
 	if (enemies[LENGTH]) {
 		for (i = 0; i < enemies[LENGTH]; i++) {
 			var thisEnemy = enemies[i];
-			context.beginPath();
-			context.fillStyle = "rgb("+thisEnemy.colors[0]+","+thisEnemy.colors[1]+","+thisEnemy.colors[2]+")";
-			context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
-			context.fill();
+			if (thisEnemy.health < 1) {
+				destroyUnit(thisEnemy.name);
+			} else {
+				context.beginPath();
+				context.fillStyle = "rgb(" + thisEnemy.colors[0] + "," + thisEnemy.colors[1] + "," + thisEnemy.colors[2] + ")";
+				context.fillRect(thisEnemy.pixelX, thisEnemy.pixelY, thisEnemy.size, thisEnemy.size);
+				context.fill();
+			}
 		}
 	}
 }
@@ -81,6 +85,10 @@ function floor(number) {
 
 function center(position, size) {
 	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
+}
+
+function centerTower(position, size) {
+	return round(position * tileSize + HALF_TILE_SIZE - size);
 }
 
 function moveEnemies() {
@@ -141,7 +149,7 @@ function getPaths(testMap) {
 		var base = getBaseCoords();
 		var path = astar.search(compiledMap, compiledMap[thisEnemy.y][thisEnemy.x], compiledMap[base.y][base.x]);
 		if (testMap) {
-			list[PUSH](!!path.length);
+			list[PUSH]( !! path.length);
 		} else {
 			thisEnemy.path = path;
 			thisEnemy.targetX = path[0].x;
@@ -150,7 +158,7 @@ function getPaths(testMap) {
 		}
 	}
 	if (testMap) {
-		if(list.indexOf(false)>-1) {
+		if (list.indexOf(false) > -1) {
 			return false;
 		}
 	}
