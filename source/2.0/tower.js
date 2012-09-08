@@ -12,7 +12,7 @@ function defineTower(name, weapon, type, range, cost, health, from, to, red, gre
 		image: recordTower(specifications),
 		x: specifications.x,
 		y: specifications.y,
-		type: type
+		type: type,
 		range: range,
 		cost: cost,
 		health: health,

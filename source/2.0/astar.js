@@ -28,7 +28,7 @@ var astar = {
 
 		var openHeap = astar.heap();
 
-		openHeap[PUSH](start);
+		openHeap.push(start);
 
 		while (openHeap.size() > 0) {
 
@@ -40,7 +40,7 @@ var astar = {
 				var curr = currentNode;
 				var ret = [];
 				while (curr.parent) {
-					ret[PUSH](curr);
+					ret.push(curr);
 					curr = curr.parent;
 				}
 				return ret.reverse();
@@ -76,7 +76,7 @@ var astar = {
 
 					if (!beenVisited) {
 						// Pushing to heap will put it in proper place based on the 'f' value.
-						openHeap[PUSH](neighbor);
+						openHeap.push(neighbor);
 					} else {
 						// Already seen the node, but since it has been rescored we need to reorder it in the heap
 						openHeap.rescoreElement(neighbor);
@@ -101,22 +101,22 @@ var astar = {
 
 		// West
 		if (grid[x - 1] && grid[x - 1][y]) {
-			ret[PUSH](grid[x - 1][y]);
+			ret.push(grid[x - 1][y]);
 		}
 
 		// East
 		if (grid[x + 1] && grid[x + 1][y]) {
-			ret[PUSH](grid[x + 1][y]);
+			ret.push(grid[x + 1][y]);
 		}
 
 		// South
 		if (grid[x] && grid[x][y - 1]) {
-			ret[PUSH](grid[x][y - 1]);
+			ret.push(grid[x][y - 1]);
 		}
 
 		// North
 		if (grid[x] && grid[x][y + 1]) {
-			ret[PUSH](grid[x][y + 1]);
+			ret.push(grid[x][y + 1]);
 		}
 
 		return ret;
@@ -131,7 +131,7 @@ function BinaryHeap(scoreFunction) {
 BinaryHeap.prototype = {
 	push: function(element) {
 		// Add the new element to the end of the array.
-		this.content[PUSH](element);
+		this.content.push(element);
 
 		// Allow it to sink down.
 		this.sinkDown(this.content[LENGTH] - 1);
