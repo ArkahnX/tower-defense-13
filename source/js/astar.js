@@ -5,8 +5,8 @@
 var astar = {
 	init: function(grid) {
 		for (var y = 0, yl = grid[LENGTH]; y < yl; y++) {
-			for (var x = 0, xl = grid[x][LENGTH]; x < xl; x++) {
-				var node = grid[y][x];
+			for (var y = 0, yl = grid[x][LENGTH]; y < yl; y++) {
+				var node = grid[x][y];
 				node.f = 0;
 				node.g = 0;
 				node.h = 0;
@@ -55,7 +55,7 @@ var astar = {
 			for (var i = 0, il = neighbors[LENGTH]; i < il; i++) {
 				var neighbor = neighbors[i];
 
-				if (neighbor.closed || neighbor.isWall()) {
+				if (neighbor.closed || neighbor[SPEED] === 0) {
 					// Not a valid node to process, skip to next neighbor.
 					continue;
 				}
@@ -70,7 +70,7 @@ var astar = {
 					// Found an optimal (so far) path to this node.  Take score for node to see how good it is.
 					neighbor.visited = true;
 					neighbor.parent = currentNode;
-					neighbor.h = neighbor.h || heuristic(neighbor.pos, end.pos);
+					neighbor.h = neighbor.h || heuristic(neighbor.x,neighbor.y, end.x,end.y);
 					neighbor.g = gScore;
 					neighbor.f = neighbor.g + neighbor.h;
 
@@ -88,10 +88,10 @@ var astar = {
 		// No result was found - empty array signifies failure to find path.
 		return [];
 	},
-	manhattan: function(pos0, pos1) {
+	manhattan: function(pos0x,pos0y, pos1x,pos1y) {
 		// See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-		var d1 = WINDOW[MATH].abs(pos1.x - pos0.x);
-		var d2 = WINDOW[MATH].abs(pos1.y - pos0.y);
+		var d1 = WINDOW[MATH].abs(pos1x - pos0x);
+		var d2 = WINDOW[MATH].abs(pos1y - pos0y);
 		return d1 + d2;
 	},
 	neighbors: function(grid, node) {
@@ -100,23 +100,23 @@ var astar = {
 		var y = node.y;
 
 		// West
-		if (grid[y - 1] && grid[y - 1][x]) {
-			ret[PUSH](grid[y - 1][x]);
+		if (grid[x - 1] && grid[x - 1][y]) {
+			ret[PUSH](grid[x - 1][y]);
 		}
 
 		// East
-		if (grid[y + 1] && grid[y + 1][x]) {
-			ret[PUSH](grid[y + 1][x]);
+		if (grid[x + 1] && grid[x + 1][y]) {
+			ret[PUSH](grid[x + 1][y]);
 		}
 
 		// South
-		if (grid[y] && grid[y][x - 1]) {
-			ret[PUSH](grid[y][x - 1]);
+		if (grid[x] && grid[x][y - 1]) {
+			ret[PUSH](grid[x][y - 1]);
 		}
 
 		// North
-		if (grid[y] && grid[y][x + 1]) {
-			ret[PUSH](grid[y][x + 1]);
+		if (grid[x] && grid[x][y + 1]) {
+			ret[PUSH](grid[x][y + 1]);
 		}
 
 		return ret;
@@ -153,7 +153,7 @@ BinaryHeap.prototype = {
 		return this.content[LENGTH];
 	},
 	rescoreElement: function(node) {
-		this.sinkDown(this.content.indexOf(node));
+		this.sinkDown(this.content.indeyOf(node));
 	},
 	sinkDown: function(n) {
 		// Fetch the element that has to be sunk.

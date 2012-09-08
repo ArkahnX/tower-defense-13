@@ -11,6 +11,7 @@ var mouse = {
 var strokeColor = "black";
 var money = 0;
 var bought = NULL;
+var waitForParticles = false;
 
 //arrays of data.
 var map = [];
@@ -18,3 +19,5 @@ var obstacles = [];
 var tiles = [];
 var enemies = [];
 var towers = [];
+var particles = [];
+var bullets = [];

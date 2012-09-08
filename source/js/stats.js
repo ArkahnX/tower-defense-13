@@ -1,18 +1,12 @@
 function setScore() {
 	var baseHealth = getBase().health;
-	var statsList = ["money"];
+	var statsList = ["money", money];
 	var start = "<li>";
 	var end = "</li>";
 	var preStart = "<code>";
 	var preEnd = "</code>"
 	var stats = [];
 	stats[PUSH]("Base Health: " + preStart + JSON.stringify(baseHealth) + preEnd)
-	for (var i = 0; i < statsList[LENGTH]; i++) {
-		if (typeof this[statsList[i]] === "function") {
-			stats[PUSH](statsList[i] + ": " + preStart + JSON.stringify(this[statsList[i]]()) + preEnd);
-		} else {
-			stats[PUSH](statsList[i] + ": " + preStart + JSON.stringify(this[statsList[i]]) + preEnd);
-		}
-	}
+	stats[PUSH]("money: " + preStart + money + preEnd);
 	document[GET_ELEMENT_BY_ID]("data")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
 }

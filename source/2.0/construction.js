@@ -11,48 +11,55 @@ function building() {
 }
 
 function canBuild() {
-	var currentTile = map[mouse.y][mouse.x];
-	if (obstacles[mouse.y][mouse.x] !== 0) {
+	/**
+	 *   ===  RULES  ===
+	 *   Cannot build on structures
+	 *   Can build when building nothing (?)
+	 *   Cannot build on enemies
+	 *   Cannot prevent enemies from reaching the base
+	 *   Can build on any terrain if we are building terrain
+	 *   Can build on basic land
+	 *   Can build traps on fast land
+	 */
+
+	// hovering over a structure
+	if (thisTile(obstacles) !== 0) {
 		return NULL;
 	}
+	// not building anything
 	if (!isBuilding()) {
 		return true;
 	}
-	var enemy = getAll(enemies, "y", mouse.y);
+	// enemies on current tile
+	var enemy = getAll(enemies, "x", mouse.x);
 	if (enemy[LENGTH]) {
-		if (getAll(enemy, "x", mouse.x)[LENGTH]) {
+		if (getAll(enemy, "y", mouse.y)[LENGTH]) {
 			return false;
 		}
 	}
-	var enemy = getAll(enemies, "targetY", mouse.y);
-	if (enemy[LENGTH]) {
-		if (getAll(enemy, "targetX", mouse.x)[LENGTH]) {
-			return false;
-		}
-	}
+	// if it stops the enemy from getting to the base
 	var testMap = compile(mouse.x, mouse.y);
 	if(!getPaths(testMap)) {
 		return false;
 	}
+	// if we are building terrain
 	if (building().is === "terrain") {
 		return true;
 	}
-	if (currentTile.is === PATH) {
+	// if this tile is a basic land
+	if (thisTile(map).is === PATH) {
 		return true;
 	}
-	if (building().is === "trap" && currentTile.is === "fast") {
+	// if we are building a trap on fast tiles
+	if (building().is === "trap" && thisTile(map).is === "fast") {
 		return true;
 	}
 	return false;
 };
 
-function emptyBuildMenu() {
-	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = "";
-}
-
-function setConstructibles() {
+function fillBuildMenu() {
 	if (document[GET_ELEMENT_BY_ID](TOWERS).children[LENGTH] > 0) {
-		emptyBuildMenu()
+		document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = "";
 	}
 	var structures = [];
 	for (var i = 0; i < towers[LENGTH]; i++) {

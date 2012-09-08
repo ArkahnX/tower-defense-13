@@ -1,14 +1,10 @@
 function makeStructures() {
-	var types = [
-		["base", "special", 1000, 100, 15, 25, 255, 0, 0],
-		["turret", "basic", 100, 10, 10, 20, 200, 0, 0]
-	];
-	for (var i = 0; i < types[LENGTH]; i++) {
-		towers[PUSH](defineTower(types[i][0], types[i][1], types[i][2], types[i][3], types[i][4], types[i][5], types[i][6], types[i][7], types[i][8]));
-	}
+	towers[PUSH](defineTower("base", "special", 0, 10000, 1000, 15, 25, 255, 0, 0));
+	towers[PUSH](defineTower("turret", "basic", 5, 100, 10, 10, 20, 200, 0, 0));
+	towers[PUSH](defineTower("ShotGun", "spread", 2, 100, 10, 15, 15, 125, 0, 0));
 }
 
-function defineTower(name, type, cost, health, from, to, red, blue, green) {
+function defineTower(name, type, range, cost, health, from, to, red, blue, green) {
 	var width = random(from, to);
 	var height = random(from, to) + round(width / 1.5);
 	var depth = random(from - 3, to - 3);
@@ -17,10 +13,14 @@ function defineTower(name, type, cost, health, from, to, red, blue, green) {
 	// tower roof
 	// makeSquare(x, y, w, h, darken(red), darken(green), darken(blue))
 	// context.clearRect(0, 0, canvas[WIDTH], canvas[HEIGHT]);
-	canvas[WIDTH] = 32;
-	canvas[HEIGHT] = 32;
+	canvas[WIDTH] = width;
+	canvas[HEIGHT] = height + depth;
 	context.clearRect(0, 0, canvas[WIDTH], canvas[HEIGHT]);
-	makeStructure(0, 0, width, height, depth, red, green, blue)
+	if (type === "spread" || type === "beam") {
+		makeTriangle(0, 0, width, height, depth, red, green, blue)
+	} else {
+		makeStructure(0, 0, width, height, depth, red, green, blue)
+	}
 	var image = new Image();
 	image[SRC] = canvas[TO_DATA_URL]();
 	canvas[WIDTH] = canvasWidth * tileSize;
@@ -30,18 +30,24 @@ function defineTower(name, type, cost, health, from, to, red, blue, green) {
 		is: type,
 		cost: cost,
 		health: health,
+		fullHealth: health,
 		color: [red, green, blue],
 		image: image,
 		width: width,
 		height: height,
-		depth: depth
+		depth: depth,
+		range:range
 	};
 }
 
 function drawTower(tower, x, y) {
 	tower.x = x;
 	tower.y = y;
-	makeStructure(tileSize * x + ((HALF_TILE_SIZE) - (tower[WIDTH] / 2)), tileSize * y - tower[HEIGHT] + ((HALF_TILE_SIZE)), tower[WIDTH], tower[HEIGHT], tower.depth, tower[COLOR][0], tower[COLOR][1], tower[COLOR][2])
+	if (tower.is === "spread" || tower.is === "beam") {
+		makeTriangle(center(x, tower.width), tileSize * y - tower[HEIGHT] + ((HALF_TILE_SIZE)), tower[WIDTH], tower[HEIGHT], tower.depth, tower[COLOR][0], tower[COLOR][1], tower[COLOR][2])
+	} else {
+		makeStructure(center(x, tower.width), tileSize * y - tower[HEIGHT] + ((HALF_TILE_SIZE)), tower[WIDTH], tower[HEIGHT], tower.depth, tower[COLOR][0], tower[COLOR][1], tower[COLOR][2])
+	}
 }
 
 function darken(color) {
@@ -58,10 +64,20 @@ function makeSquare(x, y, width, height, red, green, blue) {
 	context.fill();
 }
 
-function saveStructure() {
-	var image = new Image();
-	image[SRC] = canvas[TO_DATA_URL]();
-	images[PUSH](image);
+function makeTriangle(x, y, width, height, depth, red, blue, green) {
+	// var width = 32; // Triangle Width
+	// var height = 32; // Triangle Height
+	// var depth = 0;
+	// Draw a path
+	context.beginPath();
+	context.moveTo(x + width / 2, y + 0); // Top Corner
+	context.lineTo(x + width, y + height); // Bottom Right
+	context.lineTo(x + 0, y + height); // Bottom Left
+	context.closePath();
+
+	// Fill the path
+	context.fillStyle = RGB + red + "," + green + "," + blue + ")";
+	context.fill();
 }
 
 function makeStructure(x, y, width, height, depth, red, blue, green) {
@@ -118,3 +134,26 @@ function reachBase(enemy) {
 	damage(getBase(), enemy.health)
 }
 
+function destroyStructure(x, y) {
+	var thisTower = obstacles[y][x];
+	var towerY = center(y, tileSize);
+	var startY = towerY - (thisTower.height / 2);
+	var endY = towerY + (thisTower.height);
+	var towerX = center(x, tileSize);
+	var startX = towerX + HALF_TILE_SIZE - (thisTower.width / 2);
+	var endX = towerX + (thisTower.width);
+	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], [thisTower.color[0], thisTower.color[1], thisTower.color[2]], true);
+	obstacles[y][x] = 0;
+}
+
+function sellStructure(x, y) {
+	var thisTower = obstacles[y][x];
+	addMoney(thisTower.cost * (thisTower.health / thisTower.fullHealth) / 2);
+	destroyStructure(x, y);
+}
+
+function returnStructure() {
+	var ammount = building().cost;
+	bought = "";
+	addMoney(ammount);
+}
