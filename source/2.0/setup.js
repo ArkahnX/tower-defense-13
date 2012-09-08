@@ -21,5 +21,5 @@ function createObjects() {
 	// towers[PUSH](defineTower("Turret", "cannon", "basic", 5, 100, 10, 10, 20, 200, 0, 0, 1));
 	// towers[PUSH](defineTower("Shotgun", "spead", "basic", 2, 200, 10, 10, 15, 125, 0, 0, 1));
 	defineEnemies(5);
-	makeWaves(2)
+	makeWaves(30)
 }

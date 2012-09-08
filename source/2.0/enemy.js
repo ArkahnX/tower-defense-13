@@ -13,36 +13,25 @@ function defineEnemies(levels) {
 			y: null,
 			pixelX: null,
 			pixelY: null,
-			pathIndex: 0
+			pathIndex: 0,
+			color:"rgb(0,0,0)"
 		});
 	}
 }
-//unoptomized
-
-function uniqueSpawn(x, y, used) {
-	for (var i = 0; i < used[LENGTH]; i++) {
-		if (used[i][0] === x && used[i][1] === y) {
-			return false
-		}
-	}
-	return true;
-}
-//incomplete
-//waves are clones of eachother >:( figure out why enemies are the same as well
-// add in adding double the ammount of previous level enemies per wave
 
 function makeWaves(levels) {
-	for (var i = 1; i < levels + 1; i++) {
-		var used = [];
+	var typesOfEnemies = enemies.length;
+	for (var l = 1; l < levels+1; l++) {
 		var wave = [];
-		var easyEnemies = (levels / 2) - i;
-		var enemyNumbers = random(floor(i / 2), floor(i * 2)) + i;
-		for (var e = 0; e < enemyNumbers; e++) {
-			var side = random(0, 3)
-			// 0-3 top-left clockwise
-			var x = 0;
-			var y = 0;
-			do {
+		var used = [];
+		var enemyId = 0;
+		for (var e = l; e > 0; e--) {
+			var enemyNumbers = random(floor(e / 2), floor(e * 2)) + e;
+			for (var n = 0; n < e*2; n++) {
+				var side = random(0, 3)
+				// 0-3 top-left clockwise
+				var x = 0;
+				var y = 0;
 				if (side === 0 || side === 2) {
 					x = random(0, canvasWidth - 1);
 					if (side === 2) {
@@ -54,11 +43,11 @@ function makeWaves(levels) {
 						x = canvasHeight - 1;
 					}
 				}
-			} while (!uniqueSpawn(x, y, used));
-			used.push([x, y]);
-			var data = cloneData(enemies[i - 1], ["x", "y", "pixelX", "pixelY"], [xModifier, yModifier, pixelXModifier, pixelYModifier], [x, y]);
-			wave.push(data);
-
+				used.push([x, y]);
+				var data = cloneData(enemies[enemyId], ["x", "y", "pixelX", "pixelY"], [xModifier, yModifier, pixelXModifier, pixelYModifier], [x, y]);
+				wave.push(data);
+			}
+			enemyId++;
 		}
 		waves.push(wave);
 	}
