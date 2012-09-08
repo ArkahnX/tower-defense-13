@@ -25,8 +25,13 @@ function cloneData(data, watchList, functionList, add) {
 	var index;
 	var object = Object.create(null);
 	for (var attr in data) {
-		if (index = watchList.indexOf(attr)>-1) {
-			object[attr] = functionList[index](data, attr, add);
+		if (watchList && functionList) {
+			index = watchList.indexOf(attr);
+			if (index > -1) {
+				object[attr] = functionList[index](data, attr, add);
+			} else {
+				object[attr] = data[attr];
+			}
 		} else {
 			object[attr] = data[attr];
 		}
@@ -67,4 +72,8 @@ function centerTower(position, size) {
 
 function centerSymmetrical(position, size) {
 	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
+}
+
+function random(from, to) {
+	return floor(WINDOW[MATH].random() * (to - from + 1)) + from;
 }

@@ -1,7 +1,7 @@
 function defineEnemies(levels) {
-	for (var i = 0; i < levels; i++) {
+	for (var i = 1; i < levels + 1; i++) {
 		var half = i / 2;
-		return {
+		enemies.push({
 			level: i,
 			size: half * 10,
 			speed: half,
@@ -11,41 +11,62 @@ function defineEnemies(levels) {
 			path: null,
 			x: null,
 			y: null,
-			pixelX: centerSymmetrical(x, size),
-			pixelY: centerSymmetrical(y, size),
-			pathIndex: 0
-		}
+			pixelX: null,
+			pixelY: null,
+			pathIndex: 0,
+			color:"rgb(0,0,0)"
+		});
 	}
 }
-//unoptomized
-function uniqueSpawn(x, y, used) {
-	for (var i = 0; i < used[LENGTH]; i++) {
-		if (used[i][0] === x && used[i][1] === y) {
-			return false
+
+function makeWaves(levels) {
+	var typesOfEnemies = enemies.length;
+	for (var l = 1; l < levels+1; l++) {
+		var wave = [];
+		var used = [];
+		var enemyId = 0;
+		for (var e = l; e > 0; e--) {
+			var enemyNumbers = random(floor(e / 2), floor(e * 2)) + e;
+			for (var n = 0; n < e*2; n++) {
+				var side = random(0, 3)
+				// 0-3 top-left clockwise
+				var x = 0;
+				var y = 0;
+				if (side === 0 || side === 2) {
+					x = random(0, canvasWidth - 1);
+					if (side === 2) {
+						y = canvasWidth - 1;
+					}
+				} else if (side === 1 || side === 3) {
+					y = random(0, canvasHeight - 1);
+					if (side === 1) {
+						x = canvasHeight - 1;
+					}
+				}
+				used.push([x, y]);
+				var data = cloneData(enemies[enemyId], ["x", "y", "pixelX", "pixelY"], [xModifier, yModifier, pixelXModifier, pixelYModifier], [x, y]);
+				wave.push(data);
+			}
+			enemyId++;
 		}
+		waves.push(wave);
 	}
-	return true;
 }
-//incomplete
-function makeWave(enemies) {
-	var side = random(0, 3)
-	// 0-3 top-left clockwise
-	var x = 0;
-	var y = 0;
-	do {
-		if (side === 0 || side === 2) {
-			x = random(0, canvasWidth - 1);
-			if (side === 2) {
-				y = canvasWidth - 1;
-			}
-		} else if (side === 1 || side === 3) {
-			y = random(0, canvasHeight - 1);
-			if (side === 1) {
-				x = canvasHeight - 1;
-			}
-		}
-	} while (!uniqueSpawn(x, y, used));
-	used[PUSH]([x, y]);
+
+function xModifier(data, attribute, add) {
+	return add[0];
+}
+
+function yModifier(data, attribute, add) {
+	return add[1];
+}
+
+function pixelXModifier(data, attribute, add) {
+	return centerSymmetrical(add[0], data.size);
+}
+
+function pixelYModifier(data, attribute, add) {
+	return centerSymmetrical(add[1], data.size);
 }
 
 function drawEnemies() {
@@ -61,6 +82,7 @@ function drawEnemies() {
 	});
 }
 //unoptomized/incomplete
+
 function moveEnemies() {
 	forEach(wave, function(index) {
 		var enemy = this;
