@@ -79,30 +79,6 @@ function pixelData(dataArray) {
 }
 
 /**
- * Define tiles used in the game here.
- */
-function makeTiles() {
-	tiles.push(makeTile("grass", PATH, 7, 1, pixelData([
-		[32 * 32, 175, 230, 1.3, 1, 2],
-		[50, 200, 245, 1, 1.3, 1.5],
-		[100, 125, 175, 2, 1, 2]
-	])));
-	tiles.push(makeTile("darkGrass", PATH, 7, 1, pixelData([
-		[32 * 32, 150, 205, 1.3, 1, 2],
-		[50, 175, 220, 1, 1.3, 1.5],
-		[100, 100, 150, 2, 1, 2]
-	])));
-	tiles.push(makeTile("road", "fast", 4, 0.5, pixelData([
-		[32 * 32, 0, 0, 1, 1, 1],
-		[600, 0, 50, 1, 1, 1]
-	])));
-	tiles.push(makeTile("water", "slow", 3, 1.5, pixelData([
-		[32 * 32, 100, 200, 1.5, 1.5, 1],
-		[600, 100, 200, 1.5, 1.5, 1]
-	])));
-}
-
-/**
  * Function to manage cloning tile image. Refer to functions.js/cloneData.
  * @param  {Object} tile      Tile that is being cloned.
  * @param  {String} attribute Attribute that was targetted
