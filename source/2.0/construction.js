@@ -62,11 +62,11 @@ function canBuild() {
 		return true;
 	}
 	// if this tile is a basic land
-	if (thisTile(map).is === PATH) {
+	if (thisTile(map).type === PATH) {
 		return true;
 	}
 	// if we are building a trap on fast tiles
-	if (building().is === "trap" && thisTile(map).is === "fast") {
+	if (building().is === "trap" && thisTile(map).type === "fast") {
 		return true;
 	}
 	return false;
