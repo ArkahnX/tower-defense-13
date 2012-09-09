@@ -1,14 +1,29 @@
+/**
+ * Check if we are building anything.
+ * @return {Boolean} Whether we are building things.
+ */
+
 function isBuilding() {
 	return building() ? true : false;
 }
 
+/**
+ * Get what we are building, or return false.
+ * @return {Object} Structure information.
+ */
+
 function building() {
-	if(bought === NULL) {
+	if (bought === NULL) {
 		return false;
 	} else {
 		return getAll(towers, NAME, bought)[0];
 	}
 }
+
+/**
+ * Check if we can build on this tile.
+ * @return {Boolean} Whether we can build on this tile.
+ */
 
 function canBuild() {
 	/**
@@ -39,7 +54,7 @@ function canBuild() {
 	}
 	// if it stops the enemy from getting to the base
 	var testMap = compile(mouse.x, mouse.y);
-	if(!getPaths(testMap)) {
+	if (!getPaths(enemies, testMap)) {
 		return false;
 	}
 	// if we are building terrain
@@ -57,6 +72,10 @@ function canBuild() {
 	return false;
 };
 
+/**
+ * Fill the build menu with data from towers.
+ */
+
 function fillBuildMenu() {
 	if (document[GET_ELEMENT_BY_ID](TOWERS).children[LENGTH] > 0) {
 		document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = "";
@@ -64,10 +83,10 @@ function fillBuildMenu() {
 	var structures = [];
 	for (var i = 0; i < towers[LENGTH]; i++) {
 		var item = towers[i];
-		var name = START_SPAN+">" + item[NAME] + CLOSE_SPAN;
-		var cost = START_SPAN+" class='cost'>$" + item.cost + CLOSE_SPAN;
+		var name = START_SPAN + ">" + item[NAME] + CLOSE_SPAN;
+		var cost = START_SPAN + " class='cost'>$" + item.cost + CLOSE_SPAN;
 		var image = "<img src='" + item.image.src + "'>";
-		var container = START_DIV+" class='container' title='" + item.is + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
+		var container = START_DIV + " class='container' title='" + item.is + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
 		structures.push("" + container + "")
 	}
 	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = structures.join("");
