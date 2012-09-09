@@ -14,11 +14,11 @@ function makeMap(width, height) {
 			map[x][y] = tile;
 			obstacles[x][y] = 0;
 		}
-		base = new setStructure(towers[0]);
-		base.x = random((width / 2) - 1, (height / 2) + 1);
-		base.y = random((width / 2) - 1, (height / 2) + 1);
-		obstacles[base.x][base.y] = base;
 	}
+	base = cloneData(towers[0]);
+	base.x = random((width / 2) - 1, (height / 2) + 1);
+	base.y = random((width / 2) - 1, (height / 2) + 1);
+	obstacles[base.x][base.y] = base;
 }
 
 /**
@@ -35,9 +35,8 @@ function mapLoop() {
 		}
 	}
 	for (e = 0; e < perFrameFunction[LENGTH]; e++) {
-		perFrameFunction[e]();
+		// perFrameFunction[e]();
 	}
-	temporaryFunction.length = 0;
 }
 
 /**
