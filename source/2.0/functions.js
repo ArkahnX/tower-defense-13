@@ -27,7 +27,7 @@ function forEach(list, callback) {
  */
 
 function color(red, green, blue, alpha) {
-	return "rgba(" + red + "," + green + "," + blue + "," + alpha || 1 + ")";
+	return "rgba(" + red + "," + green + "," + blue + "," + (alpha || 1) + ")";
 }
 
 /**
@@ -153,4 +153,20 @@ function centerSymmetrical(position, size) {
 
 function random(from, to) {
 	return floor(WINDOW[MATH].random() * (to - from + 1)) + from;
+}
+
+function getWeightedRandom() {
+	var sum_of_weight = 0;
+	for (var i = 0; i < tiles[LENGTH]; i++) {
+		sum_of_weight += tiles[i].priority;
+	}
+	var num = random(0, sum_of_weight - 1);
+	for (var i = 0; i < tiles[LENGTH]; i++) {
+		if (num < tiles[i].priority) {
+			return i;
+		}
+		num -= tiles[i].priority;
+	}
+	// shouldnt arrive here
+	return false;
 }
