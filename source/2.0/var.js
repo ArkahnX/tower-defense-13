@@ -15,3 +15,4 @@ var waves = [];
 var tiles = [];
 var towers = [];
 var enemies = [];
+var onScreen = [];

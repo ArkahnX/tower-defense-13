@@ -1,10 +1,16 @@
+/**
+ * Generate a map using weighted tiles.
+ * @param  {Number} width  Width in tiles to draw the map.
+ * @param  {Number} height Height in tiles to draw the map.
+ */
+
 function makeMap(width, height) {
 	for (var x = 0; x < width; x++) {
 		map[x] = map[x] || [];
 		obstacles[x] = obstacles[x] || [];
 		for (var y = 0; y < height; y++) {
 			var number = getWeightedRandom();
-			var tile = cloneData(tiles[number], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [tempX, tempY]);
+			var tile = cloneData(tiles[number], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
 			map[x][y] = tile;
 			obstacles[x][y] = 0;
 		}
@@ -15,12 +21,16 @@ function makeMap(width, height) {
 	}
 }
 
+/**
+ * Map loop, draw loops should be included in setup.js/setup, as either perFrame, or perTile.
+ */
+
 function mapLoop() {
 	var x, y, i, e;
 	for (x = 0; x < map[LENGTH]; x++) {
 		for (y = 0; y < map[x][LENGTH]; y++) {
 			for (i = 0; i < perTileFunction[LENGTH]; i++) {
-				perTileFunction[i].call(map[x][y], map[x][y], obstacles[x][y]);
+				perTileFunction[i](map[x][y], obstacles[x][y]);
 			}
 		}
 	}
@@ -30,12 +40,19 @@ function mapLoop() {
 	temporaryFunction.length = 0;
 }
 
+/**
+ * Create a temporary map for the purpose of making sure the paths are accessible.
+ * @param  {Number} tempX X value to set to 0 (wall).
+ * @param  {Number} tempY Y value to set to 0 (wall).
+ * @return {Array}        Map to use for pathfinding.
+ */
+
 function compile(tempX, tempY) {
 	var compiledMap = [];
 	for (var x = 0; x < map.length; x++) {
 		compiledMap[x] = compiledMap[x] || [];
 		for (var y = 0; y < map[x].length; y++) {
-			var tile = map[x][y];
+			var tile = cloneData(tiles[map[x][y].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
 			if (obstacles[x][y] && obstacles[x][y][NAME] !== "base") {
 				tile.speed = 0;
 			}

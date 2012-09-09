@@ -1,3 +1,20 @@
+/**
+ * Create a tower.
+ * @param  {String} name   Name to refer the tower to the player
+ * @param  {String} weapon Weapon type the structure uses.
+ * @param  {String} type   Type of tower.
+ * @param  {Number} range  Number in tiles that the tower searches for enemies within.
+ * @param  {Number} cost   Cost to construct the tower.
+ * @param  {Number} health How much damage the tower can sustain.
+ * @param  {Number} from   Minimum tower dimentions.
+ * @param  {Number} to     Maximum tower dimentions.
+ * @param  {Number} red    0-255 value for red.
+ * @param  {Number} green  0-255 value for green.
+ * @param  {Number} blue   0-255 value for blue.
+ * @param  {Number} alpha  0-1 value for alpha.
+ * @return {Object}        Tower definition.
+ */
+
 function defineTower(name, weapon, type, range, cost, health, from, to, red, green, blue, alpha) {
 	var specifications = designTower(weapon, from, to, red, green, blue, alpha);
 	return {
@@ -27,6 +44,18 @@ function defineTower(name, weapon, type, range, cost, health, from, to, red, gre
 	};
 }
 
+/**
+ * Calculate values for some parts of the tower.
+ * @param  {String} weapon Weapon type the structure uses.
+ * @param  {Number} from   Minimum tower dimentions.
+ * @param  {Number} to     Maximum tower dimentions.
+ * @param  {Number} red    0-255 value for red.
+ * @param  {Number} green  0-255 value for green.
+ * @param  {Number} blue   0-255 value for blue.
+ * @param  {Number} alpha  0-1 value for alpha.
+ * @return {Object}        Calculated values for tower.
+ */
+
 function designTower(weapon, from, to, red, green, blue, alpha) {
 	var width = random(from, to);
 	var height = random(from, to) + round(width / 1.5);
@@ -47,6 +76,12 @@ function designTower(weapon, from, to, red, green, blue, alpha) {
 	}
 }
 
+/**
+ * Save an image of the tower for drawing.
+ * @param  {Object} specifications Specifications from designTower.
+ * @return {Image}                 Image Object.
+ */
+
 function recordTower(specifications) {
 	var width = canvas[WIDTH];
 	var height = canvas[HEIGHT];
@@ -54,8 +89,15 @@ function recordTower(specifications) {
 	drawPath[specifications.path](specifications);
 	var data = canvas[TO_DATA_URL]();
 	resetCanvas(width, height);
-	return data;
+	var image = new Image();
+	image[SRC] = data;
+	return image;
 }
+
+/**
+ * Shortcut function to draw a square on canvas.
+ * @param  {Object} specifications Specifications from designTower.
+ */
 
 function makeSquare(specifications) {
 	context.beginPath();
@@ -65,6 +107,10 @@ function makeSquare(specifications) {
 }
 
 var drawPath = {
+	/**
+	 * Draw a triangle on canvas.
+	 * @param  {Object} specifications Specifications from designTower.
+	 */
 	triangle: function makeTriangle(specifications) {
 		context.beginPath();
 		context.moveTo(specifications.x + specifications.width / 2, specifications.y + specifications.depth); // Top Corner
@@ -74,6 +120,10 @@ var drawPath = {
 		context.fillStyle = specifications.color;
 		context.fill();
 	},
+	/**
+	 * Draw a rectangle on canvas.
+	 * @param  {Object} specifications Specifications from designTower.
+	 */
 	rectangle: function makeRectangle(specifications) {
 		// main tower
 		makeSquare(specifications.x, specifications.y + (specifications.depth / 2), specifications.width, specifications.height, specifications.color);
@@ -82,8 +132,15 @@ var drawPath = {
 	}
 };
 
+/**
+ * return base, or find a base if there isn't one set.
+ * @return {Boolean} Whether a base was found or not.
+ */
+
 function getBase() {
-	if (base === null) {
+	if (base !== null) {
+		return base;
+	} else if (base === null) {
 		var coordinates = findNewBaseCoordinates();
 		if (coordinates) {
 			base = obstacles[coordinates.x][coordinates.y];
@@ -92,6 +149,11 @@ function getBase() {
 	}
 	return false;
 }
+
+/**
+ * Search the map to find a base.
+ * @return {Object} Coordinates for the new base.
+ */
 
 function findNewBaseCoordinates() {
 	for (var x = 0; x < obstacles[LENGTH]; x++) {
@@ -108,27 +170,55 @@ function findNewBaseCoordinates() {
 	return false;
 }
 
+/**
+ * Called when an enemy reaches the base.
+ * @param  {Object} enemy Enemy that reached the base.
+ */
+
 function reachBase(enemy) {
-	damage(getBase(), enemy.health)
+	damage(base, enemy.health);
+	if (base.health < 1) {
+		destroyStructure(base.x, base.y)
+		var result = getBase();
+		if (!result) {
+			gameOver();
+		}
+	}
 }
+
+/**
+ * Function to destroy a structure.
+ * @param  {Number} x X coordinate of the structure.
+ * @param  {Number} y Y coordinate of the structre.
+ */
 
 function destroyStructure(x, y) {
 	var thisTower = obstacles[x][y];
-	var towerY = center(y, tileSize);
+	var towerY = centerSymmetrical(y, tileSize);
 	var startY = towerY - (thisTower.height / 2);
 	var endY = towerY + (thisTower.height);
-	var towerX = center(x, tileSize);
+	var towerX = centerSymmetrical(x, tileSize);
 	var startX = towerX + HALF_TILE_SIZE - (thisTower.width / 2);
 	var endX = towerX + (thisTower.width);
 	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], [thisTower.color[0], thisTower.color[1], thisTower.color[2]], true);
-	obstacles[y][x] = 0;
+	obstacles[x][y] = 0;
 }
 
+/**
+ * Selling a structure that has already been built.
+ * @param  {Number} x X coordinate of the structure.
+ * @param  {Number} y Y coordinate of the structre.
+ */
+
 function sellStructure(x, y) {
-	var thisTower = obstacles[y][x];
+	var thisTower = obstacles[x][y];
 	addMoney(thisTower.cost * (thisTower.health / thisTower.fullHealth) / 2);
 	destroyStructure(x, y);
 }
+
+/**
+ * Return a structure before it is built for a full refund.
+ */
 
 function returnStructure() {
 	var ammount = building().cost;
