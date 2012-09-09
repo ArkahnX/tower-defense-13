@@ -7,6 +7,7 @@
  * @param  {Array}  pixelData See the return result of pixelData().
  * @return {Object}           Compiled tile.
  */
+
 function makeTile(name, type, priority, speed, pixelData) {
 	var images = [];
 	resetCanvas(32, 32);
@@ -26,14 +27,17 @@ function makeTile(name, type, priority, speed, pixelData) {
 		images[PUSH](image);
 		resetCanvas(canvasWidth * tileSize, canvasHeight * tileSize);
 	}
+	var thisId = id;
 	id++;
 	canvas[WIDTH] = canvasWidth * tileSize;
 	canvas[HEIGHT] = canvasHeight * tileSize;
 	return {
 		name: name,
 		is: "terrain",
-		type:type,
-		imageList: images,
+		type: type,
+		x: 0,
+		y: 0,
+		image: images,
 		images: images[LENGTH],
 		priority: priority,
 		id: thisId,
@@ -45,6 +49,7 @@ function makeTile(name, type, priority, speed, pixelData) {
  * Draw pixel noise on canvas.
  * @param  {Object} data Noise data to use.
  */
+
 function drawPixels(data) {
 	var i, colorCode;
 	var x = 0;
@@ -52,8 +57,8 @@ function drawPixels(data) {
 	for (i = 0; i < data.pixels; i++) {
 		x = random(0, tileSize - 1);
 		y = random(0, tileSize - 1);
-		colorCode = random(pixelData[0].fromColor, pixelData[0].toColor);
-		context.fillStyle = color(round(colorCode / pixelData[0].redFactor), round(colorCode / pixelData[0].greenFactor), round(colorCode / pixelData[0].blueFactor));
+		colorCode = random(data.fromColor, data.toColor);
+		context.fillStyle = color(round(colorCode / data.redFactor), round(colorCode / data.greenFactor), round(colorCode / data.blueFactor));
 		context.fillRect(x, y, 1, 1);
 	}
 }
@@ -63,6 +68,7 @@ function drawPixels(data) {
  * @param  {Array}  dataArray Array of data.
  * @return {Array}            Array of pixelData objects.
  */
+
 function pixelData(dataArray) {
 	var list = [];
 	for (var i = 0; i < dataArray.length; i++) {

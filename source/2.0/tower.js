@@ -71,6 +71,9 @@ function designTower(weapon, from, to, red, green, blue, alpha) {
 		width: width,
 		height: height,
 		depth: depth,
+		red: red,
+		blue: blue,
+		green: green,
 		color: color(red, green, blue, alpha),
 		path: path
 	}
@@ -87,10 +90,9 @@ function recordTower(specifications) {
 	var height = canvas[HEIGHT];
 	resetCanvas(specifications.width, specifications.height + specifications.depth);
 	drawPath[specifications.path](specifications);
-	var data = canvas[TO_DATA_URL]();
-	resetCanvas(width, height);
 	var image = new Image();
-	image[SRC] = data;
+	image[SRC] = canvas[TO_DATA_URL]();
+	resetCanvas(width, height);
 	return image;
 }
 
@@ -99,10 +101,10 @@ function recordTower(specifications) {
  * @param  {Object} specifications Specifications from designTower.
  */
 
-function makeSquare(specifications) {
+function makeSquare(x, y, width, height, color) {
 	context.beginPath();
 	context.rect(x, y, width, height);
-	context.fillStyle = RGB + red + "," + green + "," + blue + ")";
+	context.fillStyle = color;
 	context.fill();
 }
 
