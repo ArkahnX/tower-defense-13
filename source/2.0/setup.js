@@ -16,9 +16,9 @@ function setup() {
 	 * @param  {Object} tower Tower data. 0 if there is no tower.
 	 */
 	perTileFunction.push(function(tile, tower) {
-		context.drawImage(tile.image, centerSymmetrical(tile.x, tile.width), centerSymmetrical(tile.y, tile.height));
+		context.drawImage(tile.image, centerSymmetrical(tile.x, tileSize), centerSymmetrical(tile.y, tileSize));
 		if (tower !== 0) {
-			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerSymmetrical(tower.y, tower.height));
+			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerTower(tower.y, tower.height));
 		}
 	});
 	/**
@@ -60,3 +60,13 @@ function setup() {
 	defineEnemies(5);
 	makeWaves(30);
 }
+
+WINDOW.addEventListener("DOMContentLoaded", function() {
+	setup();
+	fillBuildMenu();
+	makeMap(canvasWidth, canvasHeight);
+	addMoney(500);
+	animate();
+	hideLoading();
+	// spriteTest();
+});
