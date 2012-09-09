@@ -29,7 +29,10 @@ function defineEnemies(levels) {
  */
 
 function spawnEnemy() {
-	if (waves[0].length) {
+	if (waves[0] && !waves[0].length) {
+		waves.splice(0, 1);
+	}
+	if (waves[0]) {
 		var data = waves[0].splice(0, 1)[0];
 		var testPath;
 		/**
@@ -63,8 +66,6 @@ function spawnEnemy() {
 		data.targetY = testPath[0].y;
 		data.pathIndex = 0;
 		onScreen.push(data);
-	} else {
-		waves.splice(0, 1);
 	}
 }
 
@@ -91,7 +92,7 @@ function makeWaves(levels) {
 				/**
 				 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
 				 */
-				var data = cloneData(enemies[enemyId], ["x", "y", "pixelX", "pixelY"], [xModifier, yModifier, pixelXModifier, pixelYModifier], [x, y]);
+				var data = cloneData(enemies[enemyId]);
 				wave.push(data);
 			}
 			enemyId++;
