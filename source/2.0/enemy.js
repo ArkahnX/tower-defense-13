@@ -6,10 +6,14 @@
 function defineEnemies(levels) {
 	for (var i = 1; i < levels + 1; i++) {
 		var half = i / 2;
+		var size = 7;
+		if (half * 10 > size) {
+			size = half * 10;
+		}
 		enemies.push({
 			level: i,
-			size: half * 10,
-			speed: half,
+			size: size,
+			speed: 2 * 2,
 			health: half * 10,
 			targetX: null,
 			targetY: null,
@@ -29,38 +33,40 @@ function defineEnemies(levels) {
  */
 
 function spawnEnemy() {
-	if (waves[0] && !waves[0].length) {
-		waves.splice(0, 1);
-	}
 	if (waves[0]) {
 		var data = waves[0].splice(0, 1)[0];
 		var testPath;
+		var times = 0;
 		/**
 		 * test paths until a
 		 */
 		do {
-			var side = random(0, 3)
-			// 0-3 top-left clockwise
-			var x = 0;
-			var y = 0;
-			if (side === 0 || side === 2) {
-				x = random(0, canvasWidth - 1);
-				if (side === 2) {
-					y = canvasWidth - 1;
+			do {
+				var side = random(0, 3)
+				// 0-3 top-left clockwise
+				var x = 0;
+				var y = 0;
+				if (side === 0 || side === 2) {
+					x = random(0, canvasWidth - 1);
+					if (side === 2) {
+						y = canvasWidth - 1;
+					}
+				} else if (side === 1 || side === 3) {
+					y = random(0, canvasHeight - 1);
+					if (side === 1) {
+						x = canvasHeight - 1;
+					}
 				}
-			} else if (side === 1 || side === 3) {
-				y = random(0, canvasHeight - 1);
-				if (side === 1) {
-					x = canvasHeight - 1;
-				}
-			}
+				times++
+				var testMap = compile();
+			} while (testMap[x][y].speed === 0 /* && times < canvasWidth * canvasHeight*/ );
+
 			data.x = x;
 			data.y = y;
 			data.pixelX = centerSymmetrical(x, data.size);
 			data.pixelY = centerSymmetrical(y, data.size);
-			var testMap = compile();
 			testPath = getPaths([data], testMap);
-		} while (!testPath);
+		} while (!testPath.length)
 		data.path = testPath;
 		data.targetX = testPath[0].x;
 		data.targetY = testPath[0].y;
@@ -95,7 +101,7 @@ function makeWaves(levels) {
 				var data = cloneData(enemies[enemyId]);
 				wave.push(data);
 			}
-			enemyId++;
+			enemyId = round((l / levels) * (enemies.length - 1));
 		}
 		waves.push(wave);
 	}
@@ -180,7 +186,7 @@ function moveEnemies() {
 			enemy.y = modulus(enemy.pixelY + (enemy.size / 2), tileSize);
 			enemy.targetX = target.x;
 			enemy.targetY = target.y;
-			var tile = map[enemy.y][enemy.x];
+			var tile = map[enemy.x][enemy.y];
 			var speed = enemy[SPEED] / tile[SPEED];
 			var x = centerSymmetrical(enemy.targetX, enemy.size);
 			var y = centerSymmetrical(enemy.targetY, enemy.size);
@@ -215,7 +221,7 @@ function moveEnemies() {
 		}
 		if (enemy.x === base.x && enemy.y === base.y) {
 			reachBase(enemy);
-			destroyEnemy(enemy, index)
+			destroyEnemy(enemy, index);
 		}
 	});
 }
@@ -243,14 +249,26 @@ function destroyEnemy(enemy, index) {
 
 function getPaths(enemies, map) {
 	var list = [];
+	var path, enemy, compiledMap;
 	forEach(enemies, function(index) {
-		var enemy = this;
-		var compiledMap = map || compile();
-		var path = astar.search(compiledMap, compiledMap[enemy.y][enemy.x], compiledMap[base.y][base.x]);
+		enemy = this;
+		compiledMap = map || compile();
+		path = astar.search(compiledMap, compiledMap[enemy.x][enemy.y], compiledMap[base.x][base.y]);
 		list[PUSH]( !! path.length);
 	});
 	if (list.indexOf(false) > -1) {
 		return false;
 	}
 	return path;
+}
+
+function getAllPaths(enemies) {
+	forEach(enemies, function(index) {
+		var enemy = this;
+		var path = getPaths([enemy]);
+		enemy.path = path;
+		enemy.pathIndex = 0;
+		enemy.targetX = path[0].x;
+		enemy.targetY = path[0].y;
+	});
 }

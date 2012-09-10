@@ -35,7 +35,7 @@ function mapLoop() {
 		}
 	}
 	for (e = 0; e < perFrameFunction[LENGTH]; e++) {
-		// perFrameFunction[e]();
+		perFrameFunction[e]();
 	}
 }
 
@@ -52,7 +52,7 @@ function compile(tempX, tempY) {
 		compiledMap[x] = compiledMap[x] || [];
 		for (var y = 0; y < map[x].length; y++) {
 			var tile = cloneData(tiles[map[x][y].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
-			if (obstacles[x][y] && obstacles[x][y][NAME] !== "base") {
+			if (obstacles[x][y] && obstacles[x][y][NAME].toLowerCase() !== "base") {
 				tile.speed = 0;
 			}
 			compiledMap[x][y] = tile;

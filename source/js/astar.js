@@ -4,9 +4,9 @@
 // Implements the astar search algorithm in javascript using a binary heap.
 var astar = {
 	init: function(grid) {
-		for (var x = 0, xl = grid[LENGTH]; x < xl; x++) {
-			for (var y = 0, yl = grid[x][LENGTH]; y < yl; y++) {
-				var node = grid[x][y];
+		for (var y = 0, yl = grid[LENGTH]; y < yl; y++) {
+			for (var x = 0, xl = grid[x][LENGTH]; x < xl; x++) {
+				var node = grid[y][x];
 				node.f = 0;
 				node.g = 0;
 				node.h = 0;
@@ -70,7 +70,7 @@ var astar = {
 					// Found an optimal (so far) path to this node.  Take score for node to see how good it is.
 					neighbor.visited = true;
 					neighbor.parent = currentNode;
-					neighbor.h = neighbor.h || heuristic(neighbor.x,neighbor.y, end.x,end.y);
+					neighbor.h = neighbor.h || heuristic(neighbor.pos, end.pos);
 					neighbor.g = gScore;
 					neighbor.f = neighbor.g + neighbor.h;
 
@@ -88,10 +88,10 @@ var astar = {
 		// No result was found - empty array signifies failure to find path.
 		return [];
 	},
-	manhattan: function(pos0x,pos0y, pos1x,pos1y) {
+	manhattan: function(pos0, pos1) {
 		// See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-		var d1 = WINDOW[MATH].abs(pos1x - pos0x);
-		var d2 = WINDOW[MATH].abs(pos1y - pos0y);
+		var d1 = WINDOW[MATH].abs(pos1.x - pos0.x);
+		var d2 = WINDOW[MATH].abs(pos1.y - pos0.y);
 		return d1 + d2;
 	},
 	neighbors: function(grid, node) {
@@ -100,23 +100,23 @@ var astar = {
 		var y = node.y;
 
 		// West
-		if (grid[x - 1] && grid[x - 1][y]) {
-			ret[PUSH](grid[x - 1][y]);
+		if (grid[y - 1] && grid[y - 1][x]) {
+			ret[PUSH](grid[y - 1][x]);
 		}
 
 		// East
-		if (grid[x + 1] && grid[x + 1][y]) {
-			ret[PUSH](grid[x + 1][y]);
+		if (grid[y + 1] && grid[y + 1][x]) {
+			ret[PUSH](grid[y + 1][x]);
 		}
 
 		// South
-		if (grid[x] && grid[x][y - 1]) {
-			ret[PUSH](grid[x][y - 1]);
+		if (grid[y] && grid[y][x - 1]) {
+			ret[PUSH](grid[y][x - 1]);
 		}
 
 		// North
-		if (grid[x] && grid[x][y + 1]) {
-			ret[PUSH](grid[x][y + 1]);
+		if (grid[y] && grid[y][x + 1]) {
+			ret[PUSH](grid[y][x + 1]);
 		}
 
 		return ret;

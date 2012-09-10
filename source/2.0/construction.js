@@ -31,6 +31,7 @@ function canBuild() {
 	 *   Cannot build on structures
 	 *   Can build when building nothing (?)
 	 *   Cannot build on enemies
+	 *   Cannot build where enemies will be
 	 *   Cannot prevent enemies from reaching the base
 	 *   Can build on any terrain if we are building terrain
 	 *   Can build on basic land
@@ -45,17 +46,24 @@ function canBuild() {
 	if (!isBuilding()) {
 		return true;
 	}
-	// enemies on current tile
-	var enemy = getAll(enemies, "x", mouse.x);
-	if (enemy[LENGTH]) {
+	if (onScreen[LENGTH]) {
+		// enemies on current tile
+		var enemy = getAll(onScreen, "x", mouse.x);
 		if (getAll(enemy, "y", mouse.y)[LENGTH]) {
 			return false;
 		}
-	}
-	// if it stops the enemy from getting to the base
-	var testMap = compile(mouse.x, mouse.y);
-	if (!getPaths(enemies, testMap)) {
-		return false;
+
+		// enemy will be going to this tile
+		var enemy = getAll(onScreen, "targetX", mouse.x);
+		if (getAll(enemy, "targetY", mouse.y)[LENGTH]) {
+			return false;
+		}
+
+		// if it stops the enemy from getting to the base
+		var testMap = compile(mouse.x, mouse.y);
+		if (!getPaths(onScreen, testMap)) {
+			return false;
+		}
 	}
 	// if we are building terrain
 	if (building().is === "terrain") {

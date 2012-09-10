@@ -15,7 +15,7 @@ function drawTempPath() {
 		var thisEnemy = enemies[i];
 		var compiledMap = compile(mouse.x, mouse.y);
 		var base = getBaseCoords();
-		var path = astar.search(compiledMap, compiledMap[thisEnemy.y][thisEnemy.x], compiledMap[base.y][base.x]);
+		var path = astar.search(compiledMap, compiledMap[thisEnemy.x][thisEnemy.y], compiledMap[base.x][base.y]);
 		for (e = 0; e < path.length; e++) {
 			var thisPath = path[e];
 			context.beginPath();

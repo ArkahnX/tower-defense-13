@@ -1,6 +1,7 @@
 function hideLoading() {
 	document[GET_ELEMENT_BY_ID]("loading")[CLASS_LIST].add("hidden")
 }
+
 function bindBuyClicks() {
 	var containers = document[QUERY_SELECTOR_ALL](".container");
 	for (var i = 0; i < containers[LENGTH]; i++) {
@@ -27,17 +28,19 @@ function clickHandler(event) {
 		if (event.which === 2) {
 			returnStructure();
 		} else {
-			var base = cloneData(building());
-			obstacles[mouse.y][mouse.x] = base;
-			bought = "";
+			var tower = cloneData(building(), ["x","y"],[tileCloneX, tileCloneY], [mouse.x,mouse.y]);
+			obstacles[mouse.x][mouse.y] = tower;
+			bought = null;
 			checkAffordable();
-			getPaths();
+			if (onScreen.length) {
+				getAllPaths(onScreen);
+			}
 		}
 	}
 	if (canBuild() === null) {
 		//middle click sell
 		if (event.which === 2) {
-			if (getBaseCoords().x !== mouse.x || getBaseCoords().y !== mouse.y) {
+			if (base.x !== mouse.x || base.y !== mouse.y) {
 				sellStructure(mouse.x, mouse.y);
 			}
 		}

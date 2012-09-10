@@ -4,7 +4,7 @@
 // Implements the astar search algorithm in javascript using a binary heap.
 var astar = {
 	init: function(grid) {
-		for (var x = 0, xl = grid[LENGTH]; x < xl; x++) {
+		for (var x = 0, xl = grid[LENGTH];x < xl; x++) {
 			for (var y = 0, yl = grid[x][LENGTH]; y < yl; y++) {
 				var node = grid[x][y];
 				node.f = 0;
@@ -28,7 +28,7 @@ var astar = {
 
 		var openHeap = astar.heap();
 
-		openHeap.push(start);
+		openHeap[PUSH](start);
 
 		while (openHeap.size() > 0) {
 
@@ -40,7 +40,7 @@ var astar = {
 				var curr = currentNode;
 				var ret = [];
 				while (curr.parent) {
-					ret.push(curr);
+					ret[PUSH](curr);
 					curr = curr.parent;
 				}
 				return ret.reverse();
@@ -70,13 +70,13 @@ var astar = {
 					// Found an optimal (so far) path to this node.  Take score for node to see how good it is.
 					neighbor.visited = true;
 					neighbor.parent = currentNode;
-					neighbor.h = neighbor.h || heuristic(neighbor.x,neighbor.y, end.x,end.y);
+					neighbor.h = neighbor.h || heuristic(neighbor.x, neighbor.y, end.x, end.y);
 					neighbor.g = gScore;
 					neighbor.f = neighbor.g + neighbor.h;
 
 					if (!beenVisited) {
 						// Pushing to heap will put it in proper place based on the 'f' value.
-						openHeap.push(neighbor);
+						openHeap[PUSH](neighbor);
 					} else {
 						// Already seen the node, but since it has been rescored we need to reorder it in the heap
 						openHeap.rescoreElement(neighbor);
@@ -88,10 +88,10 @@ var astar = {
 		// No result was found - empty array signifies failure to find path.
 		return [];
 	},
-	manhattan: function(pos0x,pos0y, pos1x,pos1y) {
+	manhattan: function(pos0X, pos0Y, pos1X, pos1Y) {
 		// See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-		var d1 = WINDOW[MATH].abs(pos1x - pos0x);
-		var d2 = WINDOW[MATH].abs(pos1y - pos0y);
+		var d1 = WINDOW[MATH].abs(pos1X - pos0X);
+		var d2 = WINDOW[MATH].abs(pos1Y - pos0Y);
 		return d1 + d2;
 	},
 	neighbors: function(grid, node) {
@@ -101,22 +101,22 @@ var astar = {
 
 		// West
 		if (grid[x - 1] && grid[x - 1][y]) {
-			ret.push(grid[x - 1][y]);
+			ret[PUSH](grid[x - 1][y]);
 		}
 
 		// East
 		if (grid[x + 1] && grid[x + 1][y]) {
-			ret.push(grid[x + 1][y]);
+			ret[PUSH](grid[x+ 1][y]);
 		}
 
 		// South
 		if (grid[x] && grid[x][y - 1]) {
-			ret.push(grid[x][y - 1]);
+			ret[PUSH](grid[x][y - 1]);
 		}
 
 		// North
 		if (grid[x] && grid[x][y + 1]) {
-			ret.push(grid[x][y + 1]);
+			ret[PUSH](grid[x][y + 1]);
 		}
 
 		return ret;
@@ -131,7 +131,7 @@ function BinaryHeap(scoreFunction) {
 BinaryHeap.prototype = {
 	push: function(element) {
 		// Add the new element to the end of the array.
-		this.content.push(element);
+		this.content[PUSH](element);
 
 		// Allow it to sink down.
 		this.sinkDown(this.content[LENGTH] - 1);

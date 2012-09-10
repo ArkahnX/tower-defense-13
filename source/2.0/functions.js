@@ -170,3 +170,22 @@ function getWeightedRandom() {
 	// shouldnt arrive here
 	return false;
 }
+
+function getAll(array, property, value) {
+	var list = [];
+	for (var attr in array) {
+		if (array[attr][property] === value) {
+			list[PUSH](array[attr]);
+		}
+	}
+	return list.length ? list : false;
+}
+
+function modulus(num, size) {
+	var mod = num % size;
+	return (num - mod) / size;
+};
+
+function randomFloat(from, to) {
+	return (WINDOW[MATH].random() * (to - from + 1)) + from;
+}

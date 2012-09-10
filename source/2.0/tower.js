@@ -180,7 +180,8 @@ function findNewBaseCoordinates() {
 function reachBase(enemy) {
 	damage(base, enemy.health);
 	if (base.health < 1) {
-		destroyStructure(base.x, base.y)
+		destroyStructure(base.x, base.y);
+		base = null;
 		var result = getBase();
 		if (!result) {
 			gameOver();
@@ -202,7 +203,7 @@ function destroyStructure(x, y) {
 	var towerX = centerSymmetrical(x, tileSize);
 	var startX = towerX + HALF_TILE_SIZE - (thisTower.width / 2);
 	var endX = towerX + (thisTower.width);
-	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], [thisTower.color[0], thisTower.color[1], thisTower.color[2]], true);
+	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], [thisTower.red, thisTower.green, thisTower.blue], true);
 	obstacles[x][y] = 0;
 }
 
