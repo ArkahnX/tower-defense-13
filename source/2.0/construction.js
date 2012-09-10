@@ -46,6 +46,27 @@ function canBuild() {
 	if (!isBuilding()) {
 		return true;
 	}
+	var testMap = compile(mouse.x, mouse.y);
+	var tests = [];
+	if (testMap[mouse.x] && testMap[mouse.x][mouse.y - 1] && testMap[mouse.x][mouse.y - 1].speed !== 0) {
+		var top = cloneData(enemies[0], ["x", "y"], [xModifier, yModifier], [mouse.x, mouse.y - 1]);
+		tests.push(top);
+	}
+	if (testMap[mouse.x + 1] && testMap[mouse.x + 1][mouse.y] && testMap[mouse.x + 1][mouse.y].speed !== 0) {
+		var right = cloneData(enemies[0], ["x", "y"], [xModifier, yModifier], [mouse.x + 1, mouse.y]);
+		tests.push(right);
+	}
+	if (testMap[mouse.x] && testMap[mouse.x][mouse.y + 1] && testMap[mouse.x][mouse.y + 1].speed !== 0) {
+		var bottom = cloneData(enemies[0], ["x", "y"], [xModifier, yModifier], [mouse.x, mouse.y + 1]);
+		tests.push(bottom);
+	}
+	if (testMap[mouse.x - 1] && testMap[mouse.x - 1][mouse.y] && testMap[mouse.x - 1][mouse.y].speed !== 0) {
+		var left = cloneData(enemies[0], ["x", "y"], [xModifier, yModifier], [mouse.x - 1, mouse.y]);
+		tests.push(left);
+	}
+	if (!getPaths(tests, testMap)) {
+		return false;
+	}
 	if (onScreen[LENGTH]) {
 		// enemies on current tile
 		var enemy = getAll(onScreen, "x", mouse.x);
