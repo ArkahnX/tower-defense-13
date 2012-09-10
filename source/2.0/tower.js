@@ -31,6 +31,8 @@ function defineTower(name, weapon, type, range, cost, health, from, to, red, gre
 		y: specifications.y,
 		type: type,
 		range: range,
+		delay:10,
+		timer:0,
 		cost: cost,
 		health: health,
 		fullHealth: health,

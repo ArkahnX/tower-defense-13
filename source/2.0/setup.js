@@ -19,6 +19,7 @@ function setup() {
 		context.drawImage(tile.image, centerSymmetrical(tile.x, tileSize), centerSymmetrical(tile.y, tileSize));
 		if (tower !== 0) {
 			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerTower(tower.y, tower.height));
+			aim(tower);
 		}
 	});
 	/**
@@ -29,6 +30,7 @@ function setup() {
 		cursorColor();
 		drawCursor();
 		drawEnemies();
+		drawBullets();
 		moveEnemies();
 		explode();
 		timer++;

@@ -1,27 +1,27 @@
 function drawBullets() {
 	for (var i = 0; i < bullets.length; i++) {
-		var thisBullet = bullets[i];
-		if (thisBullet.x > canvas.width && thisBullet.y > canvas.width) {
+	var thisBullet = bullets[i];
+	if (thisBullet.x > canvas.width && thisBullet.y > canvas.width) {
+		bullets.splice(i, 1);
+	} else {
+		var enemy = checkCollision(thisBullet);
+		if (enemy) {
 			bullets.splice(i, 1);
+			damage(enemy, bulletDamage(thisBullet));
 		} else {
-			var enemy = checkCollision(thisBullet);
-			if (enemy) {
-				bullets.splice(i, 1);
-				damage(enemy, bulletDamage(thisBullet));
-			} else {
 
-				context.beginPath();
-				context.fillStyle = "rgba(" + thisBullet.red + "," + thisBullet.green + "," + thisBullet.blue + "," + thisBullet.alpha + ")";
-				context.arc(thisBullet.x, thisBullet.y, thisBullet.radius, 0, 2 * Math.PI, false);
-				context.fill();
-				if (thisBullet.life > 0 || thisBullet.life < 0) {
-					thisBullet.x += thisBullet.dx;
-					thisBullet.y += thisBullet.dy;
-					thisBullet.life = thisBullet.life - 1;
-				}
+			context.beginPath();
+			context.fillStyle = "rgba(" + thisBullet.red + "," + thisBullet.green + "," + thisBullet.blue + "," + thisBullet.alpha + ")";
+			context.arc(thisBullet.x, thisBullet.y, thisBullet.radius, 0, 2 * Math.PI, false);
+			context.fill();
+			if (thisBullet.life > 0 || thisBullet.life < 0) {
+				thisBullet.x += thisBullet.dx;
+				thisBullet.y += thisBullet.dy;
+				thisBullet.life = thisBullet.life - 1;
 			}
 		}
 	}
+}
 }
 
 function bulletDamage() {

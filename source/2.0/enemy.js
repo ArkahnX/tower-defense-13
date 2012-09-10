@@ -32,6 +32,46 @@ function defineEnemies(levels) {
  * Function to move an enemy from the wave to the map. Will only spawn where the enemy can reach the base.
  */
 
+function findSpawn(enemy) {
+	var testPath;
+	var times = 0;
+	/**
+	 * test paths until a
+	 */
+	do {
+		do {
+			// 0-3 top-left clockwise
+			var x = 0;
+			var y = 0;
+			if (side === 0 || side === 2) {
+				x = random(0, canvasWidth - 1);
+				if (side === 2) {
+					y = canvasWidth - 1;
+				}
+			} else if (side === 1 || side === 3) {
+				y = random(0, canvasHeight - 1);
+				if (side === 1) {
+					x = canvasHeight - 1;
+				}
+			}
+			times++
+			var testMap = compile();
+		} while (testMap[x][y].speed === 0 /* && times < canvasWidth * canvasHeight*/ );
+
+		data.x = x;
+		data.y = y;
+		data.pixelX = centerSymmetrical(x, data.size);
+		data.pixelY = centerSymmetrical(y, data.size);
+		testPath = getPaths([data], testMap);
+	} while (!testPath.length)
+	data.path = testPath;
+	data.targetX = testPath[0].x;
+	data.targetY = testPath[0].y;
+	data.pathIndex = 0;
+	return enemy;
+}
+
+
 function spawnEnemy() {
 	if (waves[0]) {
 		var data = waves[0].splice(0, 1)[0];
