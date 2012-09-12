@@ -230,7 +230,7 @@ function destroyStructure(x, y) {
 
 function sellStructure(x, y) {
 	var thisTower = obstacles[x][y];
-	addMoney(thisTower.cost * (thisTower.health / thisTower.fullHealth) / 2);
+	addMoney(thisTower.cost * (thisTower.health / thisTower.fullHealth) * 0.75);
 	destroyStructure(x, y);
 }
 

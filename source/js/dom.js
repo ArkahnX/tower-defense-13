@@ -23,13 +23,22 @@ function buyHandler(event) {
 	}
 }
 
+function sellHandler(event) {
+	doNothing(event);
+	if (base.x !== mouse.x || base.y !== mouse.y) {
+		sellStructure(selectedTower.x, selectedTower.y);
+	}
+	selectedTower = null;
+}
+
 function clickHandler(event) {
 	doNothing(event);
+	selectedTower = null;
 	if (isBuilding() && canBuild()) {
 		if (event.which === 2) {
 			returnStructure();
 		} else {
-			var tower = cloneData(building(), ["x","y"],[tileCloneX, tileCloneY], [mouse.x,mouse.y]);
+			var tower = cloneData(building(), ["x", "y"], [tileCloneX, tileCloneY], [mouse.x, mouse.y]);
 			obstacles[mouse.x][mouse.y] = tower;
 			bought = null;
 			checkAffordable();

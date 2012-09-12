@@ -20,12 +20,21 @@ function setScore() {
 	if (selectedTower !== null) {
 		var stats = [];
 		for (var attr in selectedTower) {
-			var badList = ["is", "width", "height", "depth", "colors", "image", "x", "y", "path","type","delay","speed","timer"]
+			var badList = ["is", "width", "height", "depth", "colors", "image", "x", "y", "path", "type", "delay", "speed", "timer"]
 			if (badList.indexOf(attr) === -1) {
 				stats.push(attr + ": " + preStart + selectedTower[attr] + preEnd);
 			}
 		}
-		stats[PUSH]("Can Build: " + preStart + canBuild() + preEnd)
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
+		document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
+		if (selectedTower.name !== "Base") {
+			document[GET_ELEMENT_BY_ID]("sell").removeAttribute("disabled");
+			addEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
+		}
+	} else {
+		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "";
+		document[GET_ELEMENT_BY_ID]("upgrade").setAttribute("disabled", true);
+		document[GET_ELEMENT_BY_ID]("sell").setAttribute("disabled", true);
+		removeEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
 	}
 }
