@@ -15,6 +15,7 @@ var mouse = {
 var wave = 1;
 var waveLength = 0;
 var timeBeforeNextWave = 0;
+var selectedTower = null;
 
 var tileFunction = [];
 var afterTileFunction = [];

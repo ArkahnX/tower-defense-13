@@ -17,6 +17,7 @@ function buyHandler(event) {
 	doNothing(event);
 	var container = this;
 	if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
+		selectedTower = null;
 		bought = container[QUERY_SELECTOR]("span").innerText;
 		removeMoney(getAll(towers, NAME, bought)[0].cost);
 	}
@@ -43,6 +44,9 @@ function clickHandler(event) {
 			if (base.x !== mouse.x || base.y !== mouse.y) {
 				sellStructure(mouse.x, mouse.y);
 			}
+		} else {
+			// select tower
+			selectedTower = obstacles[mouse.x][mouse.y];
 		}
 	}
 }

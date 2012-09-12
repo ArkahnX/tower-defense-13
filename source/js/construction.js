@@ -26,6 +26,7 @@ function building() {
  */
 
 function canBuild() {
+	document.body.style.cursor = 'default';
 	/**
 	 *   ===  RULES  ===
 	 *   Cannot build on structures
@@ -40,6 +41,7 @@ function canBuild() {
 
 	// hovering over a structure
 	if (thisTile(obstacles) !== 0) {
+		document.body.style.cursor = 'pointer';
 		return NULL;
 	}
 	// not building anything

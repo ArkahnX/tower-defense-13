@@ -66,16 +66,16 @@ canvas {
 	padding: 0;
 }
 
-#data {
+#data, #selection, #tower {
 	color: gray;
 	padding: 10px;
 }
 
-#data:hover {
+#data:hover, #selection:hover, #tower:hover {
 	color: white;
 }
 
-#data ul {
+#data ul, #selection ul, #tower ul {
 	list-style: none;
 	margin: 0;
 }

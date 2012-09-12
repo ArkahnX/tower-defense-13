@@ -89,7 +89,9 @@ function darken(color) {
  */
 
 function thisTile(map) {
-	return map[mouse.x][mouse.y];
+	if (map) {
+		return map[mouse.x][mouse.y];
+	}
 }
 
 /**
@@ -200,7 +202,7 @@ function rgb(red, green, blue) {
 
 function area(width, height, depth) {
 	if (depth) {
-		return (2*width*height) + (2*height*depth) + (2*width*depth);
+		return (2 * width * height) + (2 * height * depth) + (2 * width * depth);
 	}
-	return width*height;
+	return width * height;
 }

@@ -57,26 +57,27 @@ function setup() {
 		[20, 30],
 		[10, 15]
 	], [rgb(225, 0, 0),rgb(darken(225),0,0)]));
-	towers[PUSH](defineTower("Cannon", "cannon", "basic", 7, 50, 10, 10, 20, [
+	towers[PUSH](defineTower("Cannon", "cannon", "basic", 7, 50, 10, 10, 15, [
 		[10, 15],
 		[10, 15],
 		[5, 10]
 	], [rgb(200, 0, 0),rgb(darken(200),0,0)]));
-	towers[PUSH](defineTower("Shotgun", "spread", "basic", 5, 50, 10, 50, 20, [
+	towers[PUSH](defineTower("Shotgun", "spread", "basic", 5, 250, 10, 50, 20, [
 		[15, 20],
 		[15, 20],
 		[10, 15]
 	], [rgb(125, 0, 0),rgb(darken(125),darken(125),0)]));
-	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 50, 10, 0, 20, [
-		[20, 25],
-		[20, 25],
-		[15, 20]
-	], [rgb(125, 0, 0),rgb(0, 0, 125)]));
-	towers[PUSH](defineTower("Explode", "explode", "basic", 5, 50, 10, 50, 20, [
+	towers[PUSH](defineTower("Explode", "explode", "basic", 5.5, 500, 10, 50, 20, [
 		[25, 30],
 		[25, 30],
 		[20, 25]
 	], [rgb(125, 0, 0),rgb(0, darken(125), darken(125))]));
+	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 50, 1000, 0, 20, [
+		[20, 25],
+		[20, 25],
+		[15, 20]
+	], [rgb(125, 0, 0),rgb(0, 0, 125)]));
+
 	tiles.push(makeTile("grass", PATH, 7, 1, pixelData([
 		[32 * 32, 175, 230, 1.3, 1, 2],
 		[50, 200, 245, 1, 1.3, 1.5],
