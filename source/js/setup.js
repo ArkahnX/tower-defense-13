@@ -72,7 +72,7 @@ function setup() {
 		[25, 30],
 		[20, 25]
 	], [rgb(125, 0, 0),rgb(0, darken(125), darken(125))]));
-	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 50, 1000, 0, 20, [
+	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 1000, 10, 0, 20, [
 		[20, 25],
 		[20, 25],
 		[15, 20]
