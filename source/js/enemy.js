@@ -77,7 +77,7 @@ function findSpawn(enemy) {
 
 
 function spawnEnemy() {
-	if (waves[0]) {
+	if (waves[0] && base) {
 		var data = waves[0].splice(0, 1)[0];
 		var testPath;
 		var times = 0;
@@ -228,7 +228,7 @@ function drawEnemies() {
 function moveEnemies() {
 	forEach(onScreen, function(index) {
 		var enemy = this;
-		if (enemy.pathIndex < enemy[PATH][LENGTH]) {
+		if (base && enemy.pathIndex < enemy[PATH][LENGTH]) {
 			var target = enemy[PATH][enemy.pathIndex];
 			enemy.x = modulus(enemy.pixelX + (enemy.size / 2), tileSize);
 			enemy.y = modulus(enemy.pixelY + (enemy.size / 2), tileSize);
@@ -267,7 +267,7 @@ function moveEnemies() {
 				enemy.pathIndex++;
 			}
 		}
-		if (enemy.x === base.x && enemy.y === base.y) {
+		if (base && enemy.x === base.x && enemy.y === base.y) {
 			reachBase(enemy);
 			destroyEnemy(enemy, index);
 		}
@@ -284,8 +284,8 @@ function destroyEnemy(enemy, index) {
 	var x = enemy.pixelX;
 	var y = enemy.pixelY;
 	var modifier = enemy.size / 2;
-	makeParticles(floor((enemy.health / enemy.fullHealth) * enemy.size)+1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
-	addMoney((enemy.fullHealth * 10)/(wave/2))
+	makeParticles(floor((enemy.health / enemy.fullHealth) * enemy.size) + 1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
+	addMoney((enemy.fullHealth * 10) / (wave / 2))
 	onScreen.splice(index, 1);
 }
 
@@ -297,18 +297,20 @@ function destroyEnemy(enemy, index) {
  */
 
 function getPaths(enemies, map) {
-	var list = [];
-	var path, enemy, compiledMap;
-	forEach(enemies, function(index) {
-		enemy = this;
-		compiledMap = map || compile();
-		path = astar.search(compiledMap, compiledMap[enemy.x][enemy.y], compiledMap[base.x][base.y]);
-		list[PUSH]( !! path.length);
-	});
-	if (list.indexOf(false) > -1) {
-		return false;
+	if (base) {
+		var list = [];
+		var path, enemy, compiledMap;
+		forEach(enemies, function(index) {
+			enemy = this;
+			compiledMap = map || compile();
+			path = astar.search(compiledMap, compiledMap[enemy.x][enemy.y], compiledMap[base.x][base.y]);
+			list[PUSH]( !! path.length);
+		});
+		if (list.indexOf(false) > -1) {
+			return false;
+		}
+		return path;
 	}
-	return path;
 }
 
 function getAllPaths(enemies) {
@@ -320,4 +322,16 @@ function getAllPaths(enemies) {
 		enemy.targetX = path[0].x;
 		enemy.targetY = path[0].y;
 	});
+}
+
+function nextWave() {
+	if (!waves[1]) {
+		document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
+		removeEvent(document.getElementById("nextWave"), "click", nextWave)
+	} else {
+		advanceWave = true;
+		for (var i = 0; i < waves[0].length; i++) {
+			waves[1].push(waves[0][i]);
+		}
+	}
 }

@@ -109,16 +109,17 @@ function keyListener() {
 }
 
 function keyPressed(event) {
-	doNothing(event);
+	console.log(event.keyCode)
 	var keyCode = 0;
-	if (event.keyCode-48 >= 1 && event.keyCode-48 <= 5) {
-		keyCode = event.keyCode-48;
-	} else if (event.keyCode-96 >= 1 && event.keyCode-96 <= 5) {
-		keyCode = event.keyCode-96;
+	if (event.keyCode - 48 >= 1 && event.keyCode - 48 <= 5) {
+		keyCode = event.keyCode - 48;
+	} else if (event.keyCode - 96 >= 1 && event.keyCode - 96 <= 5) {
+		keyCode = event.keyCode - 96;
 	}
 	if (keyCode > 0) {
+		doNothing(event);
 		var containers = document[QUERY_SELECTOR_ALL](".container");
-		var container =containers[keyCode-1]
+		var container = containers[keyCode - 1]
 		if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
 			selectedTower = null;
 			bought = container[QUERY_SELECTOR]("span").innerText;

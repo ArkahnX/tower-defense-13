@@ -37,12 +37,19 @@ function setup() {
 		explode();
 		timer++;
 		timeBeforeNextWave--;
-		if (waves[0].length && timer === (60 * 2)) {
+		if (!waves[0].length) {
+			console.log("victory");
+			stop();
+		} else if (waves[0].length && timer === (60 * 2)) {
 			timer = 0;
 			for (var i = 0; i < round(wave / 2); i++) {
 				spawnEnemy();
 			}
-		} else if (timer === 600) {
+		} else if (timer === 600 || advanceWave) {
+			advanceWave = false;
+			if (!waves[1]) {
+				document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
+			}
 			wave++;
 			waves.splice(0, 1);
 			waveLength = waves[0].length;
@@ -113,6 +120,7 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 	addEvent(canvas, "mousedown", clickHandler);
 	addEvent(canvas, "contextmenu", doNothing);
 	addEvent(document.getElementById("startGame"), "click", startGame)
+	addEvent(document.getElementById("nextWave"), "click", nextWave)
 	hideLoading();
 	keyListener();
 	// spriteTest();

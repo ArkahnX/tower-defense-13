@@ -1,5 +1,5 @@
 function setScore() {
-	var baseHealth = getBase().health;
+	var baseHealth = getBase().health || 0;
 	var start = "<li>";
 	var end = "</li>";
 	var preStart = "<code>";

@@ -194,7 +194,8 @@ function reachBase(enemy) {
 		base = null;
 		var result = getBase();
 		if (!result) {
-			gameOver();
+			console.log("defeat");
+			stop();
 		}
 	}
 }
