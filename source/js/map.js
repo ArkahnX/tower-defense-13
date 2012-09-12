@@ -1,60 +1,85 @@
+/**
+ * Generate a map using weighted tiles.
+ * @param  {Number} width  Width in tiles to draw the map.
+ * @param  {Number} height Height in tiles to draw the map.
+ */
+
 function makeMap(width, height) {
-	for (var y = 0; y < height; y++) {
-		map[y] = map[y] || [];
-		obstacles[y] = obstacles[y] || [];
-		for (var x = 0; x < width; x++) {
-			var num = getWeightedRandom();
-			var thisTile = new setTile(tiles[num], "imageList");
-			thisTile.x = x;
-			thisTile.y = y;
-			thisTile.pos = {
-				x: x,
-				y: y
-			};
-			map[y][x] = thisTile;
-			obstacles[y][x] = 0;
+	for (var x = 0; x < width; x++) {
+		map[x] = map[x] || [];
+		obstacles[x] = obstacles[x] || [];
+		for (var y = 0; y < height; y++) {
+			var number = getWeightedRandom();
+			var tile = cloneData(tiles[number], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
+			map[x][y] = tile;
+			obstacles[x][y] = 0;
 		}
 	}
-	var base = new setStructure(towers[0]);
+	base = cloneData(towers[0]);
 	base.x = random((width / 2) - 1, (height / 2) + 1);
 	base.y = random((width / 2) - 1, (height / 2) + 1);
 	obstacles[base.x][base.y] = base;
-	return [map, obstacles];
 }
 
-function drawMap() {
-	for (var y = 0; y < map[LENGTH]; y++) {
-		for (var x = 0; x < map[y][LENGTH]; x++) {
-			context.drawImage(map[y][x].image, x * 32, y * 32);
-		}
-	}
-}
+/**
+ * Map loop, draw loops should be included in setup.js/setup, as either perFrame, or perTile.
+ */
 
-function drawStructures() {
-	for (var y = 0; y < map[LENGTH]; y++) {
-		for (var x = 0; x < map[y][LENGTH]; x++) {
-			if (typeof obstacles[y][x] === "object") {
-				drawTower(obstacles[y][x], x, y);
+function mapLoop() {
+	var x, y, i, e;
+	for (x = 0; x < map[LENGTH]; x++) {
+		for (y = 0; y < map[x][LENGTH]; y++) {
+			for (i = 0; i < perTileFunction[LENGTH]; i++) {
+				perTileFunction[i](map[x][y], obstacles[x][y]);
 			}
 		}
 	}
+	for (e = 0; e < perFrameFunction[LENGTH]; e++) {
+		perFrameFunction[e]();
+	}
 }
+
+/**
+ * Create a temporary map for the purpose of making sure the paths are accessible.
+ * @param  {Number} tempX X value to set to 0 (wall).
+ * @param  {Number} tempY Y value to set to 0 (wall).
+ * @return {Array}        Map to use for pathfinding.
+ */
 
 function compile(tempX, tempY) {
 	var compiledMap = [];
-	for (var y = 0; y < map.length; y++) {
-		compiledMap[y] = compiledMap[y] || [];
-		for (var x = 0; x < map[y].length; x++) {
-			var tile = map[y][x];
-			if (obstacles[y][x] && obstacles[y][x][NAME] !== "base") {
+	for (var x = 0; x < map.length; x++) {
+		compiledMap[x] = compiledMap[x] || [];
+		for (var y = 0; y < map[x].length; y++) {
+			var tile = cloneData(tiles[map[x][y].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
+			if (obstacles[x][y] && obstacles[x][y][NAME].toLowerCase() !== "base") {
 				tile.speed = 0;
 			}
-			compiledMap[y][x] = tile;
+			compiledMap[x][y] = tile;
 		}
 	}
 	if (tempX !== undefined && tempY !== undefined) {
-		compiledMap[tempY][tempX] = setTile(tiles[compiledMap[tempY][tempX].id], "imageList");
-		compiledMap[tempY][tempX].speed = 0;
+		compiledMap[tempX][tempY] = cloneData(tiles[compiledMap[tempX][tempY].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [tempX, tempY]);
+		compiledMap[tempX][tempY].speed = 0;
 	}
 	return compiledMap;
+}
+
+function getEdges(map) {
+	var list = [];
+	for (var x = 0; x < map.length; x++) {
+		for (var y = 0; y < map[x].length; y++) {
+			if (x === 0 || x === map.length - 1 || y === 0 || y === map[x].length - 1) {
+				if (map[x][y].speed !== 0) {
+					var path = astar.search(map, map[x][y], map[base.x][base.y]);
+					if (path.length) {
+						list.push(true);
+					}
+				} else {
+					list.push(false);
+				}
+			}
+		}
+	}
+	return list;
 }

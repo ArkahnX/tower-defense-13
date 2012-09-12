@@ -50,9 +50,31 @@ function setup() {
 	/**
 	 * Initialize turrets, enemies, waves, and tiles.
 	 */
-	towers[PUSH](defineTower("Base", "none", "special", 0, 10000, 1000, 15, 25, 255, 0, 0, 1));
-	towers[PUSH](defineTower("Turret", "cannon", "basic", 5, 100, 10, 10, 20, 200, 0, 0, 1));
-	towers[PUSH](defineTower("Shotgun", "spread", "basic", 2, 200, 10, 10, 15, 125, 0, 0, 1));
+	towers[PUSH](defineTower("Base", "none", "special", 0, 10000, 1000, 0, 0, [
+		[10, 15],
+		[20, 30],
+		[10, 15]
+	], [rgb(225, 0, 0),rgb(darken(225),0,0)]));
+	towers[PUSH](defineTower("Cannon", "cannon", "basic", 7, 50, 10, 10, 20, [
+		[10, 15],
+		[10, 20],
+		[10, 15]
+	], [rgb(200, 0, 0),rgb(darken(200),0,0)]));
+	towers[PUSH](defineTower("Shotgun", "spread", "basic", 5, 50, 10, 50, 20, [
+		[15, 20],
+		[20, 25],
+		[5, 10]
+	], [rgb(125, 0, 0),rgb(darken(125),0,0)]));
+	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 50, 10, 0, 20, [
+		[15, 20],
+		[20, 25],
+		[5, 10]
+	], [rgb(125, 0, 0),rgb(0, 0, 125)]));
+	towers[PUSH](defineTower("Explode", "explode", "basic", 5, 50, 10, 50, 20, [
+		[15, 25],
+		[20, 30],
+		[4, 7]
+	], [rgb(125, 0, 0),rgb(0, 0, 125)]));
 	tiles.push(makeTile("grass", PATH, 7, 1, pixelData([
 		[32 * 32, 175, 230, 1.3, 1, 2],
 		[50, 200, 245, 1, 1.3, 1.5],
@@ -71,8 +93,8 @@ function setup() {
 		[32 * 32, 100, 200, 1.5, 1.5, 1],
 		[600, 100, 200, 1.5, 1.5, 1]
 	])));
-	defineEnemies(5);
-	makeWaves(30);
+	defineEnemies(10);
+	makeWaves(13);
 	waveLength = waves[0].length;
 	timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
 }

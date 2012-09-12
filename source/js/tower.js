@@ -1,22 +1,22 @@
 /**
  * Create a tower.
- * @param  {String} name   Name to refer the tower to the player
- * @param  {String} weapon Weapon type the structure uses.
- * @param  {String} type   Type of tower.
- * @param  {Number} range  Number in tiles that the tower searches for enemies within.
- * @param  {Number} cost   Cost to construct the tower.
- * @param  {Number} health How much damage the tower can sustain.
- * @param  {Number} from   Minimum tower dimentions.
- * @param  {Number} to     Maximum tower dimentions.
- * @param  {Number} red    0-255 value for red.
- * @param  {Number} green  0-255 value for green.
- * @param  {Number} blue   0-255 value for blue.
- * @param  {Number} alpha  0-1 value for alpha.
- * @return {Object}        Tower definition.
+ * @param  {String} name       Name to refer the tower to the player
+ * @param  {String} weapon     Weapon type the structure uses.
+ * @param  {String} type       Type of tower.
+ * @param  {Number} range      Number in tiles that the tower searches for enemies within.
+ * @param  {Number} cost       Cost to construct the tower.
+ * @param  {Number} health     How much damage the tower can sustain.
+ * @param  {Number} dimentions Array of dimentions [Width, Height, Depth].
+ * @param  {Number} to         Maximum tower dimentions.
+ * @param  {Number} red        0-255 value for red.
+ * @param  {Number} green      0-255 value for green.
+ * @param  {Number} blue       0-255 value for blue.
+ * @param  {Number} alpha      0-1 value for alpha.
+ * @return {Object}            Tower definition.
  */
 
-function defineTower(name, weapon, type, range, cost, health, from, to, red, green, blue, alpha) {
-	var specifications = designTower(weapon, from, to, red, green, blue, alpha);
+function defineTower(name, weapon, type, range, cost, health, delay, speed, dimentions, colors) {
+	var specifications = designTower(weapon, dimentions, colors);
 	return {
 		is: "tower",
 		name: name,
@@ -25,47 +25,39 @@ function defineTower(name, weapon, type, range, cost, health, from, to, red, gre
 		height: specifications.height,
 		depth: specifications.depth,
 		path: specifications.path,
-		color: specifications.color,
+		colors: specifications.colors,
 		image: recordTower(specifications),
 		x: specifications.x,
 		y: specifications.y,
 		type: type,
 		range: range,
-		delay:10,
-		timer:0,
+		delay: delay,
+		speed: speed,
+		timer: 0,
 		cost: cost,
 		health: health,
-		fullHealth: health,
-		from: from,
-		to: to,
-		red: red,
-		blue: blue,
-		green: green,
-		blue: blue,
-		alpha: alpha || 1
+		fullHealth: health
 	};
 }
 
 /**
  * Calculate values for some parts of the tower.
- * @param  {String} weapon Weapon type the structure uses.
- * @param  {Number} from   Minimum tower dimentions.
- * @param  {Number} to     Maximum tower dimentions.
- * @param  {Number} red    0-255 value for red.
- * @param  {Number} green  0-255 value for green.
- * @param  {Number} blue   0-255 value for blue.
- * @param  {Number} alpha  0-1 value for alpha.
- * @return {Object}        Calculated values for tower.
+ * @param  {String} weapon     Weapon type the structure uses.
+ * @param  {Number} dimentions Array of dimentions [Width, Height, Depth].
+ * @param  {Number} red        0-255 value for red.
+ * @param  {Number} green      0-255 value for green.
+ * @param  {Number} blue       0-255 value for blue.
+ * @param  {Number} alpha      0-1 value for alpha.
+ * @return {Object}            Calculated values for tower.
  */
 
-function designTower(weapon, from, to, red, green, blue, alpha) {
-	var width = random(from, to);
-	var height = random(from, to) + round(width / 1.5);
-	var depth = random(from - 3, to - 3);
+function designTower(weapon, dimentions, colors) {
+	var width = random(dimentions[0][0], dimentions[0][1]);
+	var height = random(dimentions[1][0], dimentions[1][1]);
+	var depth = random(dimentions[2][0], dimentions[2][1]);
 	var path = "rectangle";
 	if (weapon === "beam" || weapon === "spread") {
 		path = "triangle";
-		depth = 0;
 	}
 	return {
 		x: 0,
@@ -73,10 +65,7 @@ function designTower(weapon, from, to, red, green, blue, alpha) {
 		width: width,
 		height: height,
 		depth: depth,
-		red: red,
-		blue: blue,
-		green: green,
-		color: color(red, green, blue, alpha),
+		colors: colors,
 		path: path
 	}
 }
@@ -103,11 +92,26 @@ function recordTower(specifications) {
  * @param  {Object} specifications Specifications from designTower.
  */
 
-function makeSquare(x, y, width, height, color) {
+function makeSquare(x, y, width, height, color, depth) {
 	context.beginPath();
 	context.rect(x, y, width, height);
 	context.fillStyle = color;
 	context.fill();
+	context.closePath();
+}
+
+function makeTriangle(topX, topY, leftX, leftY, rightX, rightY, color) {
+	context.beginPath();
+	// top point
+	context.moveTo(topX, topY);
+	// Bottom Right
+	context.lineTo(rightX, rightY);
+	// Bottom Left
+	context.lineTo(leftX, leftY);
+	context.closePath();
+	context.fillStyle = color;
+	context.fill();
+	context.closePath();
 }
 
 var drawPath = {
@@ -115,24 +119,27 @@ var drawPath = {
 	 * Draw a triangle on canvas.
 	 * @param  {Object} specifications Specifications from designTower.
 	 */
-	triangle: function makeTriangle(specifications) {
-		context.beginPath();
-		context.moveTo(specifications.x + specifications.width / 2, specifications.y + specifications.depth); // Top Corner
-		context.lineTo(specifications.x + specifications.width, specifications.y + specifications.height); // Bottom Right
-		context.lineTo(specifications.x + specifications.depth, specifications.y + specifications.height); // Bottom Left
-		context.closePath();
-		context.fillStyle = specifications.color;
-		context.fill();
+	triangle: function(specifications) {
+		var x = specifications.x;
+		var y = specifications.y;
+		var depth = specifications.depth;
+		var width = specifications.width;
+		var height = specifications.height;
+		var halfWidth = width / 2;
+		var colors = specifications.colors;
+		makeTriangle(halfWidth + x, y, x, y + height, x + halfWidth, y + height + depth, color(colors[0].red, colors[0].green, colors[0].blue));
+		makeTriangle(halfWidth + x - 1, y, halfWidth + x - 1, y + height + depth, x + width, y + height, color(colors[1].red, colors[1].green, colors[1].blue));
 	},
 	/**
 	 * Draw a rectangle on canvas.
 	 * @param  {Object} specifications Specifications from designTower.
 	 */
-	rectangle: function makeRectangle(specifications) {
+	rectangle: function(specifications) {
+		var colors = specifications.colors;
 		// main tower
-		makeSquare(specifications.x, specifications.y + (specifications.depth / 2), specifications.width, specifications.height, specifications.color);
+		makeSquare(specifications.x, specifications.y + (specifications.depth / 2), specifications.width, specifications.height, color(colors[0].red, colors[0].green, colors[0].blue));
 		// tower roof
-		makeSquare(specifications.x, specifications.y, specifications.width, specifications.depth, color(darken(specifications.red), darken(specifications.green), darken(specifications.blue)));
+		makeSquare(specifications.x, specifications.y, specifications.width, specifications.depth, color(colors[1].red, colors[1].green, colors[1].blue));
 	}
 };
 
@@ -180,6 +187,7 @@ function findNewBaseCoordinates() {
  */
 
 function reachBase(enemy) {
+	removeMoney(enemy.health);
 	damage(base, enemy.health);
 	if (base.health < 1) {
 		destroyStructure(base.x, base.y);
@@ -205,7 +213,12 @@ function destroyStructure(x, y) {
 	var towerX = centerSymmetrical(x, tileSize);
 	var startX = towerX + HALF_TILE_SIZE - (thisTower.width / 2);
 	var endX = towerX + (thisTower.width);
-	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], [thisTower.red, thisTower.green, thisTower.blue], true);
+	var colors = [];
+	for (var index = 0; index < thisTower.colors.length; index++) {
+		var thisColor = thisTower.colors[index];
+		colors.push(color(thisColor.red, thisColor.green, thisColor.blue))
+	}
+	makeParticles(20, 50, [2, 7], [-2, 2, -2, 2], [startX, startY, endX, endY], colors, true);
 	obstacles[x][y] = 0;
 }
 

@@ -23,12 +23,4 @@ function checkAffordable() {
 			children[i][CLASS_LIST].add("building");
 		}
 	}
-	// $("#buildmenu").children().each(function() {
-	// 	$(this).removeClass().addClass("container");
-	// 	var cost = $(this).find("[COST]").text().substring(1);
-	// 	if (parseInt(cost, 10) > parseInt(money, 10)) {
-	// 		$(this).addClass("expensive");
-	// 	}
-	// });
-	// $(".money").text(money);
 }

@@ -7,6 +7,8 @@ function drawEnemyPath() {
 			context.fillStyle = "rgba(100,100,100,0.5)";
 			context.fillRect(thisPath.x * tileSize, thisPath.y * tileSize, tileSize, tileSize);
 			context.fill();
+			context.closePath();
+
 		}
 	}
 }
@@ -22,6 +24,7 @@ function drawTempPath() {
 			context.fillStyle = "rgba(0,255,0,0.5)";
 			context.fillRect(thisPath.x * tileSize, thisPath.y * tileSize, tileSize, tileSize);
 			context.fill();
+			context.closePath();
 		}
 	}
 }

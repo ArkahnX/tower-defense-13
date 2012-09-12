@@ -1,33 +1,31 @@
-function makeTilePart(ammount, tileSize, colorStart, colorEnd, Red, Green, Blue) {
-	var i, num;
-	var x = [];
-	var y = [];
-	for (var e = 0; e < ammount; e++) {
-		x[PUSH](random(0, tileSize - 1, ammount));
-		y[PUSH](random(0, tileSize - 1, ammount));
-	}
-	for (i = 0; i < ammount; i++) {
-		num = random(colorStart, colorEnd);
-		context.fillStyle = RGB + round(num / Red) + "," + round(num / Green) + "," + round(num / Blue) + ")";
-		context.fillRect(x[i], y[i], 1, 1);
-	}
-}
+/**
+ * Generate a tile with three random variations.
+ * @param  {String} name      Tile name, used for player reference.
+ * @param  {String} type      Tile type. Should be [path, fast, slow]
+ * @param  {Number} priority  How likely is this tile to appear.
+ * @param  {Number} speed     The speed at which enemies can cross this tile.
+ * @param  {Array}  pixelData See the return result of pixelData().
+ * @return {Object}           Compiled tile.
+ */
 
-function makeTile(name, type, priority, speed, dataArray, tileSize) {
+function makeTile(name, type, priority, speed, pixelData) {
 	var images = [];
-	canvas[WIDTH] = 32;
-	canvas[HEIGHT] = 32;
-	for (var i = 0; i < 3; i++) {
-		num = random(dataArray[0][1], dataArray[0][2]);
-		context.fillStyle = RGB + round(num / dataArray[0][3]) + "," + round(num / dataArray[0][4]) + "," + round(num / dataArray[0][5]) + ")";
+	resetCanvas(32, 32);
+	var uniqueTiles = 3;
+	/**
+	 * Loop to make unique tiles.
+	 */
+	for (var i = 0; i < uniqueTiles; i++) {
+		var colorCode = random(pixelData[0].fromColor, pixelData[0].toColor);
+		context.fillStyle = color(round(colorCode / pixelData[0].redFactor), round(colorCode / pixelData[0].greenFactor), round(colorCode / pixelData[0].blueFactor));
 		context.fillRect(0, 0, tileSize, tileSize);
-		for (var e = 0; e < dataArray[LENGTH]; e++) {
-			makeTilePart(dataArray[e][0], tileSize, dataArray[e][1], dataArray[e][2], dataArray[e][3], dataArray[e][4], dataArray[e][5]);
+		for (var e = 0; e < pixelData[LENGTH]; e++) {
+			drawPixels(pixelData[e]);
 		}
 		var image = new Image();
 		image[SRC] = canvas[TO_DATA_URL]();
 		images[PUSH](image);
-		context.clearRect(0, 0, canvas[WIDTH], canvas[HEIGHT]);
+		resetCanvas(canvasWidth * tileSize, canvasHeight * tileSize);
 	}
 	var thisId = id;
 	id++;
@@ -35,8 +33,11 @@ function makeTile(name, type, priority, speed, dataArray, tileSize) {
 	canvas[HEIGHT] = canvasHeight * tileSize;
 	return {
 		name: name,
-		is: type,
-		imageList: images,
+		is: "terrain",
+		type: type,
+		x: 0,
+		y: 0,
+		image: images,
 		images: images[LENGTH],
 		priority: priority,
 		id: thisId,
@@ -44,34 +45,77 @@ function makeTile(name, type, priority, speed, dataArray, tileSize) {
 	};
 }
 
-function setTile(tile, watch) {
-	for (var attr in tile) {
-		if (attr === watch) {
-			this.image = tile[watch][random(0, tile.images - 1)];
-		} else {
-			this[attr] = tile[attr];
-		}
+/**
+ * Draw pixel noise on canvas.
+ * @param  {Object} data Noise data to use.
+ */
+
+function drawPixels(data) {
+	var i, colorCode;
+	var x = 0;
+	var y = 0;
+	for (i = 0; i < data.pixels; i++) {
+		x = random(0, tileSize - 1);
+		y = random(0, tileSize - 1);
+		colorCode = random(data.fromColor, data.toColor);
+		context.fillStyle = color(round(colorCode / data.redFactor), round(colorCode / data.greenFactor), round(colorCode / data.blueFactor));
+		context.fillRect(x, y, 1, 1);
 	}
-	return this;
 }
 
-function makeSprites() {
-	tiles[PUSH](makeTile("grass", PATH, 7, 1, [
-		[32 * 32, 175, 230, 1.3, 1, 2],
-		[50, 200, 245, 1, 1.3, 1.5],
-		[100, 125, 175, 2, 1, 2]
-	], 32));
-	tiles[PUSH](makeTile("darkGrass", PATH, 7, 1, [
-		[32 * 32, 150, 205, 1.3, 1, 2],
-		[50, 175, 220, 1, 1.3, 1.5],
-		[100, 100, 150, 2, 1, 2]
-	], 32));
-	tiles[PUSH](makeTile("road", "speed", 4, 0.5, [
-		[32 * 32, 0, 0, 1, 1, 1],
-		[600, 0, 50, 1, 1, 1]
-	], 32));
-	tiles[PUSH](makeTile("water", "slow", 3, 1.5, [
-		[32 * 32, 100, 200, 1.5, 1.5, 1],
-		[600, 100, 200, 1.5, 1.5, 1]
-	], 32));
+/**
+ * Map array values to object names for easier reference.
+ * @param  {Array}  dataArray Array of data.
+ * @return {Array}            Array of pixelData objects.
+ */
+
+function pixelData(dataArray) {
+	var list = [];
+	for (var i = 0; i < dataArray.length; i++) {
+		list.push({
+			pixels: dataArray[i][0],
+			fromColor: dataArray[i][1],
+			toColor: dataArray[i][2],
+			redFactor: dataArray[i][3],
+			greenFactor: dataArray[i][4],
+			blueFactor: dataArray[i][5]
+		});
+	}
+	return list;
+}
+
+/**
+ * Function to manage cloning tile image. Refer to functions.js/cloneData.
+ * @param  {Object} tile      Tile that is being cloned.
+ * @param  {String} attribute Attribute that was targetted
+ * @param  {Array}  other     Variables added when called.
+ * @return {Image}            Changes the tile[attribute] to the returned value.
+ */
+
+function tileCloneImage(tile, attribute, other) {
+	return tile[attribute][random(0, tile.images - 1)];
+}
+
+/**
+ * Function to manage cloning tile X value. Refer to functions.js/cloneData.
+ * @param  {Object} tile      Tile that is being cloned.
+ * @param  {String} attribute Attribute that was targetted
+ * @param  {Array}  other     Variables added when called.
+ * @return {Number}           Changes the tile[attribute] to the returned value.
+ */
+
+function tileCloneX(tile, attribute, other) {
+	return other[0];
+}
+
+/**
+ * Function to manage cloning tile Y value. Refer to functions.js/cloneData.
+ * @param  {Object} tile      Tile that is being cloned.
+ * @param  {String} attribute Attribute that was targetted
+ * @param  {Array}  other     Variables added when called.
+ * @return {Number}           Changes the tile[attribute] to the returned value.
+ */
+
+function tileCloneY(tile, attribute, other) {
+	return other[1];
 }

@@ -186,6 +186,21 @@ function modulus(num, size) {
 	return (num - mod) / size;
 };
 
-function randomFloat(from, to) {
-	return (WINDOW[MATH].random() * (to - from + 1)) + from;
+function randomFloat(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
+function rgb(red, green, blue) {
+	return {
+		red: red,
+		green: green,
+		blue: blue
+	};
+}
+
+function area(width, height, depth) {
+	if (depth) {
+		return (2*width*height) + (2*height*depth) + (2*width*depth);
+	}
+	return width*height;
 }
