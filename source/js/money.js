@@ -1,12 +1,12 @@
 var money = 0;
 
 function addMoney(ammount) {
-	money += ammount;
+	money += round(ammount);
 	checkAffordable();
 }
 
 function removeMoney(ammount) {
-	money -= ammount;
+	money -= round(ammount);
 	checkAffordable();
 }
 
