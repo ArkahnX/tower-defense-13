@@ -109,7 +109,6 @@ function keyListener() {
 }
 
 function keyPressed(event) {
-	console.log(event.keyCode)
 	var keyCode = 0;
 	if (event.keyCode - 48 >= 1 && event.keyCode - 48 <= 5) {
 		keyCode = event.keyCode - 48;

@@ -17,7 +17,7 @@ function loadAudio(url) {
 	request.onload = function() {
 		context.decodeAudioData(request.response, function(buffer) {
 			audioBuffer = buffer;
-		}, onError);
+		});
 	}
 	request.send();
 }
