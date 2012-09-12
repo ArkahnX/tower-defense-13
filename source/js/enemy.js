@@ -285,7 +285,7 @@ function destroyEnemy(enemy, index) {
 	var y = enemy.pixelY;
 	var modifier = enemy.size / 2;
 	makeParticles(floor((enemy.health / enemy.fullHealth) * enemy.size)+1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
-	addMoney((enemy.fullHealth * 10)/wave)
+	addMoney((enemy.fullHealth * 10)/(wave/2))
 	onScreen.splice(index, 1);
 }
 
