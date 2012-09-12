@@ -29,8 +29,15 @@ function mapLoop() {
 	var x, y, i, e;
 	for (x = 0; x < map[LENGTH]; x++) {
 		for (y = 0; y < map[x][LENGTH]; y++) {
-			for (i = 0; i < perTileFunction[LENGTH]; i++) {
-				perTileFunction[i](map[x][y], obstacles[x][y]);
+			for (i = 0; i < tileFunction[LENGTH]; i++) {
+				tileFunction[i](map[x][y], obstacles[x][y]);
+			}
+		}
+	}
+	for (x = 0; x < map[LENGTH]; x++) {
+		for (y = 0; y < map[x][LENGTH]; y++) {
+			for (i = 0; i < afterTileFunction[LENGTH]; i++) {
+				afterTileFunction[i](map[x][y], obstacles[x][y]);
 			}
 		}
 	}

@@ -16,7 +16,8 @@ var wave = 1;
 var waveLength = 0;
 var timeBeforeNextWave = 0;
 
-var perTileFunction = [];
+var tileFunction = [];
+var afterTileFunction = [];
 var perFrameFunction = [];
 var map = [];
 var obstacles = [];

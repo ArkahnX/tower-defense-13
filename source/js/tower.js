@@ -56,7 +56,7 @@ function designTower(weapon, dimentions, colors) {
 	var height = random(dimentions[1][0], dimentions[1][1]);
 	var depth = random(dimentions[2][0], dimentions[2][1]);
 	var path = "rectangle";
-	if (weapon === "beam" || weapon === "spread") {
+	if (weapon !== "none") {
 		path = "triangle";
 	}
 	return {
