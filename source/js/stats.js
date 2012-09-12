@@ -26,8 +26,8 @@ function setScore() {
 			}
 		}
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
-		document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
 		if (selectedTower.name !== "Base") {
+			document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
 			document[GET_ELEMENT_BY_ID]("sell").removeAttribute("disabled");
 			addEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
 		}

@@ -1,5 +1,11 @@
 function hideLoading() {
+	document[GET_ELEMENT_BY_ID]("loadingText")[CLASS_LIST].add("hidden")
+	document[GET_ELEMENT_BY_ID]("message")[CLASS_LIST].remove("hidden")
+}
+
+function startGame() {
 	document[GET_ELEMENT_BY_ID]("loading")[CLASS_LIST].add("hidden")
+	animate();
 }
 
 function bindBuyClicks() {
@@ -96,4 +102,27 @@ function drawCursor() {
 	context.strokeRect(x, y, 32, 32);
 	context.strokeStyle = "#FFF";
 	context.strokeRect(x - 2, y - 2, 36, 36);
+}
+
+function keyListener() {
+	addEvent(document, "keydown", keyPressed)
+}
+
+function keyPressed(event) {
+	doNothing(event);
+	var keyCode = 0;
+	if (event.keyCode-48 >= 1 && event.keyCode-48 <= 5) {
+		keyCode = event.keyCode-48;
+	} else if (event.keyCode-96 >= 1 && event.keyCode-96 <= 5) {
+		keyCode = event.keyCode-96;
+	}
+	if (keyCode > 0) {
+		var containers = document[QUERY_SELECTOR_ALL](".container");
+		var container =containers[keyCode-1]
+		if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
+			selectedTower = null;
+			bought = container[QUERY_SELECTOR]("span").innerText;
+			removeMoney(getAll(towers, NAME, bought)[0].cost);
+		}
+	}
 }

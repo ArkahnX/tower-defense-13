@@ -59,7 +59,7 @@ function setup() {
 		[20, 30],
 		[10, 15]
 	], [rgb(225, 0, 0), rgb(darken(225), 0, 0)]));
-	towers[PUSH](defineTower("Cannon", "cannon", "basic", 7, 50, 10, 10, 15, [
+	towers[PUSH](defineTower("Cannon", "cannon", "basic", 6, 50, 10, 10, 15, [
 		[10, 15],
 		[10, 15],
 		[5, 10]
@@ -70,14 +70,14 @@ function setup() {
 		[10, 15]
 	], [rgb(125, 0, 0), rgb(darken(125), darken(125), 0)]));
 	towers[PUSH](defineTower("Explode", "explode", "basic", 5.5, 500, 10, 50, 20, [
-		[25, 30],
-		[25, 30],
-		[20, 25]
-	], [rgb(125, 0, 0), rgb(0, darken(125), darken(125))]));
-	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 1000, 10, 0, 20, [
 		[20, 25],
 		[20, 25],
 		[15, 20]
+	], [rgb(125, 0, 0), rgb(0, darken(125), darken(125))]));
+	towers[PUSH](defineTower("Gatling", "beam", "basic", 5, 1000, 10, 0, 20, [
+		[25, 30],
+		[25, 30],
+		[20, 25]
 	], [rgb(125, 0, 0), rgb(0, 0, 125)]));
 
 	tiles.push(makeTile("grass", PATH, 7, 1, pixelData([
@@ -112,7 +112,8 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 	addEvent(canvas, "mousemove", moveHandler);
 	addEvent(canvas, "mousedown", clickHandler);
 	addEvent(canvas, "contextmenu", doNothing);
-	animate();
+	addEvent(document.getElementById("startGame"), "click", startGame)
 	hideLoading();
+	keyListener();
 	// spriteTest();
 });
