@@ -38,12 +38,16 @@ function setup() {
 				context.strokeStyle = "rgba(0,0,0,0.2)";
 				context.stroke();
 			}
+		}
+	});
+	afterTowerFunction.push(function(tile, tower) {
+		if (tower !== 0) {
 			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerTower(tower.y, tower.height));
 			if (tower.weapon.name) {
 				aim(tower);
 			}
 		}
-	})
+	});
 	/**
 	 * Set up functions that run once per frame. Refer to map.js/mapLoop.
 	 */

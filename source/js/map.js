@@ -41,6 +41,13 @@ function mapLoop() {
 			}
 		}
 	}
+	for (x = 0; x < map[LENGTH]; x++) {
+		for (y = 0; y < map[x][LENGTH]; y++) {
+			for (i = 0; i < afterTowerFunction[LENGTH]; i++) {
+				afterTowerFunction[i](map[x][y], obstacles[x][y]);
+			}
+		}
+	}
 	for (e = 0; e < perFrameFunction[LENGTH]; e++) {
 		perFrameFunction[e]();
 	}

@@ -45,6 +45,7 @@ var moneySpent = 0;
 
 var tileFunction = [];
 var afterTileFunction = [];
+var afterTowerFunction = [];
 var perFrameFunction = [];
 var map = [];
 var obstacles = [];
