@@ -167,7 +167,6 @@ function findNewBaseCoordinates() {
  */
 
 function reachBase(enemy) {
-	removeMoney(enemy.health);
 	damage(base, enemy.health);
 	if (base.health < 1) {
 		destroyStructure(base.x, base.y);

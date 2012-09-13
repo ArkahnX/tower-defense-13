@@ -269,7 +269,7 @@ function moveEnemies() {
 		}
 		if (base && enemy.x === base.x && enemy.y === base.y) {
 			reachBase(enemy);
-			destroyEnemy(enemy, index);
+			destroyEnemy(enemy, index, true);
 		}
 	});
 }
@@ -280,12 +280,14 @@ function moveEnemies() {
  * @param  {Number} index Index to use when splicing it from onScreen.
  */
 
-function destroyEnemy(enemy, index) {
+function destroyEnemy(enemy, index, noMoney) {
 	var x = enemy.pixelX;
 	var y = enemy.pixelY;
 	var modifier = enemy.size / 2;
 	makeParticles(floor((enemy.health / enemy.fullHealth) * enemy.size) + 1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
-	addMoney((enemy.fullHealth * 10) / (wave))
+	if (!noMoney) {
+		addMoney((enemy.fullHealth * 10) / (wave));
+	}
 	onScreen.splice(index, 1);
 }
 
