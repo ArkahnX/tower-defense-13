@@ -20,6 +20,12 @@ function setup() {
 	});
 	afterTileFunction.push(function(tile, tower) {
 		if (tower !== 0) {
+			if (typeof tower.weapon !== "string") {
+				context.beginPath();
+				context.arc(centerSymmetrical(tower.x, 1), centerSymmetrical(tower.y, 1), tower.weapon.range * 32, 0, 2 * Math.PI, false);
+				context.fillStyle = "rgba(255,255,255,0.1)";
+				context.fill();
+			}
 			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerTower(tower.y, tower.height));
 			if (tower.weapon.name) {
 				aim(tower);
@@ -57,8 +63,6 @@ function setup() {
 			if (advanceWave) {
 				wavesSkipped++;
 				advanceWave = false;
-			} else {
-				wavesCompleted++;
 			}
 			timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
 			wave++;
@@ -183,7 +187,7 @@ function setGameStats() {
 		this.textContent = baseRepaired;
 	});
 	forEach(document.querySelectorAll(".wavesCompleted"), function() {
-		this.textContent = wave-wavesSkipped;
+		this.textContent = wave - wavesSkipped;
 	});
 	forEach(document.querySelectorAll(".moneySpent"), function() {
 		this.textContent = moneySpent;

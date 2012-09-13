@@ -121,6 +121,19 @@ function drawCursor() {
 	context.strokeRect(x, y, 32, 32);
 	context.strokeStyle = "#FFF";
 	context.strokeRect(x - 2, y - 2, 36, 36);
+	if (selectedTower !== null) {
+		var x = selectedTower.x * 32;
+		var y = selectedTower.y * 32;
+		context.strokeStyle = "#FFF";
+		context.lineWidth = 2;
+		context.strokeRect(x, y, 32, 32);
+		if (typeof selectedTower.weapon !== "string") {
+			context.beginPath();
+			context.arc(centerSymmetrical(selectedTower.x, 1), centerSymmetrical(selectedTower.y, 1), selectedTower.weapon.range*32, 0, 2 * Math.PI, false);
+			context.fillStyle = "rgba(255,255,255,0.3)";
+			context.fill();
+		}
+	}
 }
 
 function keyListener() {
