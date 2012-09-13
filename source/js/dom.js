@@ -129,9 +129,19 @@ function drawCursor() {
 		context.strokeRect(x, y, 32, 32);
 		if (typeof selectedTower.weapon !== "string") {
 			context.beginPath();
-			context.arc(centerSymmetrical(selectedTower.x, 1), centerSymmetrical(selectedTower.y, 1), selectedTower.weapon.range*32, 0, 2 * Math.PI, false);
+			context.arc(centerSymmetrical(selectedTower.x, 1), centerSymmetrical(selectedTower.y, 1), selectedTower.weapon.range * 32, 0, 2 * Math.PI, false);
 			context.fillStyle = "rgba(255,255,255,0.3)";
 			context.fill();
+			var radius = (selectedTower.weapon.range * 32) - 1;
+			var startAngle = 4 * Math.PI;
+			var endAngle = 2 * Math.PI;
+
+			context.beginPath();
+			context.arc(centerSymmetrical(selectedTower.x, 1), centerSymmetrical(selectedTower.y, 1), radius, startAngle, endAngle, false);
+			context.lineWidth = 2;
+			// line color
+			context.strokeStyle = "rgba(0,0,0,0.3)";
+			context.stroke();
 		}
 	}
 }

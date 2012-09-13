@@ -39,14 +39,42 @@ function drawBullets() {
 	}
 }
 
+function distance(object1, object2) {
+	var dx = object1.x - object2.x;
+	var dy = object1.y - object2.y;
+	return dx + dy;
+}
+
+function closest(list) {
+	if (list[0]) {
+		var closest = list[0];
+		var closestDistance = distance(base, list[0]);
+		for (var i = 1; i < list.length; i++) {
+			if (list[i] && distance(base, list[i]) < closestDistance) {
+				closest = list[i];
+				closestDistance = distance(base, list[i]);
+			}
+		}
+		return closest;
+	}
+	return false;
+}
+
 function aim(tower) {
 	if (tower.weapon.timer >= tower.weapon.delay) {
+		var listOfTargets = [];
+		var centerX = centerSymmetrical(tower.x, 1);
+		var centerY = centerSymmetrical(tower.y, 1, tower.size) - tower.height;
+		var modifier = tower.weapon.range * tileSize;
 		forEach(onScreen, function(index) {
 			var enemy = this;
-			var centerX = centerSymmetrical(tower.x, 1);
-			var centerY = centerSymmetrical(tower.y, 1, tower.size) - tower.height;
-			var modifier = tower.weapon.range * tileSize;
-			if (collision(centerX, centerY, modifier, enemy.pixelX, enemy.pixelY, enemy.size / 2) && tower.weapon.timer >= tower.weapon.delay) {
+			if (collision(centerX, centerY, modifier, enemy.pixelX, enemy.pixelY, enemy.size / 2)) {
+				listOfTargets.push(enemy);
+			}
+		});
+		if (tower.weapon.timer >= tower.weapon.delay) {
+			var enemy = closest(listOfTargets);
+			if (enemy) {
 				tower.weapon.timer = 0;
 				var targetX = centerX - enemy.pixelX;
 				var targetY = centerY - enemy.pixelY;
@@ -54,9 +82,8 @@ function aim(tower) {
 				var dx = (tower.weapon.speed / 60) * Math.sin(angle);
 				var dy = (tower.weapon.speed / 60) * Math.cos(angle);
 				fireWeapon(tower, centerX, centerY, dx, dy, targetX, targetY);
-				// makeBullet(tower.weapon, x, y, 50, 3, tower.speed, centerX, centerY, dx, dy, red, blue, green, 1, 1);
 			}
-		});
+		}
 	}
 	tower.weapon.timer++;
 }

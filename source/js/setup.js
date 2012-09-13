@@ -22,9 +22,21 @@ function setup() {
 		if (tower !== 0) {
 			if (typeof tower.weapon !== "string") {
 				context.beginPath();
-				context.arc(centerSymmetrical(tower.x, 1), centerSymmetrical(tower.y, 1), tower.weapon.range * 32, 0, 2 * Math.PI, false);
-				context.fillStyle = "rgba(255,255,255,0.1)";
+				var x = centerSymmetrical(tower.x, 1);
+				var y = centerSymmetrical(tower.y, 1);
+				context.arc(x,y, tower.weapon.range * 32, 0, 2 * Math.PI, false);
+				context.fillStyle = "rgba(255,255,255,0.2)";
 				context.fill();
+				var radius = (tower.weapon.range * 32)-1;
+				var startAngle = 4 * Math.PI;
+				var endAngle = 2 * Math.PI;
+
+				context.beginPath();
+				context.arc(x, y, radius, startAngle, endAngle, false);
+				context.lineWidth = 2;
+				// line color
+				context.strokeStyle = "rgba(0,0,0,0.2)";
+				context.stroke();
 			}
 			context.drawImage(tower.image, centerSymmetrical(tower.x, tower.width), centerTower(tower.y, tower.height));
 			if (tower.weapon.name) {
