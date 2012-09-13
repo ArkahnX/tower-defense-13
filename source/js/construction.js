@@ -110,6 +110,7 @@ function fillBuildMenu() {
 	}
 	var structures = [];
 	for (var i = 0; i < towers[LENGTH]; i++) {
+		var item = towers[i];
 		var expensive = "";
 		var buildClass = "";
 		if (item.cost > money) {
@@ -118,7 +119,6 @@ function fillBuildMenu() {
 		if (building()) {
 			buildClass = " building";
 		}
-		var item = towers[i];
 		var name = START_SPAN + ">" + item[NAME] + CLOSE_SPAN;
 		var cost = START_SPAN + " class='cost'>$" + item.cost + CLOSE_SPAN;
 		var image = "<img src='" + item.image.src + "'>";
