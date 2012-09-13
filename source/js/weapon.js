@@ -36,14 +36,8 @@ function mapUpgrade(tower) {
 				return amount;
 			}
 		}
-		if (tower.weapon.name === "cannon") {
-			var speedFunction = function(speed) {
-				return speed + (tower.level);
-			}
-		} else {
-			var speedFunction = function(speed) {
-				return speed;
-			}
+		var speedFunction = function(speed) {
+			return speed;
 		}
 		tower.weapon = upgradeWeapon(tower.weapon, {
 			amount: amountFunction,
@@ -59,12 +53,9 @@ function mapUpgrade(tower) {
 			damage: function(damage) {
 				return damage + tower.level;
 			},
-			level: function(level) {
-				return level + 1;
-			},
 			delay: function(delay) {
-				if(delay-level > -1) {
-					return delay-level;
+				if (delay - tower.level > -1) {
+					return delay - tower.level;
 				}
 				return 0;
 			},

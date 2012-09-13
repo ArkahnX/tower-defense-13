@@ -21,7 +21,7 @@ function setScore() {
 		var stats = [];
 		stats.push("Name" + ": " + preStart + selectedTower.name + preEnd);
 		stats.push("Level" + ": " + preStart + selectedTower.level + preEnd);
-		stats.push("Health" + ": " + preStart + (selectedTower.health/selectedTower.fullHealth*100)+"%"+ preEnd);
+		stats.push("Health" + ": " + preStart + (selectedTower.health / selectedTower.fullHealth * 100) + "%" + preEnd);
 		stats.push("Weapon Stats:");
 		stats.push("Name" + ": " + preStart + selectedTower.weapon.name + preEnd);
 		stats.push("Range" + ": " + preStart + selectedTower.weapon.range + preEnd);
@@ -33,7 +33,7 @@ function setScore() {
 		if (selectedTower.name !== "Base") {
 			document[GET_ELEMENT_BY_ID]("sell").removeAttribute("disabled");
 			addEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
-			document[GET_ELEMENT_BY_ID]("upgrade").value = "Upgrade Tower ($"+upgradeCost(selectedTower)+")";
+			document[GET_ELEMENT_BY_ID]("upgrade").value = "Upgrade Tower ($" + upgradeCost(selectedTower) + ")";
 			if (canUpgrade()) {
 				document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
 				addEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);

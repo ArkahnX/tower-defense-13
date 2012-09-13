@@ -12,6 +12,7 @@ function drawEnemyPath() {
 		}
 	}
 }
+
 function drawTempPath() {
 	for (i = 0; i < enemies[LENGTH]; i++) {
 		var thisEnemy = enemies[i];

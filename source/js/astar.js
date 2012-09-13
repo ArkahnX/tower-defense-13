@@ -4,7 +4,7 @@
 // Implements the astar search algorithm in javascript using a binary heap.
 var astar = {
 	init: function(grid) {
-		for (var x = 0, xl = grid[LENGTH];x < xl; x++) {
+		for (var x = 0, xl = grid[LENGTH]; x < xl; x++) {
 			for (var y = 0, yl = grid[x][LENGTH]; y < yl; y++) {
 				var node = grid[x][y];
 				node.f = 0;
@@ -106,7 +106,7 @@ var astar = {
 
 		// East
 		if (grid[x + 1] && grid[x + 1][y]) {
-			ret[PUSH](grid[x+ 1][y]);
+			ret[PUSH](grid[x + 1][y]);
 		}
 
 		// South

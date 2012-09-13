@@ -11,7 +11,7 @@ function drawBullets() {
 				var x = enemy.pixelX;
 				var y = enemy.pixelY;
 				var modifier = enemy.size / 2;
-				makeParticles(floor((thisBullet.damage/enemy.fullHealth)*enemy.size)+1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
+				makeParticles(floor((thisBullet.damage / enemy.fullHealth) * enemy.size) + 1, 60, [2, 7], [-2, 2, -2, 2], [x, y - modifier, x + modifier, y + modifier], [color(enemy.red, enemy.green, enemy.blue), color(darken(enemy.red), darken(enemy.green), darken(enemy.blue))]);
 			} else {
 				context.beginPath();
 				context.fillStyle = "rgba(" + thisBullet.red + "," + thisBullet.green + "," + thisBullet.blue + "," + (thisBullet.life / thisBullet.maxLife) + ")";
@@ -44,7 +44,7 @@ function aim(tower) {
 		forEach(onScreen, function(index) {
 			var enemy = this;
 			var centerX = centerSymmetrical(tower.x, 1);
-			var centerY = centerSymmetrical(tower.y, 1, tower.size)-tower.height;
+			var centerY = centerSymmetrical(tower.y, 1, tower.size) - tower.height;
 			var modifier = tower.weapon.range * tileSize;
 			if (collision(centerX, centerY, modifier, enemy.pixelX, enemy.pixelY, enemy.size / 2) && tower.weapon.timer >= tower.weapon.delay) {
 				tower.weapon.timer = 0;
@@ -97,23 +97,23 @@ function makeBullet(type, targetX, targetY, life, radius, speed, x, y, dx, dy, r
 		}
 	} else if (type === "beam") {
 		// for (var i = 0; i < 5; i++) {
-			bullets.push({
-				radius: radius,
-				x: x,
-				y: y,
-				dx: randomFloat(dx - (dx / 2), dx + (dx / 2)),
-				dy: randomFloat(dy - (dy / 2), dy + (dy / 2)),
-				red: red,
-				green: green,
-				blue: blue,
-				alpha: alpha,
-				life: 1000,
-				maxLife: 100,
-				speed: 20,
-				targetX: targetX,
-				targetY: targetY,
-				damage: 1
-			});
+		bullets.push({
+			radius: radius,
+			x: x,
+			y: y,
+			dx: randomFloat(dx - (dx / 2), dx + (dx / 2)),
+			dy: randomFloat(dy - (dy / 2), dy + (dy / 2)),
+			red: red,
+			green: green,
+			blue: blue,
+			alpha: alpha,
+			life: 1000,
+			maxLife: 100,
+			speed: 20,
+			targetX: targetX,
+			targetY: targetY,
+			damage: 1
+		});
 		// }
 	} else if (type === "explode") {
 		for (var i = 0; i < 25; i++) {

@@ -27,6 +27,7 @@ body {
 
 	-webkit-box-shadow: 3px 0 3px #111;
 	box-shadow: 3px 0 3px #111;
+	overflow:scroll;
 }
 
 canvas {
@@ -37,7 +38,7 @@ canvas {
 
 #loading {
 	z-index: 3;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -65,8 +66,6 @@ canvas {
 
 #loading .hidden {
 	color: black;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: alpha(opacity=0);
 	opacity: 0;
 }
 
@@ -146,7 +145,7 @@ ul {
 
 .screen {
 	z-index: 3;
-	position: absolute;
+	position: fixed;
 	left: 0;
 	right: 0;
 	background: black;

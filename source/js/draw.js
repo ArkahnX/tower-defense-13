@@ -4,7 +4,6 @@ function animate() {
 }
 
 function draw() {
-	resetCanvas(canvasWidth*tileSize, canvasHeight*tileSize);
+	resetCanvas(canvasWidth * tileSize, canvasHeight * tileSize);
 	mapLoop();
 }
-

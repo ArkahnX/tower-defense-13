@@ -119,4 +119,3 @@ function tileCloneX(tile, attribute, other) {
 function tileCloneY(tile, attribute, other) {
 	return other[1];
 }
-
