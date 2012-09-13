@@ -148,17 +148,6 @@ function centerSymmetrical(position, size) {
 	return round(position * tileSize + (HALF_TILE_SIZE) - (size / 2));
 }
 
-/**
- * Random value between two numbers.
- * @param  {Number} from Minimum number.
- * @param  {Number} to   Maximum number.
- * @return {Number}      Floored random number.
- */
-
-function random(from, to) {
-	return floor(WINDOW[MATH].random() * (to - from + 1)) + from;
-}
-
 function getWeightedRandom() {
 	var sum_of_weight = 0;
 	for (var i = 0; i < tiles[LENGTH]; i++) {

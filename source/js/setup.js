@@ -91,7 +91,7 @@ function setup() {
 	designWeapon("spread", 5, 20, 1, 50, 3, 25, 3, rgb(random(0, 100), random(0, 100), random(100, 255)), function(direction) {
 		return randomFloat(direction - (direction / 2), direction + (direction / 2));
 	});
-	designWeapon("gatling", 1, 15, 1, 1, 4, 25, 3, rgb(random(0, 100), random(100, 255), random(0, 100)), function(direction) {
+	designWeapon("gatling", 1, 15, 1, 3, 4, 50, 3, rgb(random(0, 100), random(100, 255), random(0, 100)), function(direction) {
 		return randomFloat(direction - (direction / 2), direction + (direction / 2));
 	});
 	designWeapon("explode", 25, 120, 5, 50, 5.5, 35, 3, rgb(random(0, 100), random(100, 255), random(100, 255)), function(direction) {

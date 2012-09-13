@@ -1,10 +1,24 @@
+function roundNumber(num, dec) {
+	var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
+	return result;
+}
+/**
+ * Random value between two numbers.
+ * @param  {Number} from Minimum number.
+ * @param  {Number} to   Maximum number.
+ * @return {Number}      Floored random number.
+ */
+
+function random(from, to) {
+	return Math.floor(Math.random() * (to - from + 1)) + from;
+}
 var canvas, context;
 var animationLoop = null;
 
 var base = null;
 var timer = 0;
-var canvasWidth = 20;
-var canvasHeight = 20;
+var canvasWidth = 26;
+var canvasHeight = 26;
 var tileSize = 32;
 var id = 0;
 var bought = null;

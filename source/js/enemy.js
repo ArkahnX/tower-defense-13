@@ -15,7 +15,7 @@ function defineEnemies(levels) {
 			size: size,
 			speed: half * 0.5,
 			health: half * 5,
-			fullHealth: half * 10,
+			fullHealth: half * 5,
 			targetX: null,
 			targetY: null,
 			path: null,
@@ -129,25 +129,25 @@ function makeWaves(levels) {
 	 * Make a wave for each level
 	 */
 	// for (var l = 1; l < levels + 1; l++) {
-		// var wave = [];
-		// var enemyId = 0;
-		/**
-		 * Start large, end small.
-		 */
-		// for (var e = l; e > 0; e--) {
-			/**
-			 * Enemy numbers, based off of previous value.
-			 */
-			// for (var n = 0; n < e * 2; n++) {
-				/**
-				 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
-				 */
-				// var data = cloneData(enemies[enemyId]);
-				// wave.push(data);
-			// }
-			// enemyId = round((l / levels) * (enemies.length - 1));
-		// }
-		// waves.push(wave);
+	// var wave = [];
+	// var enemyId = 0;
+	/**
+	 * Start large, end small.
+	 */
+	// for (var e = l; e > 0; e--) {
+	/**
+	 * Enemy numbers, based off of previous value.
+	 */
+	// for (var n = 0; n < e * 2; n++) {
+	/**
+	 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
+	 */
+	// var data = cloneData(enemies[enemyId]);
+	// wave.push(data);
+	// }
+	// enemyId = round((l / levels) * (enemies.length - 1));
+	// }
+	// waves.push(wave);
 	// }
 	for (var l = 1; l < levels + 1; l++) {
 		var wave = [];
@@ -159,7 +159,7 @@ function makeWaves(levels) {
 			/**
 			 * Enemy numbers, based off of previous value.
 			 */
-			for (var n = 0; n < (e * 2)+15; n++) {
+			for (var n = 0; n < (e * 2) + 15; n++) {
 				/**
 				 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
 				 */
@@ -239,6 +239,23 @@ function drawEnemies() {
 			context.fillRect(enemy.pixelX, enemy.pixelY, enemy.size, enemy.size);
 			context.fill();
 			context.closePath();
+			// draw enemy health
+			var radius = 16 - 1;
+			var fullHealth = enemy.fullHealth*100;
+			var health = enemy.health*100;
+			var healthCalc = ((fullHealth - health) / (fullHealth / 2)) + 1;
+			if (health < fullHealth / 2) {
+				healthCalc = (((fullHealth / 2) - health) / (fullHealth / 2));
+			}
+			var startAngle = healthCalc * Math.PI;
+			var endAngle = 1 * Math.PI;
+
+			context.beginPath();
+			context.arc(enemy.pixelX+(enemy.size/2), enemy.pixelY+(enemy.size/2), radius, startAngle, endAngle, false);
+			context.lineWidth = 2;
+			// line color
+			context.strokeStyle = "rgba(255,0,0,0.4)";
+			context.stroke();
 		}
 	});
 }

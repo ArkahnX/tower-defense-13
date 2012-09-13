@@ -16,8 +16,8 @@ function makeMap(width, height) {
 		}
 	}
 	base = cloneData(towers[0]);
-	base.x = random((width / 2) - 1, (height / 2) + 1);
-	base.y = random((width / 2) - 1, (height / 2) + 1);
+	base.x = floor(random((width / 2) - 1, (height / 2) + 1));
+	base.y = floor(random((width / 2) - 1, (height / 2) + 1));
 	obstacles[base.x][base.y] = base;
 }
 
@@ -55,9 +55,9 @@ function mapLoop() {
 
 function compile(tempX, tempY) {
 	var compiledMap = [];
-	for (var x = 0; x < map.length; x++) {
+	for (var x = 0; x < canvasWidth; x++) {
 		compiledMap[x] = compiledMap[x] || [];
-		for (var y = 0; y < map[x].length; y++) {
+		for (var y = 0; y < canvasHeight; y++) {
 			var tile = cloneData(tiles[map[x][y].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
 			if (obstacles[x][y] && obstacles[x][y][NAME].toLowerCase() !== "base") {
 				tile.speed = 0;
