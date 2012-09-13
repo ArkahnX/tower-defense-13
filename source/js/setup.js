@@ -24,10 +24,10 @@ function setup() {
 				context.beginPath();
 				var x = centerSymmetrical(tower.x, 1);
 				var y = centerSymmetrical(tower.y, 1);
-				context.arc(x,y, tower.weapon.range * 32, 0, 2 * Math.PI, false);
+				context.arc(x, y, tower.weapon.range * 32, 0, 2 * Math.PI, false);
 				context.fillStyle = "rgba(255,255,255,0.2)";
 				context.fill();
-				var radius = (tower.weapon.range * 32)-1;
+				var radius = (tower.weapon.range * 32) - 1;
 				var startAngle = 4 * Math.PI;
 				var endAngle = 2 * Math.PI;
 
@@ -97,6 +97,9 @@ function setup() {
 	designWeapon("explode", 25, 120, 5, 50, 5.5, 35, 3, rgb(random(0, 100), random(100, 255), random(100, 255)), function(direction) {
 		return randomFloat(-2, 2) / 60;
 	});
+	designWeapon("spike", 1, 10, 1, 15, 1, 15, 2, rgb(random(100, 255), random(0, 100), random(100, 255)), function(direction) {
+		return randomFloat(direction - (direction / 2), direction + (direction / 2));
+	});
 	// defineTower(name, weapon, type, cost, health, dimensions, colors)
 	towers[PUSH](defineTower("Base", "none", "special", 1000000, 1000, [
 		[10, 15],
@@ -123,6 +126,11 @@ function setup() {
 		[25, 30],
 		[20, 25]
 	], [rgb(125, 0, 0), rgb(0, 0, 125)]));
+	towers[PUSH](defineTower("Spike", "spike", "trap", 100, 10, [
+		[5, 10],
+		[5, 10],
+		[5, 10]
+	], [rgb(125, 0, 0), rgb(0, 0, 125)]));
 
 	// makeTile(name, type, priority, speed, dataArray, tileSize)
 	tiles.push(makeTile("grass", PATH, 7, 1, pixelData([
@@ -136,14 +144,18 @@ function setup() {
 		[100, 100, 150, 2, 1, 2]
 	])));
 	tiles.push(makeTile("road", "fast", 4, 0.5, pixelData([
-		[32 * 32, 0, 0, 1, 1, 1],
-		[600, 0, 50, 1, 1, 1]
+		[32 * 32, 245, 179, 1.1, 1.1, 0.8],
+		[600, 100, 200, 1, 1, 1.3]
 	])));
 	tiles.push(makeTile("water", "slow", 3, 1.5, pixelData([
 		[32 * 32, 100, 200, 1.5, 1.5, 1],
 		[600, 100, 200, 1.5, 1.5, 1]
 	])));
-	defineEnemies(13);
+	tiles.push(makeTile("wall", "wall", 0, 0, pixelData([
+		[32 * 32, 50, 75, 1.5, 1.5, 1],
+		[600, 0, 50, 1.5, 1.5, 1]
+	])));
+	defineEnemies(14);
 	makeWaves(13);
 	waveLength = waves[0].length;
 }

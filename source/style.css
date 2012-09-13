@@ -27,7 +27,7 @@ body {
 
 	-webkit-box-shadow: 3px 0 3px #111;
 	box-shadow: 3px 0 3px #111;
-	overflow:scroll;
+	overflow: scroll;
 }
 
 canvas {
@@ -66,6 +66,8 @@ canvas {
 
 #loading .hidden {
 	color: black;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
 	opacity: 0;
 }
 
@@ -159,5 +161,15 @@ ul {
 }
 
 .tryAgain {
-	cursor:pointer;
+	cursor: pointer;
+}
+
+.tile {
+	background: green;
+	border: 0;
+}
+
+.tile:disabled {
+	background: red;
+	color: white;
 }

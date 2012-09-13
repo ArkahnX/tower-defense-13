@@ -119,3 +119,43 @@ function tileCloneX(tile, attribute, other) {
 function tileCloneY(tile, attribute, other) {
 	return other[1];
 }
+
+function normalTile(event) {
+	doNothing(event);
+	var number = getWeightedRandom();
+	var tile = cloneData(tiles[random(0, 1)], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [mouse.x, mouse.y]);
+	map[mouse.x][mouse.y] = tile;
+	if (onScreen.length) {
+		getAllPaths(onScreen);
+	}
+}
+
+function fastTile(event) {
+	doNothing(event);
+	var number = getWeightedRandom();
+	var tile = cloneData(tiles[2], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [mouse.x, mouse.y]);
+	map[mouse.x][mouse.y] = tile;
+	if (onScreen.length) {
+		getAllPaths(onScreen);
+	}
+}
+
+function slowTile(event) {
+	doNothing(event);
+	var number = getWeightedRandom();
+	var tile = cloneData(tiles[3], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [mouse.x, mouse.y]);
+	map[mouse.x][mouse.y] = tile;
+	if (onScreen.length) {
+		getAllPaths(onScreen);
+	}
+}
+
+function wallTile(event) {
+	doNothing(event);
+	var number = getWeightedRandom();
+	var tile = cloneData(tiles[4], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [mouse.x, mouse.y]);
+	map[mouse.x][mouse.y] = tile;
+	if (onScreen.length) {
+		getAllPaths(onScreen);
+	}
+}

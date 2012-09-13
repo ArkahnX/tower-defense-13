@@ -153,6 +153,32 @@ function keyListener() {
 
 function keyPressed(event) {
 	var keyCode = 0;
+	if ((event.keyCode === 65 || event.keyCode === 83 || event.keyCode === 68 || event.keyCode === 70) && obstacles[mouse.x][mouse.y] === 0) {
+		if (event.keyCode === 65) {
+			if (money >= 100) {
+				removeMoney(100);
+				normalTile(event);
+			}
+		}
+		if (event.keyCode === 83) {
+			if (money >= 100) {
+				removeMoney(100);
+				slowTile(event);
+			}
+		}
+		if (event.keyCode === 68) {
+			if (money >= 100) {
+				removeMoney(100);
+				fastTile(event);
+			}
+		}
+		if (event.keyCode === 70) {
+			if (money >= 250) {
+				removeMoney(250);
+				wallTile(event);
+			}
+		}
+	}
 	if (event.keyCode - 48 >= 1 && event.keyCode - 48 <= 5) {
 		keyCode = event.keyCode - 48;
 	} else if (event.keyCode - 96 >= 1 && event.keyCode - 96 <= 5) {

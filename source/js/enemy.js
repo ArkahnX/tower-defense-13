@@ -104,11 +104,11 @@ function spawnEnemy() {
 				times++
 				var testMap = compile();
 			} while (testMap[x][y].speed === 0 /* && times < canvasWidth * canvasHeight*/ );
-
 			data.x = x;
 			data.y = y;
 			data.pixelX = centerSymmetrical(x, data.size);
 			data.pixelY = centerSymmetrical(y, data.size);
+			console.log(centerSymmetrical(x, data.size), x, data.size, data)
 			testPath = getPaths([data], testMap);
 		} while (!testPath.length)
 		data.path = testPath;
@@ -241,8 +241,8 @@ function drawEnemies() {
 			context.closePath();
 			// draw enemy health
 			var radius = 16 - 1;
-			var fullHealth = enemy.fullHealth*100;
-			var health = enemy.health*100;
+			var fullHealth = enemy.fullHealth * 100;
+			var health = enemy.health * 100;
 			var healthCalc = ((fullHealth - health) / (fullHealth / 2)) + 1;
 			if (health < fullHealth / 2) {
 				healthCalc = (((fullHealth / 2) - health) / (fullHealth / 2));
@@ -251,7 +251,7 @@ function drawEnemies() {
 			var endAngle = 1 * Math.PI;
 
 			context.beginPath();
-			context.arc(enemy.pixelX+(enemy.size/2), enemy.pixelY+(enemy.size/2), radius, startAngle, endAngle, false);
+			context.arc(enemy.pixelX + (enemy.size / 2), enemy.pixelY + (enemy.size / 2), radius, startAngle, endAngle, false);
 			context.lineWidth = 2;
 			// line color
 			context.strokeStyle = "rgba(255,0,0,0.4)";
@@ -269,6 +269,7 @@ function moveEnemies() {
 		var enemy = this;
 		if (base && enemy.pathIndex < enemy[PATH][LENGTH]) {
 			var target = enemy[PATH][enemy.pathIndex];
+			console.log(enemy.pixelX, (enemy.size / 2), modulus(enemy.pixelX + (enemy.size / 2), tileSize))
 			enemy.x = modulus(enemy.pixelX + (enemy.size / 2), tileSize);
 			enemy.y = modulus(enemy.pixelY + (enemy.size / 2), tileSize);
 			enemy.targetX = target.x;
@@ -366,8 +367,8 @@ function getAllPaths(enemies) {
 }
 
 function nextWave() {
-	advanceWave = true;
 	for (var i = 0; i < waves[0].length; i++) {
 		waves[1].push(waves[0][i]);
 	}
+	advanceWave = true;
 }

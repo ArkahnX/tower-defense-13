@@ -61,6 +61,9 @@ function compile(tempX, tempY) {
 			var tile = cloneData(tiles[map[x][y].id], ["image", "x", "y"], [tileCloneImage, tileCloneX, tileCloneY], [x, y]);
 			if (obstacles[x][y] && obstacles[x][y][NAME].toLowerCase() !== "base") {
 				tile.speed = 0;
+				if (obstacles[x][y].type === "trap") {
+					tile.speed = 0.5;
+				}
 			}
 			compiledMap[x][y] = tile;
 		}

@@ -81,7 +81,7 @@ function aim(tower) {
 				var angle = Math.atan(targetX / targetY);
 				var dx = (tower.weapon.speed / 60) * Math.sin(angle);
 				var dy = (tower.weapon.speed / 60) * Math.cos(angle);
-				var time = Math.sqrt((dx * dx) + (dy * dy)) / (tower.weapon.speed/2);
+				var time = Math.sqrt((dx * dx) + (dy * dy)) / (tower.weapon.speed / 2);
 				var enemyDistance = enemy.speed * time;
 				// moving right
 				if (enemy.targetX > enemy.x) {

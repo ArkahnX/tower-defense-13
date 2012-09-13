@@ -58,20 +58,18 @@ function canBuild(force) {
 			return false;
 		}
 		if (onScreen[LENGTH]) {
-			// enemies on current tile
-			var enemy = getAll(onScreen, "x", mouse.x);
-			if (getAll(enemy, "y", mouse.y)[LENGTH]) {
-				canBuildCache = false;
-				return false;
-			}
-
-			// enemy will be going to this tile
-			var enemy = getAll(onScreen, "targetX", mouse.x);
-			if (getAll(enemy, "targetY", mouse.y)[LENGTH]) {
-				canBuildCache = false;
-				return false;
-			}
-
+			// // enemies on current tile
+			// var enemy = getAll(onScreen, "x", mouse.x);
+			// if (getAll(enemy, "y", mouse.y)[LENGTH]) {
+			// 	canBuildCache = false;
+			// 	return false;
+			// }
+			// // enemy will be going to this tile
+			// var enemy = getAll(onScreen, "targetX", mouse.x);
+			// if (getAll(enemy, "targetY", mouse.y)[LENGTH]) {
+			// 	canBuildCache = false;
+			// 	return false;
+			// }
 			// if it stops the enemy from getting to the base
 			var testMap = compile(mouse.x, mouse.y);
 			if (!getPaths(onScreen, testMap)) {
@@ -84,13 +82,17 @@ function canBuild(force) {
 			canBuildCache = true;
 			return true;
 		}
+		// if we are building a trap on fast tiles
+		if (building().type === "trap") {
+			if (thisTile(map).type === "fast" || thisTile(map).type === "slow") {
+				canBuildCache = true;
+				return true;
+			}
+			canBuildCache = false;
+			return false;
+		}
 		// if this tile is a basic land
 		if (thisTile(map).type === PATH) {
-			canBuildCache = true;
-			return true;
-		}
-		// if we are building a trap on fast tiles
-		if (building().is === "trap" && thisTile(map).type === "fast") {
 			canBuildCache = true;
 			return true;
 		}
@@ -116,7 +118,7 @@ function fillBuildMenu() {
 		var name = START_SPAN + ">" + item[NAME] + CLOSE_SPAN;
 		var cost = START_SPAN + " class='cost'>$" + item.cost + CLOSE_SPAN;
 		var image = "<img src='" + item.image.src + "'>";
-		var container = START_DIV + " data-name='" + item.name + "' class='container" + expensive + buildClass + "' title='" + item.is + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
+		var container = START_DIV + " data-name='" + item.name + "' class='container" + expensive + buildClass + "' title='" + item.type + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
 		structures.push("" + container + "")
 	}
 	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = structures.join("");
