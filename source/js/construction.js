@@ -122,7 +122,7 @@ function fillBuildMenu() {
 		var name = START_SPAN + ">" + item[NAME] + CLOSE_SPAN;
 		var cost = START_SPAN + " class='cost'>$" + item.cost + CLOSE_SPAN;
 		var image = "<img src='" + item.image.src + "'>";
-		var container = START_DIV + " class='container" + expensive + buildClass + "' title='" + item.is + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
+		var container = START_DIV +" data-name='"+item.name+"' class='container" + expensive + buildClass + "' title='" + item.is + ": " + item[NAME] + " ($" + item.cost + ")" + "'>" + image + name + cost + CLOSE_DIV;
 		structures.push("" + container + "")
 	}
 	document[GET_ELEMENT_BY_ID](TOWERS)[INNER_HTML] = structures.join("");

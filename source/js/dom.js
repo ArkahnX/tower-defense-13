@@ -24,7 +24,7 @@ function buyHandler(event) {
 	var container = this;
 	if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
 		selectedTower = null;
-		bought = container[QUERY_SELECTOR]("span").innerText;
+		bought = container.getAttribute("data-name");
 		removeMoney(getAll(towers, NAME, bought)[0].cost);
 	}
 }

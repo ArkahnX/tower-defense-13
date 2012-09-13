@@ -1,7 +1,7 @@
 function createParticle(startX, startY, endX, endY, speed, dimention1, dimention2, path1, path2, path3, path4, colorArray) {
 	var halfspeed = speed / 3;
 	var life = (tileSize / 60) * random(speed + halfspeed, speed - halfspeed);
-	var colorIndex = random(0, colorArray.length);
+	var colorIndex = random(0, colorArray.length-1);
 	return {
 		x: random(startX, endX),
 		y: random(startY, endY),
