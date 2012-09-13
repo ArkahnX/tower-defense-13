@@ -210,7 +210,7 @@ function destroyStructure(x, y) {
 function sellStructure(x, y) {
 	towersSold++;
 	var thisTower = obstacles[x][y];
-	var returnRate = tower.cost + ((tower.cost * (tower.level - 1) * 2) * 0.25)
+	var returnRate = thisTower.cost + ((thisTower.cost * (thisTower.level - 1) * 2) * 0.25)
 	addMoney(returnRate);
 	destroyStructure(x, y);
 }
