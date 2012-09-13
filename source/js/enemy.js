@@ -108,7 +108,6 @@ function spawnEnemy() {
 			data.y = y;
 			data.pixelX = centerSymmetrical(x, data.size);
 			data.pixelY = centerSymmetrical(y, data.size);
-			console.log(centerSymmetrical(x, data.size), x, data.size, data)
 			testPath = getPaths([data], testMap);
 		} while (!testPath.length)
 		data.path = testPath;
@@ -269,7 +268,6 @@ function moveEnemies() {
 		var enemy = this;
 		if (base && enemy.pathIndex < enemy[PATH][LENGTH]) {
 			var target = enemy[PATH][enemy.pathIndex];
-			console.log(enemy.pixelX, (enemy.size / 2), modulus(enemy.pixelX + (enemy.size / 2), tileSize))
 			enemy.x = modulus(enemy.pixelX + (enemy.size / 2), tileSize);
 			enemy.y = modulus(enemy.pixelY + (enemy.size / 2), tileSize);
 			enemy.targetX = target.x;
