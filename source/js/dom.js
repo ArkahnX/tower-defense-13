@@ -44,6 +44,13 @@ function upgradeHandler(event) {
 	}
 }
 
+function repairHandler(event) {
+	doNothing(event);
+	if (base.x !== mouse.x || base.y !== mouse.y) {
+		repairStructure(selectedTower.x, selectedTower.y);
+	}
+}
+
 function clickHandler(event) {
 	doNothing(event);
 	selectedTower = null;
@@ -126,13 +133,24 @@ function keyPressed(event) {
 	} else if (event.keyCode - 96 >= 1 && event.keyCode - 96 <= 5) {
 		keyCode = event.keyCode - 96;
 	}
+	if (selectedTower) {
+		if (event.keyCode === 81) {
+			repairHandler(event);
+		}
+		if (event.keyCode === 87) {
+			upgradeHandler(event);
+		}
+		if (event.keyCode === 69) {
+			sellHandler(event);
+		}
+	}
 	if (keyCode > 0) {
 		doNothing(event);
 		var containers = document[QUERY_SELECTOR_ALL](".container");
 		var container = containers[keyCode - 1]
 		if (!container[CLASS_LIST].contains("expensive") && !isBuilding()) {
 			selectedTower = null;
-			bought = container[QUERY_SELECTOR]("span").innerText;
+			bought = towers[keyCode].name;
 			removeMoney(getAll(towers, NAME, bought)[0].cost);
 		}
 	}

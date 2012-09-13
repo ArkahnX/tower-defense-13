@@ -210,7 +210,8 @@ function destroyStructure(x, y) {
 
 function sellStructure(x, y) {
 	var thisTower = obstacles[x][y];
-	addMoney(thisTower.cost * (thisTower.health / thisTower.fullHealth) * 0.75);
+	var returnRate = tower.cost + ((tower.cost * (tower.level - 1) * 2) * 0.25)
+	addMoney(returnRate);
 	destroyStructure(x, y);
 }
 
@@ -242,4 +243,30 @@ function canUpgrade() {
 		return true;
 	}
 	return false;
+}
+
+function repairStructure(x, y) {
+	var thisTower = obstacles[x][y];
+	if (money < repairCost(thisTower)) {
+		thisTower.health += money / 10;
+		removeMoney(money);
+	} else if (money >= repairCost(thisTower)) {
+		removeMoney(repairCost(thisTower));
+		thisTower.health = thisTower.fullHealth;
+	}
+}
+
+function canRepair() {
+	if (selectedTower && money >= repairCost(selectedTower)) {
+		return true;
+	}
+	return false;
+}
+
+function upgradeCost(tower) {
+	return tower.cost * tower.level * 2;
+}
+
+function repairCost(tower) {
+	return (tower.fullHealth - tower.health) * 5;
 }

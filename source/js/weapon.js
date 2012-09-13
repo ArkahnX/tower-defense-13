@@ -79,10 +79,6 @@ function fireWeapon(tower, x, y, dx, dy, targetX, targetY) {
 
 }
 
-function upgradeCost(tower) {
-	return tower.cost * tower.level * 2;
-}
-
 function upgradeWeapon(weapon, stats) {
 	for (var attr in stats) {
 		if (weapon[attr] !== undefined) {

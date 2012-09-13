@@ -30,6 +30,11 @@ function setScore() {
 		stats.push("Damage" + ": " + preStart + selectedTower.weapon.damage + preEnd);
 
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
+		document[GET_ELEMENT_BY_ID]("upgrade").value = "Upgrade Tower";
+		document[GET_ELEMENT_BY_ID]("repair").value = "Repair Tower";
+		document[GET_ELEMENT_BY_ID]("repair").setAttribute("disabled", true);
+		document[GET_ELEMENT_BY_ID]("sell").setAttribute("disabled", true);
+		document[GET_ELEMENT_BY_ID]("upgrade").setAttribute("disabled", true);
 		if (selectedTower.name !== "Base") {
 			document[GET_ELEMENT_BY_ID]("sell").removeAttribute("disabled");
 			addEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
@@ -42,11 +47,23 @@ function setScore() {
 				removeEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);
 			}
 		}
+		document[GET_ELEMENT_BY_ID]("repair").setAttribute("disabled", true);
+		if (selectedTower.health < selectedTower.fullHealth) {
+			document[GET_ELEMENT_BY_ID]("repair").value = "Repair Tower ($" + repairCost(selectedTower) + ")";
+			// if (canRepair()) {
+			document[GET_ELEMENT_BY_ID]("repair").removeAttribute("disabled");
+			addEvent(document[GET_ELEMENT_BY_ID]("repair"), "click", repairHandler);
+			// }
+		}
 	} else {
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "";
+		document[GET_ELEMENT_BY_ID]("upgrade").value = "Upgrade Tower";
+		document[GET_ELEMENT_BY_ID]("repair").value = "Repair Tower";
 		document[GET_ELEMENT_BY_ID]("upgrade").setAttribute("disabled", true);
 		document[GET_ELEMENT_BY_ID]("sell").setAttribute("disabled", true);
+		document[GET_ELEMENT_BY_ID]("repair").setAttribute("disabled", true);
 		removeEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
 		removeEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);
+		removeEvent(document[GET_ELEMENT_BY_ID]("repair"), "click", repairHandler);
 	}
 }
