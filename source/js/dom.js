@@ -61,6 +61,7 @@ function clickHandler(event) {
 			towersBuilt++;
 			var tower = cloneData(building(), ["x", "y", "weapon"], [tileCloneX, tileCloneY, cloneWeapon], [mouse.x, mouse.y]);
 			obstacles[mouse.x][mouse.y] = tower;
+			selectedTower = obstacles[mouse.x][mouse.y];
 			bought = null;
 			checkAffordable();
 			if (onScreen.length) {
