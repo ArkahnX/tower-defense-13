@@ -13,14 +13,15 @@ function removeMoney(amount) {
 function checkAffordable() {
 	var children = document[QUERY_SELECTOR_ALL](".container");
 	for(var i=0;i<children[LENGTH];i++) {
-		children[i][CLASS_LIST].remove("expensive");
-		children[i][CLASS_LIST].remove("building");
-		var cost = children[i].querySelector(".cost").innerText.substring(1);
-		if (parseInt(cost, 10) > money) {
-			children[i][CLASS_LIST].add("expensive");
+		var item = children[i];
+		var tower = towers[i];
+		item[CLASS_LIST].remove("expensive");
+		item[CLASS_LIST].remove("building");
+		if (tower.cost > money) {
+			item[CLASS_LIST].add("expensive");
 		}
 		if(building()) {
-			children[i][CLASS_LIST].add("building");
+			item[CLASS_LIST].add("building");
 		}
 	}
 	upgradeAffordability();
