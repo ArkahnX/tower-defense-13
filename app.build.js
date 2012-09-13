@@ -1,7 +1,7 @@
 ({
 	baseUrl: "./source/",
 	name: "js/var",
-	include: ["js/const", "js/functions", "js/setup", "js/tile", "js/map", "js/enemy", "js/tower", "js/construction", "js/astar", "js/draw", "js/dom", "js/debug", "js/money", "js/compat","js/stats","js/physics","js/bullet"],
+	include: ["js/const", "js/functions", "js/setup", "js/tile", "js/map", "js/enemy", "js/tower", "js/construction", "js/astar", "js/draw", "js/dom", "js/debug", "js/money", "js/compat", "js/stats", "js/physics", "js/bullet", "js/weapon"],
 	out: "build/build.js",
 	keepBuildDir: false,
 	locale: "en-us",

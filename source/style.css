@@ -64,8 +64,10 @@ canvas {
 }
 
 #loading .hidden {
-	color:black;
-	opacity:0;
+	color: black;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
 }
 
 #main > * {
@@ -120,7 +122,7 @@ ul {
 .container img {
 	margin: 0;
 	float: left;
-	padding:5px;
+	padding: 5px;
 }
 
 .container.expensive {
