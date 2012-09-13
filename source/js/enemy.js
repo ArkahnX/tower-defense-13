@@ -327,13 +327,8 @@ function getAllPaths(enemies) {
 }
 
 function nextWave() {
-	if (!waves[1]) {
-		document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
-		removeEvent(document.getElementById("nextWave"), "click", nextWave)
-	} else {
-		advanceWave = true;
-		for (var i = 0; i < waves[0].length; i++) {
-			waves[1].push(waves[0][i]);
-		}
+	advanceWave = true;
+	for (var i = 0; i < waves[0].length; i++) {
+		waves[1].push(waves[0][i]);
 	}
 }

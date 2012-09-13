@@ -208,6 +208,7 @@ function destroyStructure(x, y) {
  */
 
 function sellStructure(x, y) {
+	towersSold++;
 	var thisTower = obstacles[x][y];
 	var returnRate = tower.cost + ((tower.cost * (tower.level - 1) * 2) * 0.25)
 	addMoney(returnRate);
@@ -230,6 +231,7 @@ function cloneWeapon(tower, attribute, other) {
 
 function upgradeStructure(x, y) {
 	if (canUpgrade()) {
+		towersUpgraded++;
 		var thisTower = obstacles[x][y];
 		removeMoney(upgradeCost(thisTower));
 		thisTower.level++;
@@ -253,6 +255,7 @@ function repairStructure(x, y) {
 		removeMoney(repairCost(thisTower));
 		thisTower.health = thisTower.fullHealth;
 	}
+	baseRepaired++;
 }
 
 function canRepair() {

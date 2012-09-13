@@ -157,3 +157,7 @@ ul {
 	text-transform: uppercase;
 	text-align: center;
 }
+
+.tryAgain {
+	cursor:pointer;
+}

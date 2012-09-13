@@ -7,14 +7,33 @@
 	</head>
 	<body>
 		<div id="gameOver" class="screen">
-			<h1 class="boldText">Game Over! Failure!</h1>
-			<span>You lasted <span class="timeLasted"></span> seconds. Try harder next time!</span>
+			<h1 class="boldText">Game Over! Failure.</h1>
+			<ul>
+				<li><span>You lasted <span class="timeLasted"></span> seconds. Try harder next time!</span></li>
+				<li><span>Here are your stats for this game:</span></li>
+				<li><span>You passed <span class="wavesCompleted"></span> waves.</span></li>
+				<li><span>You spent $<span class="moneySpent"></span>.</span></li>
+				<li><span>You built <span class="towersBuilt"></span> tower(s).</span></li>
+				<li><span>You upgraded <span class="towersUpgraded"></span> tower(s).</span></li>
+				<li><span>You sold <span class="towersSold"></span> tower(s)!</span></li>
+				<li><span>You repaired your base <span class="baseRepaired"></span> times.</span></li>
+				<li><a class="tryAgain">Try Again?</a>
+			</ul>
 			<a class="tryAgain">Try Again?</a>
 		</div>
 		<div id="gameWon" class="screen">
-			<h1 class="boldText">Game Over! Victory!</h1>
-			<span>You beat them down in <span class="timeLasted"></span> seconds!</span>
-			<a class="tryAgain">Try Again?</a>
+			<h1 class="boldText">Game Complete! Victory!</h1>
+			<ul>
+				<li><span>You beat them down in <span class="timeLasted"></span> seconds!</span></li>
+				<li><span>Here are your stats for this game:</span></li>
+				<li><span>You passed <span class="wavesCompleted"></span> waves.</span></li>
+				<li><span>You spent $<span class="moneySpent"></span>.</span></li>
+				<li><span>You built <span class="towersBuilt"></span> tower(s).</span></li>
+				<li><span>You upgraded <span class="towersUpgraded"></span> tower(s).</span></li>
+				<li><span>You sold <span class="towersSold"></span> tower(s)!</span></li>
+				<li><span>You repaired your base <span class="baseRepaired"></span> times.</span></li>
+				<li><a class="tryAgain">Try Again?</a>
+			</ul>
 		</div>
 		<div id="loading">
 			<span id="loadingText">loading...</span>

@@ -7,6 +7,7 @@ function addMoney(amount) {
 
 function removeMoney(amount) {
 	money -= round(amount);
+	moneySpent += amount;
 	checkAffordable();
 }
 

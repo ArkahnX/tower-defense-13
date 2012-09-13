@@ -19,7 +19,16 @@ var selectedTower = null;
 var advanceWave = false;
 var oldMouseCoords = "";
 var canBuildCache = true;
+
+//stats
 var timeLasted = 0;
+var towersBuilt = 0;
+var towersUpgraded = 0;
+var towersSold = 0;
+var baseRepaired = 0;
+var wavesSkipped = 0;
+var moneySpent = 0;
+
 
 var tileFunction = [];
 var afterTileFunction = [];

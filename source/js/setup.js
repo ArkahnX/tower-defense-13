@@ -40,6 +40,7 @@ function setup() {
 		timer++;
 		timeLasted++;
 		if (waves[1]) {
+			document[GET_ELEMENT_BY_ID]("nextWave").removeAttribute("disabled");
 			timeBeforeNextWave--;
 		} else if (!waves[1]) {
 			document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
@@ -53,13 +54,13 @@ function setup() {
 				spawnEnemy();
 			}
 		} else if ((timer === 600 || advanceWave) && waves[1]) {
-			advanceWave = false;
-			if (!waves[1]) {
-				document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
-				timeBeforeNextWave = 0;
+			if (advanceWave) {
+				wavesSkipped++;
+				advanceWave = false;
 			} else {
-				timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
+				wavesCompleted++;
 			}
+			timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
 			wave++;
 			waves.splice(0, 1);
 			waveLength = waves[0].length;
@@ -71,10 +72,10 @@ function setup() {
 	 * Initialize turrets, enemies, waves, and tiles.
 	 */
 	// designWeapon(name, amount, speed, damage, delay, range, life, radius, rgb)
-	designWeapon("cannon", 1, 15, 1, 10, 6, 50, 3, rgb(random(200, 255), random(0, 100), random(0, 100)), function(direction) {
+	designWeapon("cannon", 1, 15, 1, 10, 4, 50, 3, rgb(random(200, 255), random(0, 100), random(0, 100)), function(direction) {
 		return direction;
 	});
-	designWeapon("spread", 5, 20, 1, 50, 4, 25, 3, rgb(random(0, 100), random(0, 100), random(100, 255)), function(direction) {
+	designWeapon("spread", 5, 20, 1, 50, 3, 25, 3, rgb(random(0, 100), random(0, 100), random(100, 255)), function(direction) {
 		return randomFloat(direction - (direction / 2), direction + (direction / 2));
 	});
 	designWeapon("gatling", 1, 15, 1, 1, 4, 25, 3, rgb(random(0, 100), random(100, 255), random(0, 100)), function(direction) {
@@ -152,25 +153,44 @@ WINDOW.addEventListener("DOMContentLoaded", function() {
 });
 
 function gameOver() {
-	selectedStructure = null;
-	money = 0;
-	checkAffordable();
-	money = 0;
-	document.getElementById("gameOver").querySelector(".timeLasted").innerText = round(timeLasted / 60);
-	document.getElementById("gameOver").querySelector(".tryAgain").onclick = function() {
-		window.location.reload();
-	}
+	setGameStats();
 	document.getElementById("gameOver").classList.add("show");
 }
 
 function gameWon() {
+	setGameStats();
+	document.getElementById("gameWon").classList.add("show");
+}
+
+function setGameStats() {
 	selectedStructure = null;
 	money = 0;
 	checkAffordable();
 	money = 0;
-	document.getElementById("gameWon").querySelector(".timeLasted").innerText = round(timeLasted / 60);
-	document.getElementById("gameWon").querySelector(".tryAgain").onclick = function() {
-		window.location.reload();
-	}
-	document.getElementById("gameWon").classList.add("show");
+	forEach(document.querySelectorAll(".timeLasted"), function() {
+		this.textContent = round(timeLasted / 60);
+	});
+	forEach(document.querySelectorAll(".towersBuilt"), function() {
+		this.textContent = towersBuilt;
+	});
+	forEach(document.querySelectorAll(".towersUpgraded"), function() {
+		this.textContent = towersUpgraded;
+	});
+	forEach(document.querySelectorAll(".towersSold"), function() {
+		this.textContent = towersSold;
+	});
+	forEach(document.querySelectorAll(".baseRepaired"), function() {
+		this.textContent = baseRepaired;
+	});
+	forEach(document.querySelectorAll(".wavesCompleted"), function() {
+		this.textContent = wave-wavesSkipped;
+	});
+	forEach(document.querySelectorAll(".moneySpent"), function() {
+		this.textContent = moneySpent;
+	});
+	forEach(document.querySelectorAll(".tryAgain"), function() {
+		this.onclick = function() {
+			window.location.reload();
+		}
+	});
 }

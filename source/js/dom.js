@@ -58,6 +58,7 @@ function clickHandler(event) {
 		if (event.which === 2) {
 			returnStructure();
 		} else {
+			towersBuilt++;
 			var tower = cloneData(building(), ["x", "y", "weapon"], [tileCloneX, tileCloneY, cloneWeapon], [mouse.x, mouse.y]);
 			obstacles[mouse.x][mouse.y] = tower;
 			bought = null;

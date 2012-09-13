@@ -12,7 +12,9 @@ function forEach(list, callback) {
 		}
 	} else {
 		for (index in list) {
-			callback.call(list[index], index);
+			if (list.hasOwnProperty(index)) {
+				callback.call(list[index], index);
+			}
 		}
 	}
 }
