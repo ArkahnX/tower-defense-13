@@ -15,7 +15,7 @@ function checkAffordable() {
 	for(var i=0;i<children[LENGTH];i++) {
 		children[i][CLASS_LIST].remove("expensive");
 		children[i][CLASS_LIST].remove("building");
-		var cost = children[i][QUERY_SELECTOR](".cost").innerText.substring(1);
+		var cost = children[i].querySelector(".cost").innerText.substring(1);
 		if (parseInt(cost, 10) > money) {
 			children[i][CLASS_LIST].add("expensive");
 		}
