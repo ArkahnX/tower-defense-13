@@ -47,10 +47,8 @@ function setup() {
 		timeLasted++;
 		if (waves[1]) {
 			document[GET_ELEMENT_BY_ID]("nextWave").removeAttribute("disabled");
-			timeBeforeNextWave--;
 		} else if (!waves[1]) {
 			document[GET_ELEMENT_BY_ID]("nextWave").setAttribute("disabled", true);
-			timeBeforeNextWave = 0;
 		}
 		if (!waves[0].length && !waves[1] && !onScreen.length) {
 			gameWon();
@@ -64,7 +62,6 @@ function setup() {
 				wavesSkipped++;
 				advanceWave = false;
 			}
-			timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
 			wave++;
 			waves.splice(0, 1);
 			waveLength = waves[0].length;
@@ -137,7 +134,6 @@ function setup() {
 	defineEnemies(13);
 	makeWaves(13);
 	waveLength = waves[0].length;
-	timeBeforeNextWave = ((waveLength * (60 * 2)) + 600);
 }
 
 WINDOW.addEventListener("DOMContentLoaded", function() {

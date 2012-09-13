@@ -14,7 +14,7 @@ function defineEnemies(levels) {
 			level: i,
 			size: size,
 			speed: half * 0.5,
-			health: i * 10,
+			health: half * 5,
 			fullHealth: half * 10,
 			targetX: null,
 			targetY: null,
@@ -128,9 +128,30 @@ function makeWaves(levels) {
 	/**
 	 * Make a wave for each level
 	 */
+	// for (var l = 1; l < levels + 1; l++) {
+		// var wave = [];
+		// var enemyId = 0;
+		/**
+		 * Start large, end small.
+		 */
+		// for (var e = l; e > 0; e--) {
+			/**
+			 * Enemy numbers, based off of previous value.
+			 */
+			// for (var n = 0; n < e * 2; n++) {
+				/**
+				 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
+				 */
+				// var data = cloneData(enemies[enemyId]);
+				// wave.push(data);
+			// }
+			// enemyId = round((l / levels) * (enemies.length - 1));
+		// }
+		// waves.push(wave);
+	// }
 	for (var l = 1; l < levels + 1; l++) {
 		var wave = [];
-		var enemyId = 0;
+		// var enemyId = 0;
 		/**
 		 * Start large, end small.
 		 */
@@ -138,17 +159,18 @@ function makeWaves(levels) {
 			/**
 			 * Enemy numbers, based off of previous value.
 			 */
-			for (var n = 0; n < e * 2; n++) {
+			for (var n = 0; n < (e * 2)+15; n++) {
 				/**
 				 * EnemyId is increased after this loop is run, resulting in decreased enemies as they become more difficult.
 				 */
-				var data = cloneData(enemies[enemyId]);
+				var data = cloneData(enemies[l]);
 				wave.push(data);
 			}
-			enemyId = round((l / levels) * (enemies.length - 1));
+			// enemyId = round((l / levels) * (enemies.length - 1));
 		}
 		waves.push(wave);
 	}
+
 }
 
 /**
