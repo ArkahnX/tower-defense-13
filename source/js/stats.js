@@ -19,22 +19,34 @@ function setScore() {
 	document[GET_ELEMENT_BY_ID]("selection")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
 	if (selectedTower !== null) {
 		var stats = [];
-		for (var attr in selectedTower) {
-			var badList = ["is", "width", "height", "depth", "colors", "image", "x", "y", "path", "type", "delay", "speed", "timer"]
-			if (badList.indexOf(attr) === -1) {
-				stats.push(attr + ": " + preStart + selectedTower[attr] + preEnd);
-			}
-		}
+		stats.push("Name" + ": " + preStart + selectedTower.name + preEnd);
+		stats.push("Level" + ": " + preStart + selectedTower.level + preEnd);
+		stats.push("Health" + ": " + preStart + (selectedTower.health/selectedTower.fullHealth*100)+"%"+ preEnd);
+		stats.push("Weapon Stats:");
+		stats.push("Name" + ": " + preStart + selectedTower.weapon.name + preEnd);
+		stats.push("Range" + ": " + preStart + selectedTower.weapon.range + preEnd);
+		stats.push("Bullets Per Shot" + ": " + preStart + selectedTower.weapon.amount + preEnd);
+		stats.push("Delay" + ": " + preStart + selectedTower.weapon.delay + preEnd);
+		stats.push("Damage" + ": " + preStart + selectedTower.weapon.damage + preEnd);
+
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "<ul>" + start + stats.join(end + start) + end + "</ul>";
 		if (selectedTower.name !== "Base") {
-			document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
 			document[GET_ELEMENT_BY_ID]("sell").removeAttribute("disabled");
 			addEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
+			document[GET_ELEMENT_BY_ID]("upgrade").value = "Upgrade Tower ($"+upgradeCost(selectedTower)+")";
+			if (canUpgrade()) {
+				document[GET_ELEMENT_BY_ID]("upgrade").removeAttribute("disabled");
+				addEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);
+			} else {
+				document[GET_ELEMENT_BY_ID]("upgrade").setAttribute("disabled", true);
+				removeEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);
+			}
 		}
 	} else {
 		document[GET_ELEMENT_BY_ID]("tower")[INNER_HTML] = "";
 		document[GET_ELEMENT_BY_ID]("upgrade").setAttribute("disabled", true);
 		document[GET_ELEMENT_BY_ID]("sell").setAttribute("disabled", true);
 		removeEvent(document[GET_ELEMENT_BY_ID]("sell"), "click", sellHandler);
+		removeEvent(document[GET_ELEMENT_BY_ID]("upgrade"), "click", upgradeHandler);
 	}
 }

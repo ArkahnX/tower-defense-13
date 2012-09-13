@@ -5,6 +5,20 @@
 		<link href="style.css" rel="stylesheet">
 	</head>
 	<body>
+		<div id="gameOver" class="screen">
+			<h1 class="boldText">Game Over! Failure!</h1>
+			<span>You lasted <span class="timeLasted"></span>
+			seconds. Try harder next time!
+			</span>
+			<a class="tryAgain">Try Again?</a>
+		</div>
+		<div id="gameWon" class="screen">
+			<h1 class="boldText">Game Over! Victory!</h1>
+			<span>You beat them down in <span class="timeLasted"></span>
+			seconds!
+			</span>
+			<a class="tryAgain">Try Again?</a>
+		</div>
 		<div id="loading">
 			<span id="loadingText">loading...</span>
 			<ul id="message" class="hidden">
@@ -134,6 +148,9 @@
 
 		</script>
 		<script src="js/audio.js">
+
+		</script>
+		<script src="js/weapon.js">
 
 		</script>
 	</body>

@@ -1,12 +1,12 @@
 var money = 0;
 
-function addMoney(ammount) {
-	money += round(ammount);
+function addMoney(amount) {
+	money += round(amount);
 	checkAffordable();
 }
 
-function removeMoney(ammount) {
-	money -= round(ammount);
+function removeMoney(amount) {
+	money -= round(amount);
 	checkAffordable();
 }
 
@@ -22,5 +22,14 @@ function checkAffordable() {
 		if(building()) {
 			children[i][CLASS_LIST].add("building");
 		}
+	}
+	upgradeAffordability();
+}
+
+function upgradeAffordability() {
+	if(canUpgrade()) {
+		document.getElementById("upgrade").setAttribute("disabled", true)
+	} else {
+		document.getElementById("upgrade").removeAttribute("disabled");
 	}
 }

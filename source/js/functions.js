@@ -97,11 +97,11 @@ function thisTile(map) {
 /**
  * Cause damage to a target.
  * @param  {Object} target  Target to subtract health from.
- * @param  {Number} ammount Ammount of health to subtract.
+ * @param  {Number} amount amount of health to subtract.
  */
 
-function damage(target, ammount) {
-	target.health -= ammount;
+function damage(target, amount) {
+	target.health -= amount;
 }
 
 /**

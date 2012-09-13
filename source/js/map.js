@@ -77,7 +77,7 @@ function getEdges(map) {
 	for (var x = 0; x < map.length; x++) {
 		for (var y = 0; y < map[x].length; y++) {
 			if (x === 0 || x === map.length - 1 || y === 0 || y === map[x].length - 1) {
-				if (map[x][y].speed !== 0) {
+				if (map[x][y].speed !== 0 && base) {
 					var path = astar.search(map, map[x][y], map[base.x][base.y]);
 					if (path.length) {
 						list.push(true);

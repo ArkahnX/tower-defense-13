@@ -1,22 +1,5 @@
-/**
- * Create a tower.
- * @param  {String} name       Name to refer the tower to the player
- * @param  {String} weapon     Weapon type the structure uses.
- * @param  {String} type       Type of tower.
- * @param  {Number} range      Number in tiles that the tower searches for enemies within.
- * @param  {Number} cost       Cost to construct the tower.
- * @param  {Number} health     How much damage the tower can sustain.
- * @param  {Number} dimentions Array of dimentions [Width, Height, Depth].
- * @param  {Number} to         Maximum tower dimentions.
- * @param  {Number} red        0-255 value for red.
- * @param  {Number} green      0-255 value for green.
- * @param  {Number} blue       0-255 value for blue.
- * @param  {Number} alpha      0-1 value for alpha.
- * @return {Object}            Tower definition.
- */
-
-function defineTower(name, weapon, type, range, cost, health, delay, speed, dimentions, colors) {
-	var specifications = designTower(weapon, dimentions, colors);
+function defineTower(name, weapon, type, cost, health, dimensions, colors) {
+	var specifications = designTower(weapon, dimensions, colors);
 	return {
 		is: "tower",
 		name: name,
@@ -29,11 +12,8 @@ function defineTower(name, weapon, type, range, cost, health, delay, speed, dime
 		image: recordTower(specifications),
 		x: specifications.x,
 		y: specifications.y,
+		level: 1,
 		type: type,
-		range: range,
-		delay: delay,
-		speed: speed,
-		timer: 0,
 		cost: cost,
 		health: health,
 		fullHealth: health
@@ -43,7 +23,7 @@ function defineTower(name, weapon, type, range, cost, health, delay, speed, dime
 /**
  * Calculate values for some parts of the tower.
  * @param  {String} weapon     Weapon type the structure uses.
- * @param  {Number} dimentions Array of dimentions [Width, Height, Depth].
+ * @param  {Number} dimensions Array of dimensions [Width, Height, Depth].
  * @param  {Number} red        0-255 value for red.
  * @param  {Number} green      0-255 value for green.
  * @param  {Number} blue       0-255 value for blue.
@@ -51,10 +31,10 @@ function defineTower(name, weapon, type, range, cost, health, delay, speed, dime
  * @return {Object}            Calculated values for tower.
  */
 
-function designTower(weapon, dimentions, colors) {
-	var width = random(dimentions[0][0], dimentions[0][1]);
-	var height = random(dimentions[1][0], dimentions[1][1]);
-	var depth = random(dimentions[2][0], dimentions[2][1]);
+function designTower(weapon, dimensions, colors) {
+	var width = random(dimensions[0][0], dimensions[0][1]);
+	var height = random(dimensions[1][0], dimensions[1][1]);
+	var depth = random(dimensions[2][0], dimensions[2][1]);
 	var path = "rectangle";
 	if (weapon !== "none") {
 		path = "triangle";
@@ -194,8 +174,7 @@ function reachBase(enemy) {
 		base = null;
 		var result = getBase();
 		if (!result) {
-			console.log("defeat");
-			stop();
+			gameOver()
 		}
 	}
 }
@@ -240,7 +219,27 @@ function sellStructure(x, y) {
  */
 
 function returnStructure() {
-	var ammount = building().cost;
+	var amount = building().cost;
 	bought = null;
-	addMoney(ammount);
+	addMoney(amount);
+}
+
+function cloneWeapon(tower, attribute, other) {
+	return cloneData(weapons[tower.weapon]);
+}
+
+function upgradeStructure(x, y) {
+	if (canUpgrade()) {
+		var thisTower = obstacles[x][y];
+		removeMoney(upgradeCost(thisTower));
+		thisTower.level++;
+		mapUpgrade(thisTower);
+	}
+}
+
+function canUpgrade() {
+	if (selectedTower && money >= upgradeCost(selectedTower)) {
+		return true;
+	}
+	return false;
 }

@@ -37,6 +37,13 @@ function sellHandler(event) {
 	selectedTower = null;
 }
 
+function upgradeHandler(event) {
+	doNothing(event);
+	if (base.x !== mouse.x || base.y !== mouse.y) {
+		upgradeStructure(selectedTower.x, selectedTower.y);
+	}
+}
+
 function clickHandler(event) {
 	doNothing(event);
 	selectedTower = null;
@@ -44,7 +51,7 @@ function clickHandler(event) {
 		if (event.which === 2) {
 			returnStructure();
 		} else {
-			var tower = cloneData(building(), ["x", "y"], [tileCloneX, tileCloneY], [mouse.x, mouse.y]);
+			var tower = cloneData(building(), ["x", "y", "weapon"], [tileCloneX, tileCloneY, cloneWeapon], [mouse.x, mouse.y]);
 			obstacles[mouse.x][mouse.y] = tower;
 			bought = null;
 			checkAffordable();
@@ -61,7 +68,11 @@ function clickHandler(event) {
 			}
 		} else {
 			// select tower
-			selectedTower = obstacles[mouse.x][mouse.y];
+			if (obstacles[mouse.x][mouse.y] === 0) {
+				selectedTower = null;
+			} else {
+				selectedTower = obstacles[mouse.x][mouse.y];
+			}
 		}
 	}
 }

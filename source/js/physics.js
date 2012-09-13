@@ -34,9 +34,9 @@ function explode() {
 	}
 }
 
-function makeParticles(particleCount, speed, dimentions, path, areaArray, colorArray) {
+function makeParticles(particleCount, speed, dimensions, path, areaArray, colorArray) {
 	for (var i = 0; i < particleCount; i++) {
-		particles.push(createParticle(areaArray[0], areaArray[1], areaArray[2], areaArray[3], speed, dimentions[0], dimentions[1], path[0], path[1], path[2], path[3], colorArray));
+		particles.push(createParticle(areaArray[0], areaArray[1], areaArray[2], areaArray[3], speed, dimensions[0], dimensions[1], path[0], path[1], path[2], path[3], colorArray));
 	}
 }
 

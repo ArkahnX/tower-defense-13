@@ -40,27 +40,25 @@ function drawBullets() {
 }
 
 function aim(tower) {
-	if (tower.timer >= tower.delay) {
+	if (tower.weapon.timer >= tower.weapon.delay) {
 		forEach(onScreen, function(index) {
 			var enemy = this;
 			var centerX = centerSymmetrical(tower.x, 1);
 			var centerY = centerSymmetrical(tower.y, 1, tower.size)-tower.height;
-			var modifier = tower.range * tileSize;
-			if (collision(centerX, centerY, modifier, enemy.pixelX, enemy.pixelY, enemy.size / 2) && tower.timer >= tower.delay) {
-				var x = centerX - enemy.pixelX;
-				var y = centerY - enemy.pixelY;
-				var angle = Math.atan(x / y);
-				var dx = (tower.speed / 60) * Math.sin(angle);
-				var dy = (tower.speed / 60) * Math.cos(angle);
-				var red = random(200, 255);
-				var green = random(0, 100);
-				var blue = random(0, 100);
-				makeBullet(tower.weapon, x, y, 50, 3, tower.speed, centerX, centerY, dx, dy, red, blue, green, 1, 1);
-				tower.timer = 0;
+			var modifier = tower.weapon.range * tileSize;
+			if (collision(centerX, centerY, modifier, enemy.pixelX, enemy.pixelY, enemy.size / 2) && tower.weapon.timer >= tower.weapon.delay) {
+				tower.weapon.timer = 0;
+				var targetX = centerX - enemy.pixelX;
+				var targetY = centerY - enemy.pixelY;
+				var angle = Math.atan(targetX / targetY);
+				var dx = (tower.weapon.speed / 60) * Math.sin(angle);
+				var dy = (tower.weapon.speed / 60) * Math.cos(angle);
+				fireWeapon(tower, centerX, centerY, dx, dy, targetX, targetY);
+				// makeBullet(tower.weapon, x, y, 50, 3, tower.speed, centerX, centerY, dx, dy, red, blue, green, 1, 1);
 			}
 		});
 	}
-	tower.timer++;
+	tower.weapon.timer++;
 }
 
 function collision(c1X, c1Y, c1R, c2X, c2Y, c2R) {

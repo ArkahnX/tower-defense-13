@@ -17,6 +17,9 @@ var waveLength = 0;
 var timeBeforeNextWave = 0;
 var selectedTower = null;
 var advanceWave = false;
+var oldMouseCoords = "";
+var canBuildCache = true;
+var timeLasted = 0;
 
 var tileFunction = [];
 var afterTileFunction = [];
@@ -31,3 +34,4 @@ var enemies = [];
 var onScreen = [];
 var particles = [];
 var bullets = [];
+var weapons = {};
